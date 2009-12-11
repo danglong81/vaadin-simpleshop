@@ -17,44 +17,64 @@ public class User extends AbstractPojo {
 
     protected String password;
 
-    protected String userId;
-
-    protected String apiKey;
+    private String name;
 
     public User() {
 
     }
 
+    /**
+     * Get the username of the user
+     * 
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Set the username for the user
+     * 
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Get the hashed password of the user
+     * 
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Set the hashed password of the user
+     * 
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getUserId() {
-        return userId;
+    /**
+     * Set the actual name of the user
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+    /**
+     * Get the actual name of the user
+     * 
+     * @return
+     */
+    public String getName() {
+        return name;
     }
 
 }
