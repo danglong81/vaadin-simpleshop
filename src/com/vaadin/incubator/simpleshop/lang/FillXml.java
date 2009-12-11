@@ -45,7 +45,7 @@ public class FillXml {
                     Element element = nf.startMakingElement("tu", null);
                     element.addAttribute(new Attribute("tuid", msg.name()));
 
-                    for (String lang : new String[] { "fi", "sv", "en" }) {
+                    for (String lang : new String[] { "en", "fi", "sv" }) {
                         Element e = nf.startMakingElement("tuv", null);
                         e.addAttribute(new Attribute("lang", lang));
 
