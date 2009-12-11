@@ -1,5 +1,8 @@
 package com.vaadin.incubator.simpleshop.data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -18,6 +21,8 @@ public class User extends AbstractPojo {
     protected String password;
 
     private String name;
+
+    private Set<Role> roles = new HashSet<Role>();
 
     public User() {
 
@@ -75,6 +80,24 @@ public class User extends AbstractPojo {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Set the roles this user belongs to
+     * 
+     * @param roles
+     */
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    /**
+     * Get all the roles of this user
+     * 
+     * @return
+     */
+    public Set<Role> getRoles() {
+        return roles;
     }
 
 }
