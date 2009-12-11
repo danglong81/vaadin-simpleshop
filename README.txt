@@ -1,0 +1,1 @@
+Icons used in this application are open source and provided by http://icons.mysitemyway.com/
