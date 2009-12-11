@@ -5,69 +5,129 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+/**
+ * Entity class for log messages.
+ * 
+ * @author Kim
+ * 
+ */
 @Entity
 public class LogMsg extends AbstractPojo {
 
-	public static enum LogLevel {
-		DEBUG, WARNING, ERROR;
-	}
+    /** Log levels for the message **/
+    public static enum LogLevel {
+        DEBUG, WARNING, ERROR;
+    }
 
-	@Column(length = 3000)
-	private String message;
+    @Column(length = 3000)
+    private String message;
 
-	@Enumerated(EnumType.STRING)
-	private LogLevel level;
+    @Enumerated(EnumType.STRING)
+    private LogLevel level;
 
-	@Column(length = 1000)
-	private String className;
+    @Column(length = 1000)
+    private String className;
 
-	@Column(length = 500)
-	private String methodName;
+    @Column(length = 500)
+    private String methodName;
 
-	private int lineNumber;
+    private int lineNumber;
 
-	public LogMsg() {
+    public LogMsg() {
 
-	}
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    /**
+     * Get the log message.
+     * 
+     * @return
+     */
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    /**
+     * Set the message for this log.
+     * 
+     * @param message
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public LogLevel getLevel() {
-		return level;
-	}
+    /**
+     * Get the log level of this log message
+     * 
+     * @return
+     */
+    public LogLevel getLevel() {
+        return level;
+    }
 
-	public void setLevel(LogLevel level) {
-		this.level = level;
-	}
+    /**
+     * Set the log level of this message
+     * 
+     * @param level
+     */
+    public void setLevel(LogLevel level) {
+        this.level = level;
+    }
 
-	public String getClassName() {
-		return className;
-	}
+    /**
+     * Returns the class name of the class from where the logger was called -
+     * class name from where the log message originated.
+     * 
+     * @return
+     */
+    public String getClassName() {
+        return className;
+    }
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
+    /**
+     * Set the class name of the class from where the logger was called.
+     * 
+     * @param className
+     */
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
-	public String getMethodName() {
-		return methodName;
-	}
+    /**
+     * Returns the method name of the method which called the logger - method
+     * name from where the log message originated.
+     * 
+     * @return
+     */
+    public String getMethodName() {
+        return methodName;
+    }
 
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
+    /**
+     * Sets the method name of the method which called the logger.
+     * 
+     * @param methodName
+     */
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
 
-	public int getLineNumber() {
-		return lineNumber;
-	}
+    /**
+     * Get the source file line number from where the logger was called - the
+     * line where the log message originated.
+     * 
+     * @return
+     */
+    public int getLineNumber() {
+        return lineNumber;
+    }
 
-	public void setLineNumber(int lineNumber) {
-		this.lineNumber = lineNumber;
-	}
+    /**
+     * Set the source file line number from where the logger was called.
+     * 
+     * @param lineNumber
+     */
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
 
 }

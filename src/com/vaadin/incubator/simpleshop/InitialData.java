@@ -4,6 +4,12 @@ import com.vaadin.incubator.simpleshop.data.Product;
 import com.vaadin.incubator.simpleshop.data.ProductCategory;
 import com.vaadin.incubator.simpleshop.facade.FacadeFactory;
 
+/**
+ * This class's only purpose is to import initial test data to the application.
+ * 
+ * @author Kim
+ * 
+ */
 public class InitialData {
 
     public static void init() {
