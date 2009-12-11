@@ -12,8 +12,16 @@ import com.vaadin.incubator.simpleshop.InternationalizationServlet;
  */
 public enum SystemMsg {
 
+    GENERIC_USERNAME,
+    GENERIC_PASSWORD,
+
     REGISTER_REGISTER_CAPTION,
-    LOGIN_LOGIN_FAILED;
+
+    LOGIN_LOGIN_FAILED,
+    LOGIN_LOGIN_CAPTION,
+    LOGIN_FORGOT_PASSWORD,
+    LOGIN_REGISTER_BTN,
+    LOGIN_LOGIN_BTN;
 
     /**
      * Get the translation for this message
