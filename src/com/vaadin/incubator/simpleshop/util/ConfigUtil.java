@@ -12,4 +12,8 @@ public class ConfigUtil {
         return "";
     }
 
+    public static int getInt(String key) {
+        return 4;
+    }
+
 }
