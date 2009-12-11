@@ -190,5 +190,88 @@
 				<seg>Butik</seg>
 			</tuv>
 		</tu>
+		<tu tuid="GENERAL_ERROR">
+			<tuv lang="en">
+				<seg>An error has occured. Please try again later.</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Virhe tapahtunut. Yritä myöhemmin uudelleen.</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Ett fel har uppstått. Vänligen pröva senare på nytt.</seg>
+			</tuv>
+		</tu>
+		<tu tuid="GENERIC_ERROR">
+			<tuv lang="en">
+				<seg>Error</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Virhe</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Fel</seg>
+			</tuv>
+		</tu>
+		<tu tuid="REGISTER_REGISTRATION_COMPLETED">
+			<tuv lang="en">
+				<seg>Registration completed</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Rekisteröityminen suoritettu</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Registreringen är klar</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ACCOUNT_TOO_SHORT_PASSWORD">
+			<tuv lang="en">
+				<seg>The password was too short. Minimum lenght is {0}</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Salasana on liian lyhyt. Lyhyin sallittu
+					salasana on {0}
+					merkkiä.</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Lösenordet är för kort. Kortaste tillåtna
+					lösenordet
+					är {0} tecken.</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ACCOUNT_TOO_SHORT_USERNAME">
+			<tuv lang="en">
+				<seg>The username was too short. Minimum lenght is {0}.</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Käyttäjätunnus on liian lyhyt. Lyhyin sallittu
+					tunnus on {0} merkkiä.</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Användarnamnet är för kort. Kortaste tillåtna
+					användarnamnet är {0} tecken.</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ACCOUNT_PASSWORDS_DO_NOT_MATCH">
+			<tuv lang="en">
+				<seg>Passwords do not match</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Salasanat eivät täsmää</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Lösenorden är inte lika</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ACCOUNT_USERNAME_TAKEN">
+			<tuv lang="en">
+				<seg>Username already exists</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Käyttäjätunnus on jo olemassa</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Användarnamnet existerar redan</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>

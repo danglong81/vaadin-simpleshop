@@ -35,7 +35,13 @@ public enum SystemMsg {
 
     SHOP_CAPTION,
 
-    ;
+    ACCOUNT_TOO_SHORT_PASSWORD,
+    ACCOUNT_TOO_SHORT_USERNAME,
+    ACCOUNT_PASSWORDS_DO_NOT_MATCH,
+    ACCOUNT_USERNAME_TAKEN,
+    REGISTER_REGISTRATION_COMPLETED,
+
+    GENERAL_ERROR;
 
     /**
      * Get the translation for this message
