@@ -50,6 +50,8 @@ public class LoginView extends Panel implements ClickListener, Handler {
         setContent(panelLayout);
 
         initForm();
+
+        addActionHandler(this);
     }
 
     /**
@@ -124,7 +126,7 @@ public class LoginView extends Panel implements ClickListener, Handler {
             password.setValue("");
         } else {
             // Login was successfull, hence remove the enter listener
-            // TODO
+            removeActionHandler(this);
         }
     }
 
