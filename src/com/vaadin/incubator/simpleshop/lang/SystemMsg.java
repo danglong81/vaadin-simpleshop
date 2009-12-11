@@ -16,6 +16,7 @@ public enum SystemMsg {
     GENERIC_PASSWORD,
     GENERIC_USER_PROFILE,
     GENERIC_SHOPPING_CART,
+    GENERIC_ADD,
 
     REGISTER_REGISTER_CAPTION,
 
@@ -26,6 +27,13 @@ public enum SystemMsg {
     LOGIN_LOGIN_BTN,
 
     APPLICATION_TITLE,
+
+    CART_CHECKOUT,
+    CART_PRODUCT,
+    CART_QTY,
+    CART_SUM,
+
+    SHOP_CAPTION,
 
     ;
 

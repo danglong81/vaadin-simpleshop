@@ -5,6 +5,7 @@ import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.incubator.simpleshop.ShoppingCart;
 import com.vaadin.incubator.simpleshop.data.OrderRow;
 import com.vaadin.incubator.simpleshop.data.Product;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.controllers.CartController;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -57,9 +58,9 @@ public class CartItems extends Panel implements ValueChangeListener,
      */
     private void initHeader() {
         // Create labels
-        Label productName = new Label("Product");
-        Label quantity = new Label("Qty");
-        Label sum = new Label("Sum");
+        Label productName = new Label(SystemMsg.CART_PRODUCT.get());
+        Label quantity = new Label(SystemMsg.CART_QTY.get());
+        Label sum = new Label(SystemMsg.CART_SUM.get());
 
         // A label takes up 100% of the available width by default. Hence we
         // must set its width to null, so that it won't take up more space than

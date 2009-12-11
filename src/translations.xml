@@ -124,5 +124,71 @@
 				<seg>SimpleShop</seg>
 			</tuv>
 		</tu>
+		<tu tuid="GENERIC_ADD">
+			<tuv lang="en">
+				<seg>Add</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Lisää</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Lägg till</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CART_CHECKOUT">
+			<tuv lang="en">
+				<seg>Checkout</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Osta tuotteet</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Köp produkterna</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CART_PRODUCT">
+			<tuv lang="en">
+				<seg>Product</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Tuote</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Produkt</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CART_QTY">
+			<tuv lang="en">
+				<seg>Qty</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Kpl</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>St.</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CART_SUM">
+			<tuv lang="en">
+				<seg>Sum</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Summa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Summa</seg>
+			</tuv>
+		</tu>
+		<tu tuid="SHOP_CAPTION">
+			<tuv lang="en">
+				<seg>Shop</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Kauppa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Butik</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>

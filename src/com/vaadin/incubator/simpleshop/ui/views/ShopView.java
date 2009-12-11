@@ -1,5 +1,6 @@
 package com.vaadin.incubator.simpleshop.ui.views;
 
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.components.InformationView;
 import com.vaadin.incubator.simpleshop.ui.components.ItemBrowser;
 import com.vaadin.ui.HorizontalLayout;
@@ -23,7 +24,7 @@ public class ShopView extends HorizontalLayout implements View {
         setSizeFull();
         // Set the caption for this view. The caption is used as the caption in
         // the tabsheet for this tab.
-        setCaption("Shop");
+        setCaption(SystemMsg.SHOP_CAPTION.get());
         browser = new ItemBrowser();
         cart = new InformationView();
 

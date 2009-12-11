@@ -4,6 +4,7 @@ import com.vaadin.incubator.simpleshop.ShoppingCart;
 import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.events.CartUpdatedEvent;
 import com.vaadin.incubator.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.controllers.CartController;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -75,7 +76,7 @@ public class CartContentView extends VerticalLayout implements
                 .getFormattedTotalPrice(ShoppingCart.getOrder()));
 
         // Initialize the checkout button
-        paymentBtn = new Button("Proceed");
+        paymentBtn = new Button(SystemMsg.CART_CHECKOUT.get());
 
         // Add the label and the button to the layout
         summaryLayout.addComponent(totalSumLabel);

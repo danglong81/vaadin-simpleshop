@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 
 import com.vaadin.incubator.simpleshop.ShoppingCart;
 import com.vaadin.incubator.simpleshop.data.Product;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
@@ -96,7 +97,7 @@ public class ProductViewer extends CustomComponent implements ClickListener {
         header.addComponent(price);
 
         // The last component in the header is the add button
-        addToCartBtn = new Button("Add", this);
+        addToCartBtn = new Button(SystemMsg.GENERIC_ADD.get(), this);
         addToCartBtn.setWidth(null);
         header.addComponent(addToCartBtn);
 
