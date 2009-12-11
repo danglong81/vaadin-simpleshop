@@ -1,6 +1,7 @@
 package com.vaadin.incubator.simpleshop;
 
 import com.vaadin.Application;
+import com.vaadin.incubator.simpleshop.data.Order;
 import com.vaadin.incubator.simpleshop.events.EventHandler;
 import com.vaadin.incubator.simpleshop.ui.views.MainLayout;
 import com.vaadin.service.ApplicationContext.TransactionListener;
@@ -27,6 +28,9 @@ public class SimpleshopApplication extends Application implements
     // instance has its own EventHandler.
     private final EventHandler eventHandler = new EventHandler();
 
+    // This application instance's cart content
+    private Order cartContent = new Order();
+
     @Override
     public void init() {
         setTheme("simpleshop");
@@ -38,6 +42,9 @@ public class SimpleshopApplication extends Application implements
         // a couple of listeners) and the getEventHandler() method requires that
         // we have the currentApplication set.
         currentApplication.set(this);
+
+        // Set the order for the shopping cart for the same reason as above
+        ShoppingCart.setOrder(cartContent);
 
         // Create the main window we will be using in this application
         Window mainWindow = new Window("Simple Shop");
@@ -59,6 +66,9 @@ public class SimpleshopApplication extends Application implements
         if (application == SimpleshopApplication.this) {
             currentApplication.set(null);
             currentApplication.remove();
+
+            // Get the cart content
+            cartContent = ShoppingCart.getOrder();
         }
     }
 
@@ -69,6 +79,9 @@ public class SimpleshopApplication extends Application implements
         // local variable for this request.
         if (application == SimpleshopApplication.this) {
             currentApplication.set(this);
+
+            // Set the cart content for the ShoppingCart's thread local variable
+            ShoppingCart.setOrder(cartContent);
         }
     }
 

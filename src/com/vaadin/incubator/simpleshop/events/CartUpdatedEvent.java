@@ -13,7 +13,7 @@ public class CartUpdatedEvent {
 
     /** Cart update event types. Defines what happened in the cart **/
     public enum EventType {
-        PRODUCT_ADDED, PRODUCT_REMOVED;
+        PRODUCT_ADDED, PRODUCT_REMOVED, PRODUCT_QUANTITY_CHANGED;
     };
 
     private final EventType type;

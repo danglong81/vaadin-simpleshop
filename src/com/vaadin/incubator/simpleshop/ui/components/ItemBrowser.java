@@ -14,6 +14,13 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
+/**
+ * Main layout for the item browser. The item browser is where the user browses
+ * through categories and products.
+ * 
+ * @author kim
+ * 
+ */
 public class ItemBrowser extends VerticalLayout implements ClickListener {
 
     private static final long serialVersionUID = 5368868329646304718L;
@@ -28,7 +35,7 @@ public class ItemBrowser extends VerticalLayout implements ClickListener {
 
     private final List<Button> categoryHierharchyList = new ArrayList<Button>();
 
-    private Button rootCategoryBtn = new Button("Simple Shop", this);
+    private final Button rootCategoryBtn = new Button("Simple Shop", this);
 
     public ItemBrowser() {
         setSizeFull();
