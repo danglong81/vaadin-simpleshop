@@ -91,5 +91,38 @@
 				<seg>Registrering</seg>
 			</tuv>
 		</tu>
+		<tu tuid="GENERIC_USER_PROFILE">
+			<tuv lang="en">
+				<seg>User profile</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Käyttäjäprofiili</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Användarprofil</seg>
+			</tuv>
+		</tu>
+		<tu tuid="GENERIC_SHOPPING_CART">
+			<tuv lang="en">
+				<seg>Shopping cart</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Ostoskori</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Köpkorg</seg>
+			</tuv>
+		</tu>
+		<tu tuid="APPLICATION_TITLE">
+			<tuv lang="en">
+				<seg>SimpleShop</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>SimpleShop</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>SimpleShop</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>

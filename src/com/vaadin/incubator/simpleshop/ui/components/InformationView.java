@@ -1,6 +1,8 @@
 package com.vaadin.incubator.simpleshop.ui.components;
 
 import com.vaadin.incubator.simpleshop.CurrentUser;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
+import com.vaadin.incubator.simpleshop.ui.Icons;
 import com.vaadin.incubator.simpleshop.ui.components.cart.CartContentView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -21,7 +23,8 @@ public class InformationView extends VerticalLayout implements ClickListener {
     private static final long serialVersionUID = 8401760557369059696L;
 
     // Navigation buttons
-    private Button userSettingsBtn;
+    private Button profileBtn;
+    private Button shoppingCartBtn;
 
     // Layout for navigation buttons
     private HorizontalLayout buttonLayout;
@@ -63,23 +66,38 @@ public class InformationView extends VerticalLayout implements ClickListener {
         buttonLayout = new HorizontalLayout();
         buttonLayout.setHeight(null);
         buttonLayout.setSpacing(true);
-        buttonLayout.setMargin(true);
+        buttonLayout.setMargin(false, true, false, true);
 
         // Create and add buttons to layout
-        userSettingsBtn = new Button("User", this);
-        buttonLayout.addComponent(userSettingsBtn);
+        profileBtn = new Button(null, this);
+        profileBtn.setStyleName(Button.STYLE_LINK);
+        profileBtn.setWidth("64px");
+        profileBtn.setHeight("64px");
+        profileBtn.setIcon(Icons.USER_PROFILE.getResource());
+        profileBtn.setDescription(SystemMsg.GENERIC_USER_PROFILE.get());
+        buttonLayout.addComponent(profileBtn);
+
+        shoppingCartBtn = new Button(null, this);
+        shoppingCartBtn.setStyleName(Button.STYLE_LINK);
+        shoppingCartBtn.setWidth("64px");
+        shoppingCartBtn.setHeight("64px");
+        shoppingCartBtn.setIcon(Icons.SHOPPING_CART.getResource());
+        shoppingCartBtn.setDescription(SystemMsg.GENERIC_SHOPPING_CART.get());
+        buttonLayout.addComponent(shoppingCartBtn);
     }
 
     @Override
     public void buttonClick(ClickEvent event) {
-        if (event.getButton().equals(userSettingsBtn)
-                && CurrentUser.get() == null) {
+        if (event.getButton().equals(profileBtn) && CurrentUser.get() == null) {
             LoginView loginView = new LoginView();
             replaceComponent(currentView, loginView);
             currentView = loginView;
-            setExpandRatio(currentView, 1);
+        } else if (event.getButton().equals(shoppingCartBtn)) {
+            replaceComponent(currentView, cartContent);
+            currentView = cartContent;
         }
 
+        setExpandRatio(currentView, 1);
     }
 
 }

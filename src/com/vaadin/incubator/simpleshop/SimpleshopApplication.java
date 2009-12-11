@@ -4,6 +4,7 @@ import com.vaadin.Application;
 import com.vaadin.incubator.simpleshop.data.Order;
 import com.vaadin.incubator.simpleshop.data.User;
 import com.vaadin.incubator.simpleshop.events.EventHandler;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.views.MainLayout;
 import com.vaadin.service.ApplicationContext.TransactionListener;
 import com.vaadin.ui.Window;
@@ -50,7 +51,7 @@ public class SimpleshopApplication extends Application implements
         ShoppingCart.setOrder(cartContent);
 
         // Create the main window we will be using in this application
-        Window mainWindow = new Window("Simple Shop");
+        Window mainWindow = new Window(SystemMsg.APPLICATION_TITLE.get());
 
         // Create an instance of the MainLayout. Make sure currentApplication is
         // set.

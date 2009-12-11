@@ -14,6 +14,8 @@ public enum SystemMsg {
 
     GENERIC_USERNAME,
     GENERIC_PASSWORD,
+    GENERIC_USER_PROFILE,
+    GENERIC_SHOPPING_CART,
 
     REGISTER_REGISTER_CAPTION,
 
@@ -21,7 +23,11 @@ public enum SystemMsg {
     LOGIN_LOGIN_CAPTION,
     LOGIN_FORGOT_PASSWORD,
     LOGIN_REGISTER_BTN,
-    LOGIN_LOGIN_BTN;
+    LOGIN_LOGIN_BTN,
+
+    APPLICATION_TITLE,
+
+    ;
 
     /**
      * Get the translation for this message
