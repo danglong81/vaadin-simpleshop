@@ -1,0 +1,92 @@
+<tmx version="1.4">
+	<body>
+		<tu tuid="GENERIC_USERNAME">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="GENERIC_PASSWORD">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="REGISTER_REGISTER_CAPTION">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="LOGIN_LOGIN_FAILED">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="LOGIN_LOGIN_CAPTION">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="LOGIN_FORGOT_PASSWORD">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="LOGIN_REGISTER_BTN">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="LOGIN_LOGIN_BTN">
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+	</body>
+</tmx>
