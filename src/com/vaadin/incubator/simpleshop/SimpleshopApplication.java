@@ -2,6 +2,7 @@ package com.vaadin.incubator.simpleshop;
 
 import com.vaadin.Application;
 import com.vaadin.incubator.simpleshop.data.Order;
+import com.vaadin.incubator.simpleshop.data.User;
 import com.vaadin.incubator.simpleshop.events.EventHandler;
 import com.vaadin.incubator.simpleshop.ui.views.MainLayout;
 import com.vaadin.service.ApplicationContext.TransactionListener;
@@ -30,6 +31,8 @@ public class SimpleshopApplication extends Application implements
 
     // This application instance's cart content
     private Order cartContent = new Order();
+
+    private User user = null;
 
     @Override
     public void init() {
@@ -69,6 +72,9 @@ public class SimpleshopApplication extends Application implements
 
             // Get the cart content
             cartContent = ShoppingCart.getOrder();
+
+            // Get the current user
+            user = CurrentUser.get();
         }
     }
 
@@ -82,6 +88,9 @@ public class SimpleshopApplication extends Application implements
 
             // Set the cart content for the ShoppingCart's thread local variable
             ShoppingCart.setOrder(cartContent);
+
+            // Set the current user
+            CurrentUser.setUser(user);
         }
     }
 
