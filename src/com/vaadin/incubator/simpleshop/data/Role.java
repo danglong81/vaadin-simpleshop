@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 
+import org.eclipse.persistence.annotations.BasicCollection;
+
 /**
  * Entity class for Roles used in ACL
  * 
@@ -14,6 +16,7 @@ import javax.persistence.Entity;
 @Entity
 public class Role extends AbstractPojo {
 
+    @BasicCollection
     private Set<ActionLock> locks = new HashSet<ActionLock>();
 
     public Role() {

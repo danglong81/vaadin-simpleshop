@@ -51,7 +51,7 @@ public class PasswordUtil {
 
         // Get a byte array of the password concatenated with the password salt
         // value
-        byte[] defaultBytes = (password + ConfigUtil.getValue("salt"))
+        byte[] defaultBytes = (password + ConfigUtil.getString("password.salt"))
                 .getBytes();
         try {
             // Perform the hashing with SHA

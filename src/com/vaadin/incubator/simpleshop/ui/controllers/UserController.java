@@ -24,20 +24,14 @@ public class UserController {
      * 
      */
     public static enum RegistrationError {
-        TOO_SHORT_PASSWORD(
-                SystemMsg.ACCOUNT_TOO_SHORT_PASSWORD.get(ConfigUtil
-                        .getInt("minPasswordLength"))),
-        TOO_SHORT_USERNAME(
-                SystemMsg.ACCOUNT_TOO_SHORT_USERNAME.get(ConfigUtil
-                        .getInt("minUsernameLength"))),
-        PASSWORDS_DO_NOT_MATCH(
-                SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH.get()),
-        USERNAME_TAKEN(
-                SystemMsg.ACCOUNT_USERNAME_TAKEN.get()),
-        REGISTRATION_COMPLETED(
-                SystemMsg.REGISTER_REGISTRATION_COMPLETED.get()),
-        ERROR(
-                SystemMsg.GENERAL_ERROR.get());
+        TOO_SHORT_PASSWORD(SystemMsg.ACCOUNT_TOO_SHORT_PASSWORD.get(ConfigUtil
+                .getInt("password.length.min"))),
+        TOO_SHORT_USERNAME(SystemMsg.ACCOUNT_TOO_SHORT_USERNAME.get(ConfigUtil
+                .getInt("username.length.min"))),
+        PASSWORDS_DO_NOT_MATCH(SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH.get()),
+        USERNAME_TAKEN(SystemMsg.ACCOUNT_USERNAME_TAKEN.get()),
+        REGISTRATION_COMPLETED(SystemMsg.REGISTER_REGISTRATION_COMPLETED.get()),
+        ERROR(SystemMsg.GENERAL_ERROR.get());
 
         String msg;
 
@@ -76,10 +70,10 @@ public class UserController {
         // Make sure that the username and password fulfill the minimum size
         // requirements.
         if (username == null
-                || username.length() < ConfigUtil.getInt("minUsernameLength")) {
+                || username.length() < ConfigUtil.getInt("username.length.min")) {
             return RegistrationError.TOO_SHORT_USERNAME;
         } else if (password == null
-                || password.length() < ConfigUtil.getInt("minPasswordLength")) {
+                || password.length() < ConfigUtil.getInt("password.length.min")) {
             return RegistrationError.TOO_SHORT_PASSWORD;
         }
         // Make sure that the password is verified correctly
