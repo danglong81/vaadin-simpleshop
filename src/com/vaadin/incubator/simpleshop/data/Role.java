@@ -16,6 +16,8 @@ import org.eclipse.persistence.annotations.BasicCollection;
 @Entity
 public class Role extends AbstractPojo {
 
+    private String name;
+
     @BasicCollection
     private Set<ActionLock> locks = new HashSet<ActionLock>();
 
@@ -57,6 +59,24 @@ public class Role extends AbstractPojo {
      */
     public void removeLock(ActionLock lock) {
         getLocks().remove(lock);
+    }
+
+    /**
+     * Set the name for this role
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Get the name of this role
+     * 
+     * @return
+     */
+    public String getName() {
+        return name;
     }
 
 }
