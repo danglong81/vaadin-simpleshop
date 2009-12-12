@@ -6,6 +6,7 @@ import com.vaadin.incubator.simpleshop.ui.Icons;
 import com.vaadin.incubator.simpleshop.ui.components.cart.CartContentView;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
@@ -89,14 +90,15 @@ public class InformationView extends VerticalLayout implements ClickListener {
     @Override
     public void buttonClick(ClickEvent event) {
         if (event.getButton().equals(profileBtn) && CurrentUser.get() == null) {
-            LoginView loginView = new LoginView();
-            replaceComponent(currentView, loginView);
-            currentView = loginView;
+            setCurrentView(new LoginView());
         } else if (event.getButton().equals(shoppingCartBtn)) {
-            replaceComponent(currentView, cartContent);
-            currentView = cartContent;
+            setCurrentView(cartContent);
         }
+    }
 
+    public void setCurrentView(ComponentContainer component) {
+        replaceComponent(currentView, component);
+        currentView = component;
         setExpandRatio(currentView, 1);
     }
 

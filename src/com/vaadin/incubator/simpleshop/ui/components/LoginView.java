@@ -107,7 +107,8 @@ public class LoginView extends Panel implements ClickListener, Handler {
         } else if (event.getButton().equals(forgotPasswordBtn)) {
             // TODO: switch to forgot password view
         } else if (event.getButton().equals(registerBtn)) {
-
+            ((InformationView) getParent())
+                    .setCurrentView(new RegistrationView());
         }
     }
 

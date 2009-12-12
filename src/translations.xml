@@ -273,5 +273,49 @@
 				<seg>Användarnamnet existerar redan</seg>
 			</tuv>
 		</tu>
+		<tu tuid="GENERIC_CANCEL">
+			<tuv lang="en">
+				<seg>Cancel</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Peruuta</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Återkalla</seg>
+			</tuv>
+		</tu>
+		<tu tuid="GENERIC_OK">
+			<tuv lang="en">
+				<seg>Ok</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Ok</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Ok</seg>
+			</tuv>
+		</tu>
+		<tu tuid="REGISTER_VERIFY_PASSWORD">
+			<tuv lang="en">
+				<seg>Verify password</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Vahvista salasana</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Förstärk lösenord</seg>
+			</tuv>
+		</tu>
+		<tu tuid="REGISTER_REGISTER_BTN">
+			<tuv lang="en">
+				<seg>Register</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Rekisteröidy</seg>
+			</tuv>
+			<tuv lang="se">
+				<seg>Registrera</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>
