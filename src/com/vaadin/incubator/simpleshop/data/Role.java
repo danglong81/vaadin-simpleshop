@@ -41,4 +41,22 @@ public class Role extends AbstractPojo {
         return locks;
     }
 
+    /**
+     * Transient method for adding a lock to the existing set
+     * 
+     * @param lock
+     */
+    public void addLock(ActionLock lock) {
+        getLocks().add(lock);
+    }
+
+    /**
+     * Transient method for removing a lock from the set
+     * 
+     * @param lock
+     */
+    public void removeLock(ActionLock lock) {
+        getLocks().remove(lock);
+    }
+
 }

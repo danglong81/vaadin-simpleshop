@@ -100,4 +100,22 @@ public class User extends AbstractPojo {
         return roles;
     }
 
+    /**
+     * Transient method for adding a role for the user
+     * 
+     * @param role
+     */
+    public void addRole(Role role) {
+        getRoles().add(role);
+    }
+
+    /**
+     * Transient method for removing a role from the user
+     * 
+     * @param role
+     */
+    public void removeRole(Role role) {
+        getRoles().remove(role);
+    }
+
 }
