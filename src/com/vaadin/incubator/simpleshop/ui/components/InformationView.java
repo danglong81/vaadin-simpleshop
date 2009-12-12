@@ -6,6 +6,7 @@ import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
 import com.vaadin.incubator.simpleshop.events.UserSessionListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.Icons;
+import com.vaadin.incubator.simpleshop.ui.admin.AdminWindow;
 import com.vaadin.incubator.simpleshop.ui.components.cart.CartContentView;
 import com.vaadin.incubator.simpleshop.util.PermissionsUtil;
 import com.vaadin.incubator.simpleshop.util.SessionUtil;
@@ -121,6 +122,8 @@ public class InformationView extends VerticalLayout implements ClickListener,
             setCurrentView(cartContent);
         } else if (event.getButton().equals(logoutBtn)) {
             SessionUtil.logout();
+        } else if (event.getButton().equals(adminBtn)) {
+            getApplication().getMainWindow().addWindow(new AdminWindow());
         }
     }
 
