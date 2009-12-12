@@ -20,8 +20,17 @@ public class PermissionsUtil {
      * @return
      */
     public static boolean hasAccess(ActionLock lock) {
-        // Get the current user
-        User user = CurrentUser.get();
+        return hasAccess(lock, CurrentUser.get());
+    }
+
+    /**
+     * Checks if the given user has access to this action
+     * 
+     * @param lock
+     * @param user
+     * @return
+     */
+    public static boolean hasAccess(ActionLock lock, User user) {
         // If the current user is null, then the user is not logged in and thus
         // does not have access to the given action
         if (user == null) {
@@ -47,6 +56,27 @@ public class PermissionsUtil {
         // The user does not have access to the action.
         return false;
 
+    }
+
+    /**
+     * Checks if the user belongs to any roles that have even access to at least
+     * one administrative action.
+     * 
+     * @param user
+     * @return
+     */
+    public static boolean isAdmin(User user) {
+        if (hasAccess(ActionLock.MANAGE_ACL, user)) {
+            return true;
+        } else if (hasAccess(ActionLock.MANAGE_CUSTOMERS, user)) {
+            return true;
+        } else if (hasAccess(ActionLock.MANAGE_INVENTORY, user)) {
+            return true;
+        } else if (hasAccess(ActionLock.MANAGE_ORDERS, user)) {
+            return true;
+        }
+
+        return false;
     }
 
 }

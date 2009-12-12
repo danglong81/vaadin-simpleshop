@@ -4,10 +4,13 @@ import com.vaadin.Application;
 import com.vaadin.incubator.simpleshop.data.Order;
 import com.vaadin.incubator.simpleshop.data.User;
 import com.vaadin.incubator.simpleshop.events.EventHandler;
+import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
+import com.vaadin.incubator.simpleshop.events.UserSessionListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.views.MainLayout;
 import com.vaadin.service.ApplicationContext.TransactionListener;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.Window.Notification;
 
 /**
  * Application class for the SimpleShop.
@@ -16,7 +19,7 @@ import com.vaadin.ui.Window;
  * 
  */
 public class SimpleshopApplication extends Application implements
-        TransactionListener {
+        TransactionListener, UserSessionListener {
 
     private static final long serialVersionUID = 4097161573771089801L;
 
@@ -39,6 +42,7 @@ public class SimpleshopApplication extends Application implements
     public void init() {
         setTheme("simpleshop");
         getContext().addTransactionListener(this);
+        eventHandler.addListener(this);
 
         // Set the current application to this. This is also done in the
         // transactionStart, but in our application we need to define it in the
@@ -112,6 +116,20 @@ public class SimpleshopApplication extends Application implements
      */
     public static EventHandler getEventHandler() {
         return getInstance().eventHandler;
+    }
+
+    @Override
+    public void loginEvent(UserSessionEvent event) {
+        getMainWindow().showNotification(
+                SystemMsg.APPLICATION_WELCOME_USER.get(event.getUser()
+                        .getName()), "", Notification.TYPE_TRAY_NOTIFICATION);
+    }
+
+    @Override
+    public void logoutEvent(UserSessionEvent event) {
+        getMainWindow().showNotification(
+                SystemMsg.APPLICATION_USER_X_LOGGED_OUT.get(event.getUser()
+                        .getName()), "", Notification.TYPE_TRAY_NOTIFICATION);
     }
 
 }

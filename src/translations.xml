@@ -317,5 +317,49 @@
 				<seg>Registrera</seg>
 			</tuv>
 		</tu>
+		<tu tuid="GENERIC_ADMINISTRATION">
+			<tuv lang="en">
+				<seg>Administration</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Hallinta</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Administration</seg>
+			</tuv>
+		</tu>
+		<tu tuid="GENERIC_LOGOUT">
+			<tuv lang="en">
+				<seg>Logout</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Kirjaudu ulos</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Logga ut</seg>
+			</tuv>
+		</tu>
+		<tu tuid="APPLICATION_WELCOME_USER">
+			<tuv lang="en">
+				<seg>Welcome, {0}</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Tervetuloa {0}</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Välkommen, {0}</seg>
+			</tuv>
+		</tu>
+		<tu tuid="APPLICATION_USER_X_LOGGED_OUT">
+			<tuv lang="en">
+				<seg>User logged out</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Käyttäjä kirjattu ulos</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Användaren loggat ut</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>

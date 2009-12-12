@@ -17,6 +17,8 @@ public class EventHandler {
     // A list of all the cart update listeners in the application
     private final List<CartUpdateListener> cartUpdateListeners = new ArrayList<CartUpdateListener>();
 
+    private final List<UserSessionListener> userSessionListeners = new ArrayList<UserSessionListener>();
+
     /**
      * Add a cart update listener
      * 
@@ -48,6 +50,54 @@ public class EventHandler {
         if (event != null) {
             for (CartUpdateListener listener : cartUpdateListeners) {
                 listener.cartUpdated(event);
+            }
+        }
+    }
+
+    /**
+     * Add a user session listener
+     * 
+     * @param listener
+     */
+    public void addListener(UserSessionListener listener) {
+        if (listener != null) {
+            userSessionListeners.add(listener);
+        }
+    }
+
+    /**
+     * Remove a user session listener.
+     * 
+     * @param listener
+     */
+    public void removeListener(UserSessionListener listener) {
+        if (listener != null) {
+            userSessionListeners.remove(listener);
+        }
+    }
+
+    /**
+     * Dispatch a login event to all appropriate listeners.
+     * 
+     * @param event
+     */
+    public void dispatchLoginEvent(UserSessionEvent event) {
+        if (event != null) {
+            for (UserSessionListener listener : userSessionListeners) {
+                listener.loginEvent(event);
+            }
+        }
+    }
+
+    /**
+     * Dispatch a logout event to all appropriate listeners.
+     * 
+     * @param event
+     */
+    public void dispatchLogoutEvent(UserSessionEvent event) {
+        if (event != null) {
+            for (UserSessionListener listener : userSessionListeners) {
+                listener.logoutEvent(event);
             }
         }
     }

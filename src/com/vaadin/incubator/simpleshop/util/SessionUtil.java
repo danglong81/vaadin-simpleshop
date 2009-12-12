@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.vaadin.incubator.simpleshop.CurrentUser;
+import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.data.User;
+import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
 import com.vaadin.incubator.simpleshop.facade.FacadeFactory;
 
 /**
@@ -45,6 +47,9 @@ public class SessionUtil {
                 // current user (inlogged)
                 CurrentUser.setUser(user);
 
+                UserSessionEvent event = new UserSessionEvent(CurrentUser.get());
+                SimpleshopApplication.getEventHandler().dispatchLoginEvent(
+                        event);
                 return true;
             }
         }
@@ -56,7 +61,9 @@ public class SessionUtil {
      * Method for logging out a user
      */
     public static void logout() {
+        UserSessionEvent event = new UserSessionEvent(CurrentUser.get());
         CurrentUser.setUser(null);
+        SimpleshopApplication.getEventHandler().dispatchLogoutEvent(event);
     }
 
 }

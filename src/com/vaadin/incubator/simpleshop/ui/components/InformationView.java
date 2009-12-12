@@ -1,9 +1,14 @@
 package com.vaadin.incubator.simpleshop.ui.components;
 
 import com.vaadin.incubator.simpleshop.CurrentUser;
+import com.vaadin.incubator.simpleshop.SimpleshopApplication;
+import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
+import com.vaadin.incubator.simpleshop.events.UserSessionListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.Icons;
 import com.vaadin.incubator.simpleshop.ui.components.cart.CartContentView;
+import com.vaadin.incubator.simpleshop.util.PermissionsUtil;
+import com.vaadin.incubator.simpleshop.util.SessionUtil;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
@@ -19,13 +24,16 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class InformationView extends VerticalLayout implements ClickListener {
+public class InformationView extends VerticalLayout implements ClickListener,
+        UserSessionListener {
 
     private static final long serialVersionUID = 8401760557369059696L;
 
     // Navigation buttons
     private Button profileBtn;
     private Button shoppingCartBtn;
+    private Button adminBtn = null;
+    private Button logoutBtn = null;
 
     // Layout for navigation buttons
     private HorizontalLayout buttonLayout;
@@ -57,6 +65,7 @@ public class InformationView extends VerticalLayout implements ClickListener {
         // The sub view should take as much space as there is available and
         // navigation button's should only reserve as much space as they need.
         setExpandRatio(currentView, 1);
+        SimpleshopApplication.getEventHandler().addListener(this);
     }
 
     /**
@@ -85,21 +94,68 @@ public class InformationView extends VerticalLayout implements ClickListener {
         shoppingCartBtn.setIcon(Icons.SHOPPING_CART.getResource());
         shoppingCartBtn.setDescription(SystemMsg.GENERIC_SHOPPING_CART.get());
         buttonLayout.addComponent(shoppingCartBtn);
+
+        adminBtn = new Button(null, this);
+        adminBtn.setStyleName(Button.STYLE_LINK);
+        adminBtn.setWidth("64px");
+        adminBtn.setHeight("64px");
+        adminBtn.setIcon(Icons.ADMIN.getResource());
+        adminBtn.setDescription(SystemMsg.GENERIC_ADMINISTRATION.get());
+
+        logoutBtn = new Button(null, this);
+        logoutBtn.setStyleName(Button.STYLE_LINK);
+        logoutBtn.setWidth("64px");
+        logoutBtn.setHeight("64px");
+        logoutBtn.setIcon(Icons.LOGOUT.getResource());
+        logoutBtn.setDescription(SystemMsg.GENERIC_LOGOUT.get());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void buttonClick(ClickEvent event) {
         if (event.getButton().equals(profileBtn) && CurrentUser.get() == null) {
             setCurrentView(new LoginView());
         } else if (event.getButton().equals(shoppingCartBtn)) {
             setCurrentView(cartContent);
+        } else if (event.getButton().equals(logoutBtn)) {
+            SessionUtil.logout();
         }
     }
 
+    /**
+     * Sets the visible view in the InformationView
+     * 
+     * @param component
+     */
     public void setCurrentView(ComponentContainer component) {
         replaceComponent(currentView, component);
         currentView = component;
         setExpandRatio(currentView, 1);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void loginEvent(UserSessionEvent event) {
+        setCurrentView(cartContent);
+
+        if (PermissionsUtil.isAdmin(CurrentUser.get())) {
+            buttonLayout.addComponent(adminBtn);
+        }
+
+        buttonLayout.addComponent(logoutBtn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void logoutEvent(UserSessionEvent event) {
+        setCurrentView(cartContent);
+
+        buttonLayout.removeComponent(adminBtn);
+        buttonLayout.removeComponent(logoutBtn);
     }
 
 }
