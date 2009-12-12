@@ -1,8 +1,12 @@
 package com.vaadin.incubator.simpleshop;
 
+import com.vaadin.incubator.simpleshop.data.ActionLock;
 import com.vaadin.incubator.simpleshop.data.Product;
 import com.vaadin.incubator.simpleshop.data.ProductCategory;
+import com.vaadin.incubator.simpleshop.data.Role;
+import com.vaadin.incubator.simpleshop.data.User;
 import com.vaadin.incubator.simpleshop.facade.FacadeFactory;
+import com.vaadin.incubator.simpleshop.util.PasswordUtil;
 
 /**
  * This class's only purpose is to import initial test data to the application.
@@ -13,6 +17,24 @@ import com.vaadin.incubator.simpleshop.facade.FacadeFactory;
 public class InitialData {
 
     public static void init() {
+        // Create the admin role
+        Role adminRole = new Role();
+        adminRole.setName("Administrator");
+        for (ActionLock lock : ActionLock.values()) {
+            adminRole.addLock(lock);
+        }
+
+        FacadeFactory.getFacade().store(adminRole);
+
+        // Root user
+        User adminUser = new User();
+        adminUser.setUsername("demo");
+        adminUser.setPassword(PasswordUtil.generateHashedPassword("demo"));
+        adminUser.setName("Joe Demo");
+        adminUser.addRole(adminRole);
+
+        FacadeFactory.getFacade().store(adminUser);
+
         ProductCategory volvo = new ProductCategory();
         volvo.setName("Volvo");
         volvo.setRootCategory(true);
