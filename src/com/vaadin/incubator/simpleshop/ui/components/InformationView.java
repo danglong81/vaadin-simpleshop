@@ -167,6 +167,11 @@ public class InformationView extends VerticalLayout implements ClickListener,
 
         buttonLayout.removeComponent(adminBtn);
         buttonLayout.removeComponent(logoutBtn);
+
+        // If the user logs out, clear the profile view so that if another user
+        // uses the same session, he will see his own details and not the
+        // previous user's details.
+        userProfileView = null;
     }
 
 }
