@@ -12,7 +12,7 @@ import com.vaadin.ui.HorizontalLayout;
  * @author Kim
  * 
  */
-public class ShopView extends HorizontalLayout implements View {
+public class ShopView extends View<HorizontalLayout> {
 
     private static final long serialVersionUID = 5345221919713457136L;
 
@@ -21,22 +21,23 @@ public class ShopView extends HorizontalLayout implements View {
     private final ItemBrowser browser;
 
     public ShopView() {
-        setSizeFull();
+        super(new HorizontalLayout());
+        mainLayout.setSizeFull();
         // Set the caption for this view. The caption is used as the caption in
         // the tabsheet for this tab.
         setCaption(SystemMsg.SHOP_CAPTION.get());
         browser = new ItemBrowser();
         cart = new InformationView();
 
-        addComponent(browser);
-        addComponent(cart);
+        mainLayout.addComponent(browser);
+        mainLayout.addComponent(cart);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void activate() {
+    public void activated() {
         // TODO Auto-generated method stub
 
     }

@@ -6,13 +6,14 @@ import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
 import com.vaadin.incubator.simpleshop.events.UserSessionListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.Icons;
+import com.vaadin.incubator.simpleshop.ui.ParentView;
+import com.vaadin.incubator.simpleshop.ui.ViewHandler;
 import com.vaadin.incubator.simpleshop.ui.admin.AdminWindow;
 import com.vaadin.incubator.simpleshop.ui.components.cart.CartContentView;
+import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.incubator.simpleshop.util.PermissionsUtil;
 import com.vaadin.incubator.simpleshop.util.SessionUtil;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
@@ -25,8 +26,8 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class InformationView extends VerticalLayout implements ClickListener,
-        UserSessionListener {
+public class InformationView extends View<VerticalLayout> implements
+        ClickListener, UserSessionListener, ParentView {
 
     private static final long serialVersionUID = 8401760557369059696L;
 
@@ -42,13 +43,13 @@ public class InformationView extends VerticalLayout implements ClickListener,
     // The cart content view
     private final CartContentView cartContent;
 
-    private Component currentView;
-
-    private UserProfileView userProfileView = null;
+    private View<?> currentView;
 
     public InformationView() {
-        // Take all the space available
-        setSizeFull();
+        super(new VerticalLayout());
+        setStyleName("infoview");
+
+        mainLayout.setSizeFull();
 
         // Initialize navigation buttons
         initButtons();
@@ -60,15 +61,17 @@ public class InformationView extends VerticalLayout implements ClickListener,
         currentView = cartContent;
 
         // Add buttons to layout
-        addComponent(buttonLayout);
+        mainLayout.addComponent(buttonLayout);
 
         // Add current view to layout
-        addComponent(currentView);
+        mainLayout.addComponent(currentView);
 
         // The sub view should take as much space as there is available and
         // navigation button's should only reserve as much space as they need.
-        setExpandRatio(currentView, 1);
+        mainLayout.setExpandRatio(currentView, 1);
         SimpleshopApplication.getEventHandler().addListener(this);
+
+        registerChildViews();
     }
 
     /**
@@ -119,15 +122,15 @@ public class InformationView extends VerticalLayout implements ClickListener,
     @Override
     public void buttonClick(ClickEvent event) {
         if (event.getButton().equals(profileBtn) && CurrentUser.get() == null) {
-            setCurrentView(new LoginView());
+            SimpleshopApplication.getViewHandler()
+                    .activateView(LoginView.class);
         } else if (event.getButton().equals(profileBtn)
                 && CurrentUser.get() != null) {
-            if (userProfileView == null) {
-                userProfileView = new UserProfileView();
-            }
-            setCurrentView(userProfileView);
+            SimpleshopApplication.getViewHandler().activateView(
+                    UserProfileView.class);
         } else if (event.getButton().equals(shoppingCartBtn)) {
-            setCurrentView(cartContent);
+            SimpleshopApplication.getViewHandler().activateView(
+                    CartContentView.class);
         } else if (event.getButton().equals(logoutBtn)) {
             SessionUtil.logout();
         } else if (event.getButton().equals(adminBtn)) {
@@ -136,21 +139,10 @@ public class InformationView extends VerticalLayout implements ClickListener,
     }
 
     /**
-     * Sets the visible view in the InformationView
-     * 
-     * @param component
-     */
-    public void setCurrentView(ComponentContainer component) {
-        replaceComponent(currentView, component);
-        currentView = component;
-        setExpandRatio(currentView, 1);
-    }
-
-    /**
      * {@inheritDoc}
      */
     public void loginEvent(UserSessionEvent event) {
-        setCurrentView(cartContent);
+        activate(cartContent);
 
         if (PermissionsUtil.isAdmin(CurrentUser.get())) {
             buttonLayout.addComponent(adminBtn);
@@ -163,7 +155,7 @@ public class InformationView extends VerticalLayout implements ClickListener,
      * {@inheritDoc}
      */
     public void logoutEvent(UserSessionEvent event) {
-        setCurrentView(cartContent);
+        activate(cartContent);
 
         buttonLayout.removeComponent(adminBtn);
         buttonLayout.removeComponent(logoutBtn);
@@ -171,7 +163,30 @@ public class InformationView extends VerticalLayout implements ClickListener,
         // If the user logs out, clear the profile view so that if another user
         // uses the same session, he will see his own details and not the
         // previous user's details.
-        userProfileView = null;
+        SimpleshopApplication.getViewHandler()
+                .removeView(UserProfileView.class);
+    }
+
+    @Override
+    public void activate(View<?> view) {
+        mainLayout.replaceComponent(currentView, view);
+        currentView = view;
+        mainLayout.setExpandRatio(currentView, 1);
+    }
+
+    @Override
+    public void activated() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void registerChildViews() {
+        ViewHandler vh = SimpleshopApplication.getViewHandler();
+        vh.addView(RegistrationView.class, this);
+        vh.addView(LoginView.class, this);
+        vh.addView(UserProfileView.class, this);
+        vh.addView(CartContentView.class, this);
     }
 
 }

@@ -11,9 +11,9 @@ import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.GenericFieldFactory;
 import com.vaadin.incubator.simpleshop.ui.controllers.UserController;
 import com.vaadin.incubator.simpleshop.ui.controllers.UserController.ProfileError;
+import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
@@ -32,11 +32,10 @@ import com.vaadin.ui.Window.Notification;
  * @author Kim
  * 
  */
-public class UserProfileView extends CustomComponent implements ClickListener {
+public class UserProfileView extends View<VerticalLayout> implements
+        ClickListener {
 
     private static final long serialVersionUID = -397461258975322708L;
-
-    private final VerticalLayout mainLayout;
 
     private FormLayout passwordLayout;
 
@@ -53,16 +52,17 @@ public class UserProfileView extends CustomComponent implements ClickListener {
     private Button updateProfileBtn;
 
     public UserProfileView() {
+        super(new VerticalLayout());
+
         content = new Panel();
         content.setStyleName(Panel.STYLE_LIGHT);
         content.setWidth("100%");
 
-        mainLayout = new VerticalLayout();
         mainLayout.setMargin(true);
         mainLayout.setWidth("100%");
-        content.setContent(mainLayout);
 
         setCompositionRoot(content);
+        content.setContent(mainLayout);
 
         initContactInfoForm();
         initPasswordFields();
@@ -190,5 +190,14 @@ public class UserProfileView extends CustomComponent implements ClickListener {
 
             return field;
         }
+    }
+
+    @Override
+    public void activated() {
+        // Clear the password fields, since we don't want anyone to forget that
+        // they had filled the forms
+        currentPassword.setValue(null);
+        newPassword.setValue(null);
+        verifyNewPassword.setValue(null);
     }
 }

@@ -9,6 +9,7 @@ import com.vaadin.incubator.simpleshop.events.EventHandler;
 import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
 import com.vaadin.incubator.simpleshop.events.UserSessionListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
+import com.vaadin.incubator.simpleshop.ui.ViewHandler;
 import com.vaadin.incubator.simpleshop.ui.views.MainLayout;
 import com.vaadin.incubator.simpleshop.util.ConfigUtil;
 import com.vaadin.service.ApplicationContext.TransactionListener;
@@ -35,6 +36,8 @@ public class SimpleshopApplication extends Application implements
     // An instance of an EventHandler for this application. Each application
     // instance has its own EventHandler.
     private final EventHandler eventHandler = new EventHandler();
+
+    private final ViewHandler viewHandler = new ViewHandler();
 
     // This application instance's cart content
     private Order cartContent = new Order();
@@ -125,6 +128,16 @@ public class SimpleshopApplication extends Application implements
      */
     public static EventHandler getEventHandler() {
         return getInstance().eventHandler;
+    }
+
+    /**
+     * Method for fetching the ViewHandler instance in a static way for this
+     * application instance.
+     * 
+     * @return
+     */
+    public static ViewHandler getViewHandler() {
+        return getInstance().viewHandler;
     }
 
     @Override

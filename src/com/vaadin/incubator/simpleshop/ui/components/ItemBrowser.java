@@ -6,6 +6,7 @@ import java.util.List;
 import com.vaadin.incubator.simpleshop.data.Product;
 import com.vaadin.incubator.simpleshop.data.ProductCategory;
 import com.vaadin.incubator.simpleshop.ui.controllers.ItemController;
+import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Layout;
@@ -18,10 +19,10 @@ import com.vaadin.ui.Button.ClickListener;
  * Main layout for the item browser. The item browser is where the user browses
  * through categories and products.
  * 
- * @author kim
+ * @author Kim
  * 
  */
-public class ItemBrowser extends VerticalLayout implements ClickListener {
+public class ItemBrowser extends View<VerticalLayout> implements ClickListener {
 
     private static final long serialVersionUID = 5368868329646304718L;
 
@@ -38,8 +39,10 @@ public class ItemBrowser extends VerticalLayout implements ClickListener {
     private final Button rootCategoryBtn = new Button("Simple Shop", this);
 
     public ItemBrowser() {
-        setSizeFull();
-        setStyleName("item-browser-background");
+        super(new VerticalLayout());
+
+        mainLayout.setSizeFull();
+        mainLayout.setStyleName("item-browser-background");
 
         categoryHierarchy.setWidth("100%");
         categoryHierarchy.setHeight(null);
@@ -50,11 +53,11 @@ public class ItemBrowser extends VerticalLayout implements ClickListener {
         productsLayout.setStyleName(Panel.STYLE_LIGHT);
         ((Layout) productsLayout.getContent()).setMargin(false);
 
-        addComponent(categoryHierarchy);
-        addComponent(productsLayout);
-        addComponent(spacerLayout);
+        mainLayout.addComponent(categoryHierarchy);
+        mainLayout.addComponent(productsLayout);
+        mainLayout.addComponent(spacerLayout);
 
-        setExpandRatio(spacerLayout, 1);
+        mainLayout.setExpandRatio(spacerLayout, 1);
 
         rootCategoryBtn.setWidth("100%");
         categoryHierarchy.addComponent(rootCategoryBtn);
@@ -130,5 +133,11 @@ public class ItemBrowser extends VerticalLayout implements ClickListener {
         }
 
         drawCategory(category);
+    }
+
+    @Override
+    public void activated() {
+        // TODO Auto-generated method stub
+
     }
 }

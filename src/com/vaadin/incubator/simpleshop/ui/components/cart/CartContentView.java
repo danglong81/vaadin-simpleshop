@@ -6,6 +6,7 @@ import com.vaadin.incubator.simpleshop.events.CartUpdatedEvent;
 import com.vaadin.incubator.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.controllers.CartController;
+import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -20,7 +21,7 @@ import com.vaadin.ui.VerticalLayout;
  * @author Kim
  * 
  */
-public class CartContentView extends VerticalLayout implements
+public class CartContentView extends View<VerticalLayout> implements
         CartUpdateListener {
 
     private static final long serialVersionUID = 8401760557369059696L;
@@ -37,8 +38,9 @@ public class CartContentView extends VerticalLayout implements
      * Constructor
      */
     public CartContentView() {
+        super(new VerticalLayout());
         // Take as much space as there is available
-        setSizeFull();
+        mainLayout.setSizeFull();
 
         // Initialize the content
         initContent();
@@ -55,10 +57,10 @@ public class CartContentView extends VerticalLayout implements
     private void initContent() {
         // Create the cart items panel and add it to the main layout
         content = new CartItems();
-        addComponent(content);
+        mainLayout.addComponent(content);
 
         // The items panel should take all the available space
-        setExpandRatio(content, 1);
+        mainLayout.setExpandRatio(content, 1);
     }
 
     /**
@@ -89,7 +91,7 @@ public class CartContentView extends VerticalLayout implements
         summaryLayout.setComponentAlignment(paymentBtn, Alignment.MIDDLE_RIGHT);
 
         // Add summary layout to the main layout
-        addComponent(summaryLayout);
+        mainLayout.addComponent(summaryLayout);
     }
 
     @Override
@@ -97,6 +99,12 @@ public class CartContentView extends VerticalLayout implements
         totalSumLabel.setValue(CartController
                 .getFormattedTotalPrice(ShoppingCart.getOrder()));
         content.refresh();
+    }
+
+    @Override
+    public void activated() {
+        // TODO Auto-generated method stub
+
     }
 
 }

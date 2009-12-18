@@ -1,8 +1,10 @@
 package com.vaadin.incubator.simpleshop.ui.components;
 
+import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.controllers.UserController;
 import com.vaadin.incubator.simpleshop.ui.controllers.UserController.RegistrationError;
+import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -12,7 +14,8 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Window.Notification;
 
-public class RegistrationView extends VerticalLayout implements ClickListener {
+public class RegistrationView extends View<VerticalLayout> implements
+        ClickListener {
 
     private static final long serialVersionUID = -1557284716632681422L;
 
@@ -25,30 +28,32 @@ public class RegistrationView extends VerticalLayout implements ClickListener {
     private final Button cancelBtn;
 
     public RegistrationView() {
-        setWidth("100%");
-        setMargin(true);
-        setSpacing(true);
+        super(new VerticalLayout());
+
+        mainLayout.setWidth("100%");
+        mainLayout.setMargin(true);
+        mainLayout.setSpacing(true);
 
         feedbackLabel = new Label();
-        addComponent(feedbackLabel);
+        mainLayout.addComponent(feedbackLabel);
 
         username = new TextField(SystemMsg.GENERIC_USERNAME.get());
         username.setNullRepresentation("");
         username.setWidth("100%");
         username.focus();
-        addComponent(username);
+        mainLayout.addComponent(username);
 
         password = new TextField(SystemMsg.GENERIC_PASSWORD.get());
         password.setSecret(true);
         password.setNullRepresentation("");
         password.setWidth("100%");
-        addComponent(password);
+        mainLayout.addComponent(password);
 
         verifyPassword = new TextField(SystemMsg.REGISTER_VERIFY_PASSWORD.get());
         verifyPassword.setSecret(true);
         verifyPassword.setNullRepresentation("");
         verifyPassword.setWidth("100%");
-        addComponent(verifyPassword);
+        mainLayout.addComponent(verifyPassword);
 
         registerBtn = new Button(SystemMsg.REGISTER_REGISTER_BTN.get(), this);
         registerBtn.setSizeUndefined();
@@ -66,7 +71,7 @@ public class RegistrationView extends VerticalLayout implements ClickListener {
 
         buttonLayout.setExpandRatio(spacer, 1);
 
-        addComponent(buttonLayout);
+        mainLayout.addComponent(buttonLayout);
     }
 
     public void buttonClick(ClickEvent event) {
@@ -74,7 +79,8 @@ public class RegistrationView extends VerticalLayout implements ClickListener {
             username.setValue(null);
             password.setValue(null);
             verifyPassword.setValue(null);
-            ((InformationView) getParent()).setCurrentView(new LoginView());
+            SimpleshopApplication.getViewHandler()
+                    .activateView(LoginView.class);
         } else if (event.getButton().equals(registerBtn)) {
             RegistrationError error = UserController.registerUser(
                     (String) username.getValue(), (String) password.getValue(),
@@ -83,13 +89,20 @@ public class RegistrationView extends VerticalLayout implements ClickListener {
                 getApplication().getMainWindow().showNotification(
                         error.getMessage(), "",
                         Notification.TYPE_TRAY_NOTIFICATION);
-                ((InformationView) getParent()).setCurrentView(new LoginView());
+                SimpleshopApplication.getViewHandler().activateView(
+                        LoginView.class);
             } else {
                 feedbackLabel.setValue(error.getMessage());
                 password.setValue(null);
                 verifyPassword.setValue(null);
             }
         }
+    }
+
+    @Override
+    public void activated() {
+        // TODO Auto-generated method stub
+
     }
 
 }

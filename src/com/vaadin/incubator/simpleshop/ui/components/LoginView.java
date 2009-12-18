@@ -3,7 +3,9 @@ package com.vaadin.incubator.simpleshop.ui.components;
 import com.vaadin.event.Action;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.Action.Handler;
+import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
+import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.incubator.simpleshop.util.SessionUtil;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -22,10 +24,12 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class LoginView extends Panel implements ClickListener, Handler {
+public class LoginView extends View<VerticalLayout> implements ClickListener,
+        Handler {
 
     private static final long serialVersionUID = -7254800457211263522L;
 
+    private Panel panel = new Panel();
     private Label feedbackLabel;
     private TextField username;
     private TextField password;
@@ -39,19 +43,22 @@ public class LoginView extends Panel implements ClickListener, Handler {
             ShortcutAction.KeyCode.ENTER, null);
 
     public LoginView() {
+        super(new VerticalLayout());
+
         // Remove all extra stryling
-        setStyleName(STYLE_LIGHT);
+        panel.setStyleName(Panel.STYLE_LIGHT);
 
         // The inner layout should be a VerticalLayout
         VerticalLayout panelLayout = new VerticalLayout();
         panelLayout.setMargin(true);
         panelLayout.setSpacing(true);
 
-        setContent(panelLayout);
+        panel.setContent(panelLayout);
 
         initForm();
 
-        addActionHandler(this);
+        panel.addActionHandler(this);
+        setCompositionRoot(panel);
     }
 
     /**
@@ -62,19 +69,19 @@ public class LoginView extends Panel implements ClickListener, Handler {
         // "login failed"
         feedbackLabel = new Label();
 
-        addComponent(feedbackLabel);
+        panel.addComponent(feedbackLabel);
 
         // Add the username textfield. It should be focused by default
         username = new TextField(SystemMsg.GENERIC_USERNAME.get());
         username.setWidth("100%");
         username.focus();
-        addComponent(username);
+        panel.addComponent(username);
 
         // Add the password textfield. Set the type to secret
         password = new TextField(SystemMsg.GENERIC_PASSWORD.get());
         password.setSecret(true);
         password.setWidth("100%");
-        addComponent(password);
+        panel.addComponent(password);
 
         // Create a layout containing the buttons we need
         HorizontalLayout buttons = new HorizontalLayout();
@@ -97,7 +104,7 @@ public class LoginView extends Panel implements ClickListener, Handler {
         buttons.addComponent(loginBtn);
         buttons.setComponentAlignment(loginBtn, Alignment.MIDDLE_RIGHT);
 
-        addComponent(buttons);
+        panel.addComponent(buttons);
     }
 
     public void buttonClick(ClickEvent event) {
@@ -107,8 +114,8 @@ public class LoginView extends Panel implements ClickListener, Handler {
         } else if (event.getButton().equals(forgotPasswordBtn)) {
             // TODO: switch to forgot password view
         } else if (event.getButton().equals(registerBtn)) {
-            ((InformationView) getParent())
-                    .setCurrentView(new RegistrationView());
+            SimpleshopApplication.getViewHandler().activateView(
+                    RegistrationView.class);
         }
     }
 
@@ -127,7 +134,7 @@ public class LoginView extends Panel implements ClickListener, Handler {
             password.setValue("");
         } else {
             // Login was successfull, hence remove the enter listener
-            removeActionHandler(this);
+            panel.removeActionHandler(this);
         }
     }
 
@@ -137,5 +144,13 @@ public class LoginView extends Panel implements ClickListener, Handler {
 
     public void handleAction(Action action, Object sender, Object target) {
         login();
+    }
+
+    @Override
+    public void activated() {
+        feedbackLabel.setValue("");
+        username.setValue("");
+        password.setValue("");
+        username.focus();
     }
 }
