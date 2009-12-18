@@ -474,5 +474,16 @@
 				<seg>Spara ändringarna</seg>
 			</tuv>
 		</tu>
+		<tu tuid="PROFILE_UPDATED">
+			<tuv lang="en">
+				<seg>Profile updated</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Käyttäjäprofiili päivitetty</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Användarprofilen uppdaterad</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>

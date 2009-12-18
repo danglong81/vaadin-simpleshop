@@ -160,6 +160,9 @@ public class UserProfileView extends CustomComponent implements ClickListener {
             // Store the user object
             UserController.storeUser((User) ((BeanItem) contactInfoForm
                     .getItemDataSource()).getBean());
+            getApplication().getMainWindow().showNotification(
+                    SystemMsg.PROFILE_UPDATED.get(), "",
+                    Notification.TYPE_TRAY_NOTIFICATION);
         }
     }
 
