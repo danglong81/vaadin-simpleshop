@@ -25,7 +25,7 @@ public abstract class GenericFieldFactory extends DefaultFieldFactory {
      * @param fieldName
      * @return
      */
-    protected String getCaption(Class<?> c, String fieldName) {
+    protected String getFieldTranslation(Class<?> c, String fieldName) {
         Field field = getField(c, fieldName);
         if (field != null && field.isAnnotationPresent(FieldTranslation.class)) {
             FieldTranslation translation = field
