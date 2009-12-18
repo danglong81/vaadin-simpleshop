@@ -24,14 +24,20 @@ public class UserController {
      * 
      */
     public static enum RegistrationError {
-        TOO_SHORT_PASSWORD(SystemMsg.ACCOUNT_TOO_SHORT_PASSWORD.get(ConfigUtil
-                .getInt("password.length.min"))),
-        TOO_SHORT_USERNAME(SystemMsg.ACCOUNT_TOO_SHORT_USERNAME.get(ConfigUtil
-                .getInt("username.length.min"))),
-        PASSWORDS_DO_NOT_MATCH(SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH.get()),
-        USERNAME_TAKEN(SystemMsg.ACCOUNT_USERNAME_TAKEN.get()),
-        REGISTRATION_COMPLETED(SystemMsg.REGISTER_REGISTRATION_COMPLETED.get()),
-        ERROR(SystemMsg.GENERAL_ERROR.get());
+        TOO_SHORT_PASSWORD(
+                SystemMsg.ACCOUNT_TOO_SHORT_PASSWORD.get(ConfigUtil
+                        .getInt("password.length.min"))),
+        TOO_SHORT_USERNAME(
+                SystemMsg.ACCOUNT_TOO_SHORT_USERNAME.get(ConfigUtil
+                        .getInt("username.length.min"))),
+        PASSWORDS_DO_NOT_MATCH(
+                SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH.get()),
+        USERNAME_TAKEN(
+                SystemMsg.ACCOUNT_USERNAME_TAKEN.get()),
+        REGISTRATION_COMPLETED(
+                SystemMsg.REGISTER_REGISTRATION_COMPLETED.get()),
+        ERROR(
+                SystemMsg.GENERAL_ERROR.get());
 
         String msg;
 
@@ -43,6 +49,30 @@ public class UserController {
             return msg;
         }
     };
+
+    public static enum ProfileError {
+        TOO_SHORT_PASSWORD(
+                SystemMsg.ACCOUNT_TOO_SHORT_PASSWORD.get(ConfigUtil
+                        .getInt("password.length.min"))),
+        PASSWORDS_DO_NOT_MATCH(
+                SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH.get()),
+        PASSWORD_CHANGED(
+                SystemMsg.PROFILE_PASSWORD_CHANGED.get()),
+        WRONG_PASSWORD(
+                SystemMsg.PROFILE_WRONG_PASSWORD.get()),
+        ERROR(
+                SystemMsg.GENERAL_ERROR.get());
+
+        String msg;
+
+        private ProfileError(String msg) {
+            this.msg = msg;
+        }
+
+        public String getMessage() {
+            return msg;
+        }
+    }
 
     /**
      * Get the user object with the given primary key
@@ -110,5 +140,50 @@ public class UserController {
         User user = FacadeFactory.getFacade().find(query, parameters);
 
         return user != null ? false : true;
+    }
+
+    /**
+     * Change the password of the given user. Verifies that the new password
+     * meets all the set conditions.
+     * 
+     * @param user
+     * @param currentPassword
+     * @param newPassword
+     * @param verifiedNewPassword
+     * @return
+     */
+    public static ProfileError changePassword(User user,
+            String currentPassword, String newPassword,
+            String verifiedNewPassword) {
+
+        // Verify that the current password is correct
+        if (!PasswordUtil.verifyPassword(user, currentPassword)) {
+            return ProfileError.WRONG_PASSWORD;
+        }
+
+        // Check the new password's constraints
+        if (newPassword == null
+                || newPassword.length() < ConfigUtil
+                        .getInt("password.length.min")) {
+            return ProfileError.TOO_SHORT_PASSWORD;
+        } else if (!newPassword.equals(verifiedNewPassword)) {
+            return ProfileError.PASSWORDS_DO_NOT_MATCH;
+        }
+
+        // Password is ok, hash it and change it
+        user.setPassword(PasswordUtil.generateHashedPassword(newPassword));
+        // Store the user
+        FacadeFactory.getFacade().store(user);
+
+        return ProfileError.PASSWORD_CHANGED;
+    }
+
+    /**
+     * Stores to the database any changes made to the user object
+     * 
+     * @param user
+     */
+    public static void storeUser(User user) {
+        FacadeFactory.getFacade().store(user);
     }
 }

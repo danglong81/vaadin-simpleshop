@@ -44,6 +44,8 @@ public class InformationView extends VerticalLayout implements ClickListener,
 
     private Component currentView;
 
+    private UserProfileView userProfileView = null;
+
     public InformationView() {
         // Take all the space available
         setSizeFull();
@@ -118,6 +120,12 @@ public class InformationView extends VerticalLayout implements ClickListener,
     public void buttonClick(ClickEvent event) {
         if (event.getButton().equals(profileBtn) && CurrentUser.get() == null) {
             setCurrentView(new LoginView());
+        } else if (event.getButton().equals(profileBtn)
+                && CurrentUser.get() != null) {
+            if (userProfileView == null) {
+                userProfileView = new UserProfileView();
+            }
+            setCurrentView(userProfileView);
         } else if (event.getButton().equals(shoppingCartBtn)) {
             setCurrentView(cartContent);
         } else if (event.getButton().equals(logoutBtn)) {

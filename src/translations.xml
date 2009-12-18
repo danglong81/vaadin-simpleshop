@@ -235,7 +235,8 @@
 			<tuv lang="se">
 				<seg>Lösenordet är för kort. Kortaste tillåtna
 					lösenordet
-					är {0} tecken.</seg>
+					är {0}
+					tecken.</seg>
 			</tuv>
 		</tu>
 		<tu tuid="ACCOUNT_TOO_SHORT_USERNAME">
@@ -244,11 +245,13 @@
 			</tuv>
 			<tuv lang="fi">
 				<seg>Käyttäjätunnus on liian lyhyt. Lyhyin sallittu
-					tunnus on {0} merkkiä.</seg>
+					tunnus on {0}
+					merkkiä.</seg>
 			</tuv>
 			<tuv lang="se">
 				<seg>Användarnamnet är för kort. Kortaste tillåtna
-					användarnamnet är {0} tecken.</seg>
+					användarnamnet är
+					{0} tecken.</seg>
 			</tuv>
 		</tu>
 		<tu tuid="ACCOUNT_PASSWORDS_DO_NOT_MATCH">
@@ -359,6 +362,116 @@
 			</tuv>
 			<tuv lang="sv">
 				<seg>Användaren loggat ut</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_CURRENT_PASSWORD">
+			<tuv lang="en">
+				<seg>Current password</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Nykyinen salasa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Nuvarande lösenord</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_NEW_PASSWORD">
+			<tuv lang="en">
+				<seg>New password</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Uusi salasana</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Nytt lösenord</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_VERIFY_NEW_PASSWORD">
+			<tuv lang="en">
+				<seg>Vertify new password</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Vahvenna uusi salasana</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Förstärk nya lösenordet</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_CHANGE_PWD_BTN">
+			<tuv lang="en">
+				<seg>Change password</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Vaihda salasana</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Byt lösenord</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_PASSWORD_CHANGED">
+			<tuv lang="en">
+				<seg>Password changed</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Salasana vaihdettu</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Lösenord bytt</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_WRONG_PASSWORD">
+			<tuv lang="en">
+				<seg>Current password was incorrect</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Nykyinen salasana oli virhellinen</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Nuvarande lösenord var felaktig</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_CHANGE_PASSWORD">
+			<tuv lang="en">
+				<seg>Change password</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Salasanan vaihto</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Byte av lösenord</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_CHANGE_CONTACT_INFORMATION">
+			<tuv lang="en">
+				<seg>Update contact information</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Yhteystietojen päivitys</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Uppdatering av kontaktuppgifter</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_NAME">
+			<tuv lang="en">
+				<seg>Name</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Nimi</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Namn</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_UPDATE_PROFILE">
+			<tuv lang="en">
+				<seg>Save changes</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Tallenna muutokset</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Spara ändringarna</seg>
 			</tuv>
 		</tu>
 	</body>
