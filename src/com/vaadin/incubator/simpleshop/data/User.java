@@ -6,6 +6,9 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.vaadin.incubator.simpleshop.annotations.FieldTranslation;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
+
 /**
  * Entity class for users. This class keeps information about registered users.
  * 
@@ -20,6 +23,8 @@ public class User extends AbstractPojo {
 
     protected String password;
 
+    // Provide the translated name for this field
+    @FieldTranslation(name = SystemMsg.PROFILE_NAME)
     private String name;
 
     private Set<Role> roles = new HashSet<Role>();
