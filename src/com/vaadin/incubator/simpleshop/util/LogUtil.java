@@ -88,6 +88,30 @@ public class LogUtil {
     }
 
     /**
+     * Log an exception as a warning level message
+     * 
+     * @param e
+     */
+    public static void warning(Exception e) {
+        // Print the stack trace if console logging is enabled
+        if (LOG_TO_CONSOLE) {
+            e.printStackTrace();
+        }
+
+        // Get the stacktrace of the call TO THIS METHOD
+        StackTraceElement[] stackTraceElements = Thread.currentThread()
+                .getStackTrace();
+
+        // Create a log message
+        LogMsg log = createLog(e.getMessage(), stackTraceElements);
+        // Set the level of the log message
+        log.setLevel(LogLevel.WARNING);
+
+        // Store the log message
+        FacadeFactory.getFacade().store(log);
+    }
+
+    /**
      * Log an exception as an error level message
      * 
      * @param e
