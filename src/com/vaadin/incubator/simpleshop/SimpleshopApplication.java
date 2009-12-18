@@ -1,5 +1,7 @@
 package com.vaadin.incubator.simpleshop;
 
+import java.util.Locale;
+
 import com.vaadin.Application;
 import com.vaadin.incubator.simpleshop.data.Order;
 import com.vaadin.incubator.simpleshop.data.User;
@@ -8,6 +10,7 @@ import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
 import com.vaadin.incubator.simpleshop.events.UserSessionListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.views.MainLayout;
+import com.vaadin.incubator.simpleshop.util.ConfigUtil;
 import com.vaadin.service.ApplicationContext.TransactionListener;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
@@ -43,6 +46,12 @@ public class SimpleshopApplication extends Application implements
         setTheme("simpleshop");
         getContext().addTransactionListener(this);
         eventHandler.addListener(this);
+
+        // Get the store locale from the settings
+        Locale locale = new Locale(ConfigUtil.getString("locale.language"),
+                ConfigUtil.getString("locale.country"));
+        // Use the settings locale
+        Locale.setDefault(locale);
 
         // Set the current application to this. This is also done in the
         // transactionStart, but in our application we need to define it in the
