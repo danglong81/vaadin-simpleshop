@@ -102,7 +102,7 @@ public class CartContentView extends View<VerticalLayout> implements
     }
 
     @Override
-    public void activated() {
+    public void activated(Object... params) {
         // TODO Auto-generated method stub
 
     }

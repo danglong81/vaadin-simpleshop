@@ -139,7 +139,7 @@ public class ItemBrowser extends View<VerticalLayout> implements ClickListener {
     }
 
     @Override
-    public void activated() {
+    public void activated(Object... params) {
         // TODO Auto-generated method stub
 
     }

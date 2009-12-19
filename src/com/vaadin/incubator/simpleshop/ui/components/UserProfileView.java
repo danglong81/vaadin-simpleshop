@@ -193,7 +193,7 @@ public class UserProfileView extends View<VerticalLayout> implements
     }
 
     @Override
-    public void activated() {
+    public void activated(Object... params) {
         // Clear the password fields, since we don't want anyone to forget that
         // they had filled the forms
         currentPassword.setValue(null);

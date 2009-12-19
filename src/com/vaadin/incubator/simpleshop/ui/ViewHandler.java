@@ -85,11 +85,14 @@ public class ViewHandler {
     }
 
     /**
-     * Activate the view with the given viewId.
+     * Activate the view with the given viewId. You can specify any given amount
+     * of parameters for the activation request. Each parameter is forwarded to
+     * the View's activated() method.
      * 
      * @param viewId
+     * @param params
      */
-    public void activateView(Object viewId) {
+    public void activateView(Object viewId, Object... params) {
         if (viewId != null && viewMap.containsKey(viewId)
                 && parentMap.containsKey(viewId)) {
             // Get the ViewItem and parent for this viewId
@@ -100,7 +103,7 @@ public class ViewHandler {
             parent.activate(item.getView());
 
             // Tell the view that it has been activated
-            item.getView().activated();
+            item.getView().activated(params);
         }
     }
 

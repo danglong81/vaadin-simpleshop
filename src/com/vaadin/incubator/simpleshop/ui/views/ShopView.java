@@ -38,7 +38,7 @@ public class ShopView extends View<HorizontalLayout> implements ParentView {
      * {@inheritDoc}
      */
     @Override
-    public void activated() {
+    public void activated(Object... params) {
         // TODO Auto-generated method stub
 
     }

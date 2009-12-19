@@ -24,6 +24,6 @@ public abstract class View<A extends Layout> extends CustomComponent {
     /**
      * This method is called when the view is activated.
      */
-    public abstract void activated();
+    public abstract void activated(Object... params);
 
 }

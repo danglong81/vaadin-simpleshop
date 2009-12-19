@@ -147,7 +147,7 @@ public class LoginView extends View<VerticalLayout> implements ClickListener,
     }
 
     @Override
-    public void activated() {
+    public void activated(Object... params) {
         feedbackLabel.setValue("");
         username.setValue("");
         password.setValue("");
