@@ -1,5 +1,19 @@
 @import url(../reindeer/styles.css);
 
 .item-browser-background {
-	background: #ffffff url(bg.jpg);
+	background: #666975 url(gradient-bg.png) repeat-x;
+}
+
+.v-panel-content-products-browser {
+	background: #ffffff;
+}
+
+.products-browser {
+	padding-bottom: 10px;
+	background: url(shadow.png) repeat-x bottom;
+}
+
+.product {
+	background: #ffffff url(product-bg.png) no-repeat;
+	border-bottom: solid 1px #888888;
 }

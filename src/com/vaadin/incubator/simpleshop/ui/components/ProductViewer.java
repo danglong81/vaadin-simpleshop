@@ -50,11 +50,14 @@ public class ProductViewer extends CustomComponent implements ClickListener {
      * @param product
      */
     public ProductViewer(Product product) {
-        // Se the product
+        setStyleName("product");
+
+        // Set the product
         this.product = product;
 
         // Set the root layout
         setCompositionRoot(mainLayout);
+        mainLayout.setMargin(true);
 
         // Start building the layout
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.vaadin.incubator.simpleshop.data.Product;
 import com.vaadin.incubator.simpleshop.data.ProductCategory;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.controllers.ItemController;
 import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.ui.Button;
@@ -36,7 +37,8 @@ public class ItemBrowser extends View<VerticalLayout> implements ClickListener {
 
     private final List<Button> categoryHierharchyList = new ArrayList<Button>();
 
-    private final Button rootCategoryBtn = new Button("Simple Shop", this);
+    private final Button rootCategoryBtn = new Button(
+            SystemMsg.APPLICATION_TITLE.get(), this);
 
     public ItemBrowser() {
         super(new VerticalLayout());
@@ -51,6 +53,7 @@ public class ItemBrowser extends View<VerticalLayout> implements ClickListener {
 
         productsLayout.setWidth("100%");
         productsLayout.setStyleName(Panel.STYLE_LIGHT);
+        productsLayout.addStyleName("products-browser");
         ((Layout) productsLayout.getContent()).setMargin(false);
 
         mainLayout.addComponent(categoryHierarchy);
