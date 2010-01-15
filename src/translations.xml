@@ -485,5 +485,71 @@
 				<seg>Användarprofilen uppdaterad</seg>
 			</tuv>
 		</tu>
+		<tu tuid="CHECKOUT_PREVIOUS_STEP">
+			<tuv lang="en">
+				<seg>Previous step</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Edellinen vaihe</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Föregående steg</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_NEXT_STEP">
+			<tuv lang="en">
+				<seg>Next step</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Seuraava vaihe</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Följande steg</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_VERIFY_CONTENT">
+			<tuv lang="en">
+				<seg>Verify content</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Sisällön tarkistaminen</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Granskning av innehåll</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_CHOOSE_DELIVERY_METHOD">
+			<tuv lang="en">
+				<seg>Delivery method</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Toimitustapa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Sätt av leverans</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_CONTACT_INFORMATION">
+			<tuv lang="en">
+				<seg>Contact information</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Yhteystiedot</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Kontaktuppgifter</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_PAYMENT">
+			<tuv lang="en">
+				<seg>Payment</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Maksaminen</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Betalning</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>
