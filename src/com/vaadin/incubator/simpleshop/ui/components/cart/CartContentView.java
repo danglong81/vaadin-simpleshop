@@ -6,12 +6,15 @@ import com.vaadin.incubator.simpleshop.events.CartUpdatedEvent;
 import com.vaadin.incubator.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.controllers.CartController;
+import com.vaadin.incubator.simpleshop.ui.views.CheckoutView;
 import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 
 /**
  * This class defines the layout for the cart content. The cart content consists
@@ -22,7 +25,7 @@ import com.vaadin.ui.VerticalLayout;
  * 
  */
 public class CartContentView extends View<VerticalLayout> implements
-        CartUpdateListener {
+        CartUpdateListener, ClickListener {
 
     private static final long serialVersionUID = 8401760557369059696L;
 
@@ -30,7 +33,7 @@ public class CartContentView extends View<VerticalLayout> implements
 
     private Label totalSumLabel;
 
-    private Button paymentBtn;
+    private Button checkoutBtn;
 
     private CartItems content;
 
@@ -78,17 +81,18 @@ public class CartContentView extends View<VerticalLayout> implements
                 .getFormattedTotalPrice(ShoppingCart.getOrder()));
 
         // Initialize the checkout button
-        paymentBtn = new Button(SystemMsg.CART_CHECKOUT.get());
+        checkoutBtn = new Button(SystemMsg.CART_CHECKOUT.get(), this);
 
         // Add the label and the button to the layout
         summaryLayout.addComponent(totalSumLabel);
-        summaryLayout.addComponent(paymentBtn);
+        summaryLayout.addComponent(checkoutBtn);
 
         // The sum label should be aligned to the left and the checkout button
         // to the right
         summaryLayout.setComponentAlignment(totalSumLabel,
                 Alignment.MIDDLE_LEFT);
-        summaryLayout.setComponentAlignment(paymentBtn, Alignment.MIDDLE_RIGHT);
+        summaryLayout
+                .setComponentAlignment(checkoutBtn, Alignment.MIDDLE_RIGHT);
 
         // Add summary layout to the main layout
         mainLayout.addComponent(summaryLayout);
@@ -99,12 +103,29 @@ public class CartContentView extends View<VerticalLayout> implements
         totalSumLabel.setValue(CartController
                 .getFormattedTotalPrice(ShoppingCart.getOrder()));
         content.refresh();
+
+        // Disable the checkout button if there aren't any items in the cart
+        if (checkoutBtn.isEnabled()
+                && ShoppingCart.getOrder().getOrderedProducts().size() <= 0) {
+            checkoutBtn.setEnabled(false);
+        } else if (!checkoutBtn.isEnabled()
+                && ShoppingCart.getOrder().getOrderedProducts().size() > 0) {
+            // Enable button if cart contains items
+            checkoutBtn.setEnabled(true);
+        }
     }
 
     @Override
     public void activated(Object... params) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void buttonClick(ClickEvent event) {
+        // We want to proceed to the checkout process. Activate the checkout
+        // view.
+        SimpleshopApplication.getViewHandler().activateView(CheckoutView.class);
     }
 
 }

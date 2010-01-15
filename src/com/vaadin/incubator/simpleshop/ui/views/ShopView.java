@@ -1,7 +1,6 @@
 package com.vaadin.incubator.simpleshop.ui.views;
 
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
-import com.vaadin.incubator.simpleshop.ui.ParentView;
 import com.vaadin.incubator.simpleshop.ui.components.InformationView;
 import com.vaadin.incubator.simpleshop.ui.components.ItemBrowser;
 import com.vaadin.ui.HorizontalLayout;
@@ -13,7 +12,7 @@ import com.vaadin.ui.HorizontalLayout;
  * @author Kim
  * 
  */
-public class ShopView extends View<HorizontalLayout> implements ParentView {
+public class ShopView extends View<HorizontalLayout> {
 
     private static final long serialVersionUID = 5345221919713457136L;
 
@@ -39,12 +38,6 @@ public class ShopView extends View<HorizontalLayout> implements ParentView {
      */
     @Override
     public void activated(Object... params) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void activate(View<?> view) {
         // TODO Auto-generated method stub
 
     }

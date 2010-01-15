@@ -1,5 +1,8 @@
 package com.vaadin.incubator.simpleshop.ui.views;
 
+import com.vaadin.incubator.simpleshop.SimpleshopApplication;
+import com.vaadin.incubator.simpleshop.ui.ParentView;
+import com.vaadin.incubator.simpleshop.ui.ViewHandler;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
@@ -10,17 +13,25 @@ import com.vaadin.ui.VerticalLayout;
  * @author Kim
  * 
  */
-public class MainLayout extends VerticalLayout {
+public class MainLayout extends VerticalLayout implements ParentView {
 
     private static final long serialVersionUID = -6616394129999558904L;
 
     private final TabSheet mainTabs = new TabSheet();
 
+    private View<?> currentShopView;
+
     public MainLayout() {
         // Initialize layout
         initLayout();
-        initTabs();
+        // initTabs();
         setSizeFull();
+
+        ViewHandler vh = SimpleshopApplication.getViewHandler();
+        currentShopView = vh.addView(ShopView.class, this).getView();
+        vh.addView(CheckoutView.class, this);
+
+        mainTabs.addComponent(currentShopView);
     }
 
     /**
@@ -44,7 +55,13 @@ public class MainLayout extends VerticalLayout {
      */
     private void initTabs() {
         // Add the shop view to the TabSheet
-        mainTabs.addComponent(new ShopView());
+        mainTabs.addTab(new ShopView());
+    }
+
+    @Override
+    public void activate(View<?> view) {
+        mainTabs.replaceComponent(currentShopView, view);
+        currentShopView = view;
     }
 
 }
