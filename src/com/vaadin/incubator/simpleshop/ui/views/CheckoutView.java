@@ -45,15 +45,9 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
         //
         ViewHandler vh = SimpleshopApplication.getViewHandler();
         ViewItem item = vh.addView("content", this);
-
+        // item.setViewClass(CartItems.class);
+        //
         // mainLayout.addComponent(item.getView());
-
-        Label poc = new Label();
-        poc.setContentMode(Label.CONTENT_XHTML);
-        poc
-                .setValue("Foobar<img src=\"#\" width=200 height=100 alt=\"foo\" onmouseover=\"alert(document.cookies);\" />");
-
-        mainLayout.addComponent(poc);
 
         // Initialize the navigation buttons
         initButtons();
