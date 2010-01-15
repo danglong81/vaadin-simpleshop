@@ -83,6 +83,11 @@ public class CartContentView extends View<VerticalLayout> implements
         // Initialize the checkout button
         checkoutBtn = new Button(SystemMsg.CART_CHECKOUT.get(), this);
 
+        // Button should be disabled when there are no items in the cart and
+        // since the cart will be empty when this view is initialized, this
+        // button should then be disabled.
+        checkoutBtn.setEnabled(false);
+
         // Add the label and the button to the layout
         summaryLayout.addComponent(totalSumLabel);
         summaryLayout.addComponent(checkoutBtn);
