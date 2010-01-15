@@ -50,14 +50,6 @@ public class MainLayout extends VerticalLayout implements ParentView {
         setComponentAlignment(mainTabs, Alignment.TOP_CENTER);
     }
 
-    /**
-     * Initialize the TabSheet
-     */
-    private void initTabs() {
-        // Add the shop view to the TabSheet
-        mainTabs.addTab(new ShopView());
-    }
-
     @Override
     public void activate(View<?> view) {
         mainTabs.replaceComponent(currentShopView, view);
