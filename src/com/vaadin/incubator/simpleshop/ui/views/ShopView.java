@@ -49,10 +49,4 @@ public class ShopView extends View<HorizontalLayout> implements ParentView {
 
     }
 
-    @Override
-    public void registerChildViews() {
-        // TODO Auto-generated method stub
-
-    }
-
 }

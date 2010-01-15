@@ -17,8 +17,4 @@ public interface ParentView {
      */
     public void activate(View<?> view);
 
-    /**
-     * This method should register all child views for this parent view.
-     */
-    public void registerChildViews();
 }

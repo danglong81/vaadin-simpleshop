@@ -8,6 +8,7 @@ import com.vaadin.incubator.simpleshop.lang.SystemMsg;
 import com.vaadin.incubator.simpleshop.ui.Icons;
 import com.vaadin.incubator.simpleshop.ui.ParentView;
 import com.vaadin.incubator.simpleshop.ui.ViewHandler;
+import com.vaadin.incubator.simpleshop.ui.ViewItem;
 import com.vaadin.incubator.simpleshop.ui.admin.AdminWindow;
 import com.vaadin.incubator.simpleshop.ui.components.cart.CartContentView;
 import com.vaadin.incubator.simpleshop.ui.views.View;
@@ -40,9 +41,6 @@ public class InformationView extends View<VerticalLayout> implements
     // Layout for navigation buttons
     private HorizontalLayout buttonLayout;
 
-    // The cart content view
-    private final CartContentView cartContent;
-
     private View<?> currentView;
 
     public InformationView() {
@@ -54,11 +52,15 @@ public class InformationView extends View<VerticalLayout> implements
         // Initialize navigation buttons
         initButtons();
 
-        // Initialize the cart content view
-        cartContent = new CartContentView();
+        // Register child views
+        ViewHandler vh = SimpleshopApplication.getViewHandler();
+        vh.addView(RegistrationView.class, this);
+        vh.addView(LoginView.class, this);
+        vh.addView(UserProfileView.class, this);
+        ViewItem cartContentView = vh.addView(CartContentView.class, this);
 
         // Set the cart content view as the current view
-        currentView = cartContent;
+        currentView = cartContentView.getView();
 
         // Add buttons to layout
         mainLayout.addComponent(buttonLayout);
@@ -70,8 +72,6 @@ public class InformationView extends View<VerticalLayout> implements
         // navigation button's should only reserve as much space as they need.
         mainLayout.setExpandRatio(currentView, 1);
         SimpleshopApplication.getEventHandler().addListener(this);
-
-        registerChildViews();
     }
 
     /**
@@ -142,7 +142,8 @@ public class InformationView extends View<VerticalLayout> implements
      * {@inheritDoc}
      */
     public void loginEvent(UserSessionEvent event) {
-        activate(cartContent);
+        SimpleshopApplication.getViewHandler().activateView(
+                CartContentView.class);
 
         if (PermissionsUtil.isAdmin(CurrentUser.get())) {
             buttonLayout.addComponent(adminBtn);
@@ -155,7 +156,8 @@ public class InformationView extends View<VerticalLayout> implements
      * {@inheritDoc}
      */
     public void logoutEvent(UserSessionEvent event) {
-        activate(cartContent);
+        SimpleshopApplication.getViewHandler().activateView(
+                CartContentView.class);
 
         buttonLayout.removeComponent(adminBtn);
         buttonLayout.removeComponent(logoutBtn);
@@ -179,14 +181,4 @@ public class InformationView extends View<VerticalLayout> implements
         // TODO Auto-generated method stub
 
     }
-
-    @Override
-    public void registerChildViews() {
-        ViewHandler vh = SimpleshopApplication.getViewHandler();
-        vh.addView(RegistrationView.class, this);
-        vh.addView(LoginView.class, this);
-        vh.addView(UserProfileView.class, this);
-        vh.addView(CartContentView.class, this);
-    }
-
 }
