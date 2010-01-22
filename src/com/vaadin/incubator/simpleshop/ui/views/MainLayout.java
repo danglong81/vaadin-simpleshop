@@ -3,6 +3,7 @@ package com.vaadin.incubator.simpleshop.ui.views;
 import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.ui.ParentView;
 import com.vaadin.incubator.simpleshop.ui.ViewHandler;
+import com.vaadin.incubator.simpleshop.ui.checkout.CheckoutView;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;

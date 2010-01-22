@@ -1,4 +1,4 @@
-package com.vaadin.incubator.simpleshop.ui.views;
+package com.vaadin.incubator.simpleshop.ui.checkout;
 
 import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
@@ -6,6 +6,8 @@ import com.vaadin.incubator.simpleshop.ui.ParentView;
 import com.vaadin.incubator.simpleshop.ui.ViewHandler;
 import com.vaadin.incubator.simpleshop.ui.ViewItem;
 import com.vaadin.incubator.simpleshop.ui.components.cart.CartContentView;
+import com.vaadin.incubator.simpleshop.ui.views.ShopView;
+import com.vaadin.incubator.simpleshop.ui.views.View;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
