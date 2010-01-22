@@ -10,6 +10,9 @@ import javax.persistence.Table;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
 
+import com.vaadin.incubator.simpleshop.annotations.FieldTranslation;
+import com.vaadin.incubator.simpleshop.lang.SystemMsg;
+
 /**
  * Entity for orders places in the shop
  * 
@@ -20,12 +23,162 @@ import org.eclipse.persistence.annotations.PrivateOwned;
 @Table(name = "shop_order")
 public class Order extends AbstractPojo {
 
+    @FieldTranslation(name = SystemMsg.ORDER_NAME)
+    private String name;
+
+    @FieldTranslation(name = SystemMsg.ORDER_STREET_NAME)
+    private String streetName;
+
+    @FieldTranslation(name = SystemMsg.ORDER_ZIP)
+    private String zip;
+
+    @FieldTranslation(name = SystemMsg.ORDER_CITY)
+    private String city;
+
+    @FieldTranslation(name = SystemMsg.ORDER_PHONE)
+    private String phone;
+
+    @FieldTranslation(name = SystemMsg.ORDER_EMAIL)
+    private String email;
+
+    @FieldTranslation(name = SystemMsg.ORDER_COMMENTS)
+    private String comments;
+
     @OneToMany(cascade = CascadeType.ALL)
     @PrivateOwned
     private List<OrderRow> orderedProducts = new ArrayList<OrderRow>();
 
     public Order() {
 
+    }
+
+    /**
+     * Sets the name of the person the delivery is addressed to.
+     * 
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns the name of the person the delivery is addressed to.
+     * 
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the street name of the delivery address.
+     * 
+     * @param streetName
+     */
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    /**
+     * Returns the street name of the delivery address.
+     * 
+     * @return
+     */
+    public String getStreetName() {
+        return streetName;
+    }
+
+    /**
+     * Sets the zip code for the delivery address
+     * 
+     * @param zip
+     */
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    /**
+     * Returns the zip code for the delivery address
+     * 
+     * @return
+     */
+    public String getZip() {
+        return zip;
+    }
+
+    /**
+     * Sets the city for the delivery address
+     * 
+     * @param city
+     */
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    /**
+     * Returns the city of the delivery address
+     * 
+     * @return
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Sets the phone number of the person making the delivery
+     * 
+     * @param phone
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * Returns the phone number of the person making the delivery
+     * 
+     * @return
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * Sets the email address of the person making the delivery
+     * 
+     * @param email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Returns the email address of the person making the delivery
+     * 
+     * @return
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets the free comments of the person making the delivery. This field can
+     * be used as a way to deliver a message to the shop keep with the actual
+     * order. The field is free text where the user can for example add special
+     * requests.
+     * 
+     * @param comments
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    /**
+     * Returns the free comments of the person making the delivery
+     * 
+     * @return
+     */
+    public String getComments() {
+        return comments;
     }
 
     /**
