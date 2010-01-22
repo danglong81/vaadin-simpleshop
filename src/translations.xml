@@ -551,5 +551,104 @@
 				<seg>Betalning</seg>
 			</tuv>
 		</tu>
+		<tu tuid="CHECKOUT_DELIVERY_ADDRESS">
+			<tuv lang="en">
+				<seg>Delivery address</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Toimitusosoite</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Levereringsadress</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_NAME">
+			<tuv lang="en">
+				<seg>Name</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Nimi</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Namn</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_STREET_NAME">
+			<tuv lang="en">
+				<seg>Street name</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Katuosoite</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Vägnamn</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_ZIP">
+			<tuv lang="en">
+				<seg>Zip</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Postinumero</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Postnummer</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_CITY">
+			<tuv lang="en">
+				<seg>City</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Postitoimipaikka</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Postanstalt</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_COMMENTS">
+			<tuv lang="en">
+				<seg>Message</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Tilaajan viesti</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Meddelande</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_PHONE">
+			<tuv lang="en">
+				<seg>Phone number</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Puhelinnumero</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Telefonnummer</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_EMAIL">
+			<tuv lang="en">
+				<seg>E-mail address</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Sähköpostiosoite</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>E-postadress</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_INVALID_EMAIL">
+			<tuv lang="en">
+				<seg>Invalid e-mail address</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Virheellinen sähköpostiosoite</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Felaktig e-postadress</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>
