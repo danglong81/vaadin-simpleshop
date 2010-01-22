@@ -6,9 +6,9 @@ import java.util.UUID;
 
 public class ViewHandler {
 
-    private Map<Object, ViewItem> viewMap = new HashMap<Object, ViewItem>();
+    private final Map<Object, ViewItem> viewMap = new HashMap<Object, ViewItem>();
 
-    private Map<Object, ParentView> parentMap = new HashMap<Object, ParentView>();
+    private final Map<Object, ParentView> parentMap = new HashMap<Object, ParentView>();
 
     /**
      * Add a new View to the ViewHandler. Takes as input a viewId. The user is
@@ -34,6 +34,15 @@ public class ViewHandler {
         return item;
     }
 
+    /**
+     * Add a new view to the view handler.
+     * 
+     * @param viewId
+     *            The view's id
+     * @param parent
+     *            Parent view for the given view
+     * @return
+     */
     public ViewItem addView(Object viewId, ParentView parent) {
         ViewItem item = addView(viewId);
         setParent(viewId, parent);
