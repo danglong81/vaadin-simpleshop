@@ -154,9 +154,49 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
             SimpleshopApplication.getViewHandler().activateView(ShopView.class);
         } else if (event.getButton().equals(previousStepBtn)) {
             // Previous step was requested
+            switch (currentStep) {
+            case VERIFY_CONTENT:
+                break;
+            case CONTACT_INFO:
+                verifyContent.setEnabled(false);
+                contactInformation.setEnabled(true);
+                previousStepBtn.setEnabled(true);
+                break;
+            case DELIVERY_METHOD:
+                contactInformation.setEnabled(false);
+                chooseDeliveryMethod.setEnabled(true);
+                break;
+            case PAYMENT:
+                chooseDeliveryMethod.setEnabled(false);
+                payment.setEnabled(true);
+                nextStepBtn.setEnabled(false);
+                break;
+            default:
+                break;
+            }
+
         } else if (event.getButton().equals(nextStepBtn)) {
             // Next step was requested
-
+            switch (currentStep) {
+            case VERIFY_CONTENT:
+                payment.setEnabled(false);
+                chooseDeliveryMethod.setEnabled(true);
+                nextStepBtn.setEnabled(true);
+                break;
+            case CONTACT_INFO:
+                verifyContent.setEnabled(false);
+                contactInformation.setEnabled(true);
+                previousStepBtn.setEnabled(true);
+                break;
+            case DELIVERY_METHOD:
+                contactInformation.setEnabled(false);
+                chooseDeliveryMethod.setEnabled(true);
+                break;
+            case PAYMENT:
+                break;
+            default:
+                break;
+            }
         }
     }
 
