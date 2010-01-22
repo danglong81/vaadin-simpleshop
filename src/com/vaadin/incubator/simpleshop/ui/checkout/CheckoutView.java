@@ -27,6 +27,14 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
 
     private static final long serialVersionUID = 1700835878617090430L;
 
+    // Enumeration of the steps in the checkout process
+    private enum CheckoutStep {
+        VERIFY_CONTENT,
+        CONTACT_INFO,
+        DELIVERY_METHOD,
+        PAYMENT;
+    }
+
     // Process steps
     private Label verifyContent;
     private Label chooseDeliveryMethod;
@@ -39,6 +47,8 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
     private Button nextStepBtn;
 
     private View<?> currentView = null;
+
+    private final CheckoutStep currentStep = CheckoutStep.VERIFY_CONTENT;
 
     public CheckoutView() {
         super(new VerticalLayout());
@@ -68,13 +78,13 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
                 + SystemMsg.CHECKOUT_VERIFY_CONTENT.get());
         layout.addComponent(verifyContent);
 
-        chooseDeliveryMethod = new Label("2. "
-                + SystemMsg.CHECKOUT_CHOOSE_DELIVERY_METHOD.get());
-        layout.addComponent(chooseDeliveryMethod);
-
-        contactInformation = new Label("3. "
+        contactInformation = new Label("2. "
                 + SystemMsg.CHECKOUT_CONTACT_INFORMATION.get());
         layout.addComponent(contactInformation);
+
+        chooseDeliveryMethod = new Label("3. "
+                + SystemMsg.CHECKOUT_CHOOSE_DELIVERY_METHOD.get());
+        layout.addComponent(chooseDeliveryMethod);
 
         payment = new Label("4. " + SystemMsg.CHECKOUT_PAYMENT.get());
         layout.addComponent(payment);
@@ -146,6 +156,7 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
             // Previous step was requested
         } else if (event.getButton().equals(nextStepBtn)) {
             // Next step was requested
+
         }
     }
 
