@@ -29,10 +29,7 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
 
     // Enumeration of the steps in the checkout process
     private enum CheckoutStep {
-        VERIFY_CONTENT,
-        CONTACT_INFO,
-        DELIVERY_METHOD,
-        PAYMENT;
+        VERIFY_CONTENT, CONTACT_INFO, DELIVERY_METHOD, PAYMENT;
     }
 
     // Process steps
@@ -48,7 +45,7 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
 
     private View<?> currentView = null;
 
-    private final CheckoutStep currentStep = CheckoutStep.VERIFY_CONTENT;
+    private CheckoutStep currentStep = CheckoutStep.VERIFY_CONTENT;
 
     public CheckoutView() {
         super(new VerticalLayout());
@@ -80,13 +77,16 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
 
         contactInformation = new Label("2. "
                 + SystemMsg.CHECKOUT_CONTACT_INFORMATION.get());
+        contactInformation.setEnabled(false);
         layout.addComponent(contactInformation);
 
         chooseDeliveryMethod = new Label("3. "
                 + SystemMsg.CHECKOUT_CHOOSE_DELIVERY_METHOD.get());
+        chooseDeliveryMethod.setEnabled(false);
         layout.addComponent(chooseDeliveryMethod);
 
         payment = new Label("4. " + SystemMsg.CHECKOUT_PAYMENT.get());
+        payment.setEnabled(false);
         layout.addComponent(payment);
 
         mainLayout.addComponent(layout);
@@ -158,18 +158,21 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
             case VERIFY_CONTENT:
                 break;
             case CONTACT_INFO:
-                verifyContent.setEnabled(false);
-                contactInformation.setEnabled(true);
-                previousStepBtn.setEnabled(true);
+                verifyContent.setEnabled(true);
+                contactInformation.setEnabled(false);
+                previousStepBtn.setEnabled(false);
+                currentStep = CheckoutStep.VERIFY_CONTENT;
                 break;
             case DELIVERY_METHOD:
-                contactInformation.setEnabled(false);
-                chooseDeliveryMethod.setEnabled(true);
+                contactInformation.setEnabled(true);
+                chooseDeliveryMethod.setEnabled(false);
+                currentStep = CheckoutStep.CONTACT_INFO;
                 break;
             case PAYMENT:
-                chooseDeliveryMethod.setEnabled(false);
-                payment.setEnabled(true);
-                nextStepBtn.setEnabled(false);
+                chooseDeliveryMethod.setEnabled(true);
+                payment.setEnabled(false);
+                nextStepBtn.setEnabled(true);
+                currentStep = CheckoutStep.DELIVERY_METHOD;
                 break;
             default:
                 break;
@@ -179,18 +182,21 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView,
             // Next step was requested
             switch (currentStep) {
             case VERIFY_CONTENT:
-                payment.setEnabled(false);
-                chooseDeliveryMethod.setEnabled(true);
-                nextStepBtn.setEnabled(true);
-                break;
-            case CONTACT_INFO:
                 verifyContent.setEnabled(false);
                 contactInformation.setEnabled(true);
                 previousStepBtn.setEnabled(true);
+                currentStep = CheckoutStep.CONTACT_INFO;
                 break;
-            case DELIVERY_METHOD:
+            case CONTACT_INFO:
                 contactInformation.setEnabled(false);
                 chooseDeliveryMethod.setEnabled(true);
+                currentStep = CheckoutStep.DELIVERY_METHOD;
+                break;
+            case DELIVERY_METHOD:
+                chooseDeliveryMethod.setEnabled(false);
+                payment.setEnabled(true);
+                nextStepBtn.setEnabled(false);
+                currentStep = CheckoutStep.PAYMENT;
                 break;
             case PAYMENT:
                 break;
