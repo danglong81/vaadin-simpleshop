@@ -37,8 +37,8 @@ public class CartItems extends Panel implements ValueChangeListener,
         // Maximize the size of this panel
         setSizeFull();
 
-        // Initialize the list header
-        initHeader();
+        // Initialize the content
+        refresh();
 
         // The GridLayout should maximize its width
         layout.setWidth("100%");

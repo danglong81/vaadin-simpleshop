@@ -80,6 +80,10 @@ public class CartContentView extends View<VerticalLayout> implements
         totalSumLabel = new Label(CartController
                 .getFormattedTotalPrice(ShoppingCart.getOrder()));
 
+        // A label is by default 100% wide, hence aligning a label won't work
+        // properly unless you set its width to null (undefined).
+        totalSumLabel.setWidth(null);
+
         // Initialize the checkout button
         checkoutBtn = new Button(SystemMsg.CART_CHECKOUT.get(), this);
 
@@ -109,21 +113,43 @@ public class CartContentView extends View<VerticalLayout> implements
                 .getFormattedTotalPrice(ShoppingCart.getOrder()));
         content.refresh();
 
-        // Disable the checkout button if there aren't any items in the cart
-        if (checkoutBtn.isEnabled()
-                && ShoppingCart.getOrder().getOrderedProducts().size() <= 0) {
-            checkoutBtn.setEnabled(false);
-        } else if (!checkoutBtn.isEnabled()
-                && ShoppingCart.getOrder().getOrderedProducts().size() > 0) {
-            // Enable button if cart contains items
-            checkoutBtn.setEnabled(true);
+        // Check if the checkout button exists, as it is removed in some cases.
+        if (checkoutBtn != null) {
+            // Disable the checkout button if there aren't any items in the cart
+            if (checkoutBtn.isEnabled()
+                    && ShoppingCart.getOrder().getOrderedProducts().size() <= 0) {
+                checkoutBtn.setEnabled(false);
+            } else if (!checkoutBtn.isEnabled()
+                    && ShoppingCart.getOrder().getOrderedProducts().size() > 0) {
+                // Enable button if cart contains items
+                checkoutBtn.setEnabled(true);
+            }
         }
     }
 
     @Override
     public void activated(Object... params) {
-        // TODO Auto-generated method stub
+        // Check if we have any parameters
+        if (params != null) {
+            // If there are any parameters, then we expect the first parameter
+            // to be a boolean
+            if (params[0] instanceof Boolean) {
+                // The parameter boolean decides the content of the summary
+                // layout. If the boolean is true, then the checkout button
+                // should be removed and the total sum label should be aligned
+                // to the right.
+                boolean hideCheckoutBtn = (Boolean) params[0];
+                if (hideCheckoutBtn && checkoutBtn != null) {
+                    summaryLayout.removeComponent(checkoutBtn);
+                    summaryLayout.setComponentAlignment(totalSumLabel,
+                            Alignment.MIDDLE_RIGHT);
 
+                    // Clear the instance of the checkout button, as we won't be
+                    // needing it in this layout any longer.
+                    checkoutBtn = null;
+                }
+            }
+        }
     }
 
     @Override
