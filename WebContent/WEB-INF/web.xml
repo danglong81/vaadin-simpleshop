@@ -12,7 +12,7 @@
 	</context-param>
 	<listener>
 		<listener-class>
-			com.vaadin.incubator.simpleshop.SimpleShopContextListener</listener-class>
+			org.vaadin.simpleshop.SimpleShopContextListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>Simples Shop</servlet-name>
@@ -21,13 +21,13 @@
 			<description>
   		Vaadin application class to start</description>
 			<param-name>application</param-name>
-			<param-value>com.vaadin.incubator.simpleshop.SimpleshopApplication</param-value>
+			<param-value>org.vaadin.simpleshop.SimpleshopApplication</param-value>
 		</init-param>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>I18NServlet</servlet-name>
-		<servlet-class>com.vaadin.incubator.simpleshop.InternationalizationServlet</servlet-class>
+		<servlet-class>org.vaadin.simpleshop.InternationalizationServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	

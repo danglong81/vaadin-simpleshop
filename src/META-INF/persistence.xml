@@ -8,13 +8,13 @@
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
-		<class>com.vaadin.incubator.simpleshop.data.LogMsg</class>
-		<class>com.vaadin.incubator.simpleshop.data.Product</class>
-		<class>com.vaadin.incubator.simpleshop.data.ProductCategory</class>
-		<class>com.vaadin.incubator.simpleshop.data.Order</class>
-		<class>com.vaadin.incubator.simpleshop.data.OrderRow</class>
-		<class>com.vaadin.incubator.simpleshop.data.Role</class>
-		<class>com.vaadin.incubator.simpleshop.data.User</class>
+		<class>org.vaadin.simpleshop.data.LogMsg</class>
+		<class>org.vaadin.simpleshop.data.Product</class>
+		<class>org.vaadin.simpleshop.data.ProductCategory</class>
+		<class>org.vaadin.simpleshop.data.Order</class>
+		<class>org.vaadin.simpleshop.data.OrderRow</class>
+		<class>org.vaadin.simpleshop.data.Role</class>
+		<class>org.vaadin.simpleshop.data.User</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
            <property name="eclipselink.logging.level" value="OFF"/>
