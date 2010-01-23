@@ -38,6 +38,8 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView {
         ViewHandler vh = SimpleshopApplication.getViewHandler();
         vh.addView(VerifyContentView.class, this);
         vh.addView(ContactInfoView.class, this);
+        vh.addView(DeliveryMethodView.class, this);
+        vh.addView(PaymentView.class, this);
 
         vh.activateView(VerifyContentView.class, true);
     }
@@ -91,8 +93,8 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView {
 
     private void setStep(int step) {
         verifyContent.setEnabled(step == 1 ? true : false);
-        chooseDeliveryMethod.setEnabled(step == 2 ? true : false);
-        contactInformation.setEnabled(step == 3 ? true : false);
+        contactInformation.setEnabled(step == 2 ? true : false);
+        chooseDeliveryMethod.setEnabled(step == 3 ? true : false);
         payment.setEnabled(step == 4 ? true : false);
     }
 }

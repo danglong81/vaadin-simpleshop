@@ -58,8 +58,13 @@ public class ContactInfoView extends AbstractCheckoutStepView {
 
     @Override
     protected void next() {
-        // TODO Auto-generated method stub
-
+        if (form.isValid()) {
+            form.commit();
+            SimpleshopApplication.getViewHandler().activateView(
+                    DeliveryMethodView.class);
+        } else {
+            form.setValidationVisible(true);
+        }
     }
 
     @Override
