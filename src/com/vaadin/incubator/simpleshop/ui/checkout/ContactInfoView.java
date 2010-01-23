@@ -55,7 +55,8 @@ public class ContactInfoView extends AbstractCheckoutStepView {
 
     @Override
     public void activated(Object... params) {
-
+        // Focus the first field in the form when the view is activated
+        form.focus();
     }
 
     @Override
