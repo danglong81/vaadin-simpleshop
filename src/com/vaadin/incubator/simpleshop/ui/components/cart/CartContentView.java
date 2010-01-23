@@ -130,7 +130,7 @@ public class CartContentView extends View<VerticalLayout> implements
     @Override
     public void activated(Object... params) {
         // Check if we have any parameters
-        if (params != null) {
+        if (params != null && params.length > 0) {
             // If there are any parameters, then we expect the first parameter
             // to be a boolean
             if (params[0] instanceof Boolean) {
