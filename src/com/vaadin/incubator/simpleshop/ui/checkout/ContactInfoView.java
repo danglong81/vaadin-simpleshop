@@ -3,6 +3,7 @@ package com.vaadin.incubator.simpleshop.ui.checkout;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.incubator.simpleshop.CurrentUser;
 import com.vaadin.incubator.simpleshop.ShoppingCart;
 import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.data.Order;
@@ -27,6 +28,8 @@ public class ContactInfoView extends AbstractCheckoutStepView {
     private Form form;
 
     public ContactInfoView() {
+        ShoppingCart.prefillContactInformation(CurrentUser.get());
+
         // Get the current order
         Order order = ShoppingCart.getOrder();
 
@@ -52,7 +55,6 @@ public class ContactInfoView extends AbstractCheckoutStepView {
 
     @Override
     public void activated(Object... params) {
-        // TODO Auto-generated method stub
 
     }
 

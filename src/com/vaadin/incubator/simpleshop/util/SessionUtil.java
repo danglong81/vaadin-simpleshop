@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.vaadin.incubator.simpleshop.CurrentUser;
+import com.vaadin.incubator.simpleshop.ShoppingCart;
 import com.vaadin.incubator.simpleshop.SimpleshopApplication;
 import com.vaadin.incubator.simpleshop.data.User;
 import com.vaadin.incubator.simpleshop.events.UserSessionEvent;
@@ -63,6 +64,11 @@ public class SessionUtil {
     public static void logout() {
         UserSessionEvent event = new UserSessionEvent(CurrentUser.get());
         CurrentUser.setUser(null);
+
+        // Clear all sensitive information from the order
+        ShoppingCart.clearContactInfo();
+
+        // Dispatch logout event
         SimpleshopApplication.getEventHandler().dispatchLogoutEvent(event);
     }
 
