@@ -650,5 +650,60 @@
 				<seg>Felaktig e-postadress</seg>
 			</tuv>
 		</tu>
+		<tu tuid="PROFILE_STREET_NAME">
+			<tuv lang="en">
+				<seg>Street name</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Katuosoite</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Vägnamn</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_ZIP">
+			<tuv lang="en">
+				<seg>Zip</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Postinumero</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Postnummer</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_CITY">
+			<tuv lang="en">
+				<seg>City</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Postitoimipaikka</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Postanstalt</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_EMAIL">
+			<tuv lang="en">
+				<seg>E-mail address</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Sähköpostiosoite</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>E-postadress</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PROFILE_INVALID_EMAIL">
+			<tuv lang="en">
+				<seg>Invalid e-mail address</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Virheellinen sähköpostiosoite</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Felaktig e-postadress</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>

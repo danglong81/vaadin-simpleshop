@@ -27,6 +27,18 @@ public class User extends AbstractPojo {
     @FieldTranslation(name = SystemMsg.PROFILE_NAME)
     private String name;
 
+    @FieldTranslation(name = SystemMsg.PROFILE_STREET_NAME)
+    private String streetName;
+
+    @FieldTranslation(name = SystemMsg.PROFILE_ZIP)
+    private String zip;
+
+    @FieldTranslation(name = SystemMsg.PROFILE_CITY)
+    private String city;
+
+    @FieldTranslation(name = SystemMsg.PROFILE_EMAIL)
+    private String email;
+
     private Set<Role> roles = new HashSet<Role>();
 
     public User() {
@@ -85,6 +97,38 @@ public class User extends AbstractPojo {
      */
     public String getName() {
         return name;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     /**

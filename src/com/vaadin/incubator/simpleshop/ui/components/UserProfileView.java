@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.incubator.simpleshop.CurrentUser;
 import com.vaadin.incubator.simpleshop.data.User;
 import com.vaadin.incubator.simpleshop.lang.SystemMsg;
@@ -56,7 +57,7 @@ public class UserProfileView extends View<VerticalLayout> implements
 
         content = new Panel();
         content.setStyleName(Panel.STYLE_LIGHT);
-        content.setWidth("100%");
+        content.setSizeFull();
 
         mainLayout.setMargin(true);
         mainLayout.setWidth("100%");
@@ -77,9 +78,13 @@ public class UserProfileView extends View<VerticalLayout> implements
                 .get());
         contactInfoForm.setFormFieldFactory(new ProfileFieldFactory());
 
-        BeanItem item = new BeanItem(CurrentUser.get());
+        BeanItem<User> item = new BeanItem<User>(CurrentUser.get());
         List<String> visibleFields = new ArrayList<String>();
         visibleFields.add("name");
+        visibleFields.add("streetName");
+        visibleFields.add("zip");
+        visibleFields.add("city");
+        visibleFields.add("email");
 
         contactInfoForm.setItemDataSource(item, visibleFields);
 
@@ -155,14 +160,21 @@ public class UserProfileView extends View<VerticalLayout> implements
                 feedbackLabel.setValue(msg.getMessage());
             }
         } else if (event.getButton().equals(updateProfileBtn)) {
-            // Commit any changes made to the actual object
-            contactInfoForm.commit();
-            // Store the user object
-            UserController.storeUser((User) ((BeanItem) contactInfoForm
-                    .getItemDataSource()).getBean());
-            getApplication().getMainWindow().showNotification(
-                    SystemMsg.PROFILE_UPDATED.get(), "",
-                    Notification.TYPE_TRAY_NOTIFICATION);
+            // Check that the form is filled properly
+            if (contactInfoForm.isValid()) {
+                // Commit any changes made to the actual object
+                contactInfoForm.commit();
+                // Store the user object
+                UserController.storeUser((User) ((BeanItem<?>) contactInfoForm
+                        .getItemDataSource()).getBean());
+                getApplication().getMainWindow().showNotification(
+                        SystemMsg.PROFILE_UPDATED.get(), "",
+                        Notification.TYPE_TRAY_NOTIFICATION);
+            } else {
+                // The form had some errors, so show the error messages to the
+                // user.
+                contactInfoForm.setValidationVisible(true);
+            }
         }
     }
 
@@ -183,6 +195,19 @@ public class UserProfileView extends View<VerticalLayout> implements
             Field field = super.createField(item, propertyId, uiContext);
             // Set width
             field.setWidth("100%");
+
+            // Some fields have special requirements
+            if (propertyId.equals("zip")) {
+                field.setWidth("150px");
+            } else if (propertyId.equals("name")) {
+                field.setRequired(true);
+            } else if (propertyId.equals("email")) {
+                field.addValidator(new EmailValidator(
+                        SystemMsg.PROFILE_INVALID_EMAIL.get()));
+            }
+
+            // Show an empty string instead of the text "null"
+            ((TextField) field).setNullRepresentation("");
 
             // Set the translated caption
             field.setCaption(getFieldTranslation(User.class,
