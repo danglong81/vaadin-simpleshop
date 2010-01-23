@@ -15,7 +15,7 @@
 			org.vaadin.simpleshop.SimpleShopContextListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>Simples Shop</servlet-name>
+		<servlet-name>Simple Shop</servlet-name>
 		<servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
 		<init-param>
 			<description>
@@ -32,7 +32,7 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>Simples Shop</servlet-name>
+		<servlet-name>Simple Shop</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
