@@ -83,6 +83,14 @@ public class CartContentView extends View<VerticalLayout> implements
                 ShoppingCart.getOrder(), ConfigUtil
                         .getBoolean("product.showPriceIncludingTakes")));
 
+        if (ConfigUtil.getBoolean("product.showPriceIncludingTakes")) {
+            totalSumLabel.setCaption(SystemMsg.CART_TOTAL_SUM_CAPTION_INCL_VAT
+                    .get());
+        } else {
+            totalSumLabel.setCaption(SystemMsg.CART_TOTAL_SUM_CAPTION_EXCL_VAT
+                    .get());
+        }
+
         // A label is by default 100% wide, hence aligning a label won't work
         // properly unless you set its width to null (undefined).
         totalSumLabel.setWidth(null);

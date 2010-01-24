@@ -859,5 +859,27 @@
 				<seg>Giltighetsperiodens slut</seg>
 			</tuv>
 		</tu>
+		<tu tuid="CART_TOTAL_SUM_CAPTION_INCL_VAT">
+			<tuv lang="en">
+				<seg>Total sum (including VAT)</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Loppusumma (sis alv)</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Slutsumma (inklusive moms)</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CART_TOTAL_SUM_CAPTION_EXCL_VAT">
+			<tuv lang="en">
+				<seg>Total sum (excluding VAT)</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Loppusumma (veroton)</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Slutsumma (skattefri)</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>
