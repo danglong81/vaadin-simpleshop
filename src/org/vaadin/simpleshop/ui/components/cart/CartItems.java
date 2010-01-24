@@ -5,6 +5,7 @@ import org.vaadin.simpleshop.data.OrderRow;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.controllers.CartController;
+import org.vaadin.simpleshop.util.ConfigUtil;
 
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -121,7 +122,14 @@ public class CartItems extends Panel implements ValueChangeListener,
         quantityField.setData(row.getProduct());
 
         // Add sum label
-        final Label sumLabel = new Label(CartController.formatSum(row.getSum()));
+        Label sumLabel = null;
+        if (ConfigUtil.getBoolean("product.showPriceIncludingTakes")) {
+            sumLabel = new Label(CartController.formatSum(row
+                    .getSumIncludingVAT()));
+        } else {
+            sumLabel = new Label(CartController.formatSum(row
+                    .getSumExcludingVAT()));
+        }
         sumLabel.setWidth(null);
 
         // Add a remove button

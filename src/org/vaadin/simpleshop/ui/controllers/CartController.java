@@ -6,7 +6,6 @@ import java.text.NumberFormat;
 import org.vaadin.simpleshop.data.Order;
 import org.vaadin.simpleshop.data.OrderRow;
 
-
 public class CartController {
 
     private static final long serialVersionUID = 1510068834927523940L;
@@ -17,12 +16,16 @@ public class CartController {
      * @param order
      * @return
      */
-    public static String getFormattedTotalPrice(Order order) {
+    public static String getFormattedTotalPrice(Order order, boolean includeVat) {
         double totalSum = 0;
         // Loop through all order rows
         for (OrderRow row : order.getOrderedProducts()) {
             // Calculate this row's sum and add it to the total sum
-            totalSum += row.getPrice() * row.getQuantity();
+            if (includeVat) {
+                totalSum += row.getSumIncludingVAT();
+            } else {
+                totalSum += row.getSumExcludingVAT();
+            }
         }
 
         return formatSum(totalSum);

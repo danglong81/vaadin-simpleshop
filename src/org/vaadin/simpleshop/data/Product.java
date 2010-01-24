@@ -1,6 +1,10 @@
 package org.vaadin.simpleshop.data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
+import org.eclipse.persistence.annotations.PrivateOwned;
 
 /**
  * Entity class for the products in this application.
@@ -13,7 +17,9 @@ public class Product extends AbstractPojo {
 
     private String name;
 
-    private double price;
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrivateOwned
+    private Price price;
 
     private String description;
 
@@ -44,7 +50,7 @@ public class Product extends AbstractPojo {
      * 
      * @param price
      */
-    public void setPrice(double price) {
+    public void setPrice(Price price) {
         this.price = price;
     }
 
@@ -53,7 +59,7 @@ public class Product extends AbstractPojo {
      * 
      * @return
      */
-    public double getPrice() {
+    public Price getPrice() {
         return price;
     }
 
@@ -75,6 +81,21 @@ public class Product extends AbstractPojo {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Transient method for getting the price without taxes
+     */
+    public double getPriceExcludingTaxes() {
+        return getPrice().getPrice();
+    }
+
+    /**
+     * Transient method for getting the price with taxes
+     */
+    public double getPriceIncludingTaxes() {
+        return getPrice().getPrice()
+                * ((getPrice().getVat().getPercentage() / 100) + 1);
     }
 
 }

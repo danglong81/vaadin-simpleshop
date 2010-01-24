@@ -12,7 +12,6 @@ import org.eclipse.persistence.annotations.PrivateOwned;
 import org.vaadin.simpleshop.annotations.FieldTranslation;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
-
 /**
  * Entity for orders places in the shop
  * 
@@ -213,7 +212,8 @@ public class Order extends AbstractPojo {
             row = new OrderRow();
             row.setProduct(product);
             row.setProductName(product.getName());
-            row.setPrice(product.getPrice());
+            row.setPrice(product.getPrice().getPrice());
+            row.setVat(product.getPrice().getVat().getPercentage());
             row.setQuantity(1);
             getOrderedProducts().add(row);
         }
@@ -247,7 +247,8 @@ public class Order extends AbstractPojo {
             row = new OrderRow();
             row.setProduct(product);
             row.setProductName(product.getName());
-            row.setPrice(product.getPrice());
+            row.setPrice(product.getPrice().getPrice());
+            row.setVat(product.getPrice().getVat().getPercentage());
             row.setQuantity(quantity);
             getOrderedProducts().add(row);
         }

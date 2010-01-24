@@ -6,6 +6,7 @@ import java.text.NumberFormat;
 import org.vaadin.simpleshop.ShoppingCart;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.lang.SystemMsg;
+import org.vaadin.simpleshop.util.ConfigUtil;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
@@ -93,7 +94,14 @@ public class ProductViewer extends CustomComponent implements ClickListener {
         nf.setRoundingMode(RoundingMode.HALF_UP);
 
         // Create the price label with the currency
-        price = new Label(nf.format(product.getPrice()) + " EUR");
+        if (ConfigUtil.getBoolean("product.showPriceIncludingTakes")) {
+            price = new Label(nf.format(product.getPriceIncludingTaxes())
+                    + " EUR");
+        } else {
+            price = new Label(nf.format(product.getPriceExcludingTaxes())
+                    + " EUR");
+        }
+
         // The price label shouldn't take more space than what it needs
         price.setWidth(null);
 

@@ -23,6 +23,8 @@ public class OrderRow extends AbstractPojo {
 
     private double price;
 
+    private double vat;
+
     private int quantity;
 
     public OrderRow() {
@@ -84,6 +86,24 @@ public class OrderRow extends AbstractPojo {
     }
 
     /**
+     * Set the VAT percentage for this product
+     * 
+     * @param vat
+     */
+    public void setVat(double vat) {
+        this.vat = vat;
+    }
+
+    /**
+     * Get the VAT percentage for this product
+     * 
+     * @return
+     */
+    public double getVat() {
+        return vat;
+    }
+
+    /**
      * Set the ordered quantity
      * 
      * @param quantity
@@ -102,12 +122,21 @@ public class OrderRow extends AbstractPojo {
     }
 
     /**
-     * A transient method which calculates this row's sum
+     * A transient method which calculates this row's sum without taxes
      * 
      * @return
      */
-    public double getSum() {
+    public double getSumExcludingVAT() {
         return quantity * price;
+    }
+
+    /**
+     * A transient method which calculates this row's sum without taxes
+     * 
+     * @return
+     */
+    public double getSumIncludingVAT() {
+        return quantity * price * ((vat / 100) + 1);
     }
 
 }

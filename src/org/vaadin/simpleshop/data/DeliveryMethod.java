@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
 import org.vaadin.simpleshop.annotations.FieldTranslation;
@@ -31,9 +33,11 @@ public class DeliveryMethod extends AbstractPojo {
     private Price price;
 
     @FieldTranslation(name = SystemMsg.DELIVERY_VALID_FROM)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date validFrom;
 
     @FieldTranslation(name = SystemMsg.DELIVERY_VALID_UNTIL)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date validUntil;
 
     /**

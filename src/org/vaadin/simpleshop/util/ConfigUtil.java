@@ -74,4 +74,18 @@ public class ConfigUtil {
         }
     }
 
+    /**
+     * Get the property of type boolean for the given key
+     * 
+     * @param key
+     * @return
+     */
+    public static boolean getBoolean(String key) {
+        if (getProperties().containsKey(key)) {
+            return Boolean.valueOf(getProperties().getProperty(key));
+        } else {
+            return false;
+        }
+    }
+
 }

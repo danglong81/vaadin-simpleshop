@@ -8,6 +8,7 @@ import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.checkout.CheckoutView;
 import org.vaadin.simpleshop.ui.controllers.CartController;
 import org.vaadin.simpleshop.ui.views.View;
+import org.vaadin.simpleshop.util.ConfigUtil;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -78,8 +79,9 @@ public class CartContentView extends View<VerticalLayout> implements
         summaryLayout.setSpacing(true);
 
         // Create the sum label
-        totalSumLabel = new Label(CartController
-                .getFormattedTotalPrice(ShoppingCart.getOrder()));
+        totalSumLabel = new Label(CartController.getFormattedTotalPrice(
+                ShoppingCart.getOrder(), ConfigUtil
+                        .getBoolean("product.showPriceIncludingTakes")));
 
         // A label is by default 100% wide, hence aligning a label won't work
         // properly unless you set its width to null (undefined).
@@ -110,8 +112,9 @@ public class CartContentView extends View<VerticalLayout> implements
 
     @Override
     public void cartUpdated(CartUpdatedEvent event) {
-        totalSumLabel.setValue(CartController
-                .getFormattedTotalPrice(ShoppingCart.getOrder()));
+        totalSumLabel.setValue(CartController.getFormattedTotalPrice(
+                ShoppingCart.getOrder(), ConfigUtil
+                        .getBoolean("product.showPriceIncludingTakes")));
         content.refresh();
 
         // Check if the checkout button exists, as it is removed in some cases.

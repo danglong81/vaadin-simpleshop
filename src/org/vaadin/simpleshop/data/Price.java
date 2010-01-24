@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.vaadin.simpleshop.annotations.FieldTranslation;
 import org.vaadin.simpleshop.lang.SystemMsg;
@@ -29,10 +31,27 @@ public class Price extends AbstractPojo {
     private Vat vat;
 
     @FieldTranslation(name = SystemMsg.PRICE_VALID_FROM)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date validFrom;
 
     @FieldTranslation(name = SystemMsg.PRICE_VALID_UNTIL)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date validUntil;
+
+    /**
+     * Default constructor
+     */
+    public Price() {
+    }
+
+    /**
+     * Constructor which takes as parameters the name, price and VAT object *
+     */
+    public Price(String name, double price, Vat vat) {
+        setName(name);
+        setPrice(price);
+        setVat(vat);
+    }
 
     /**
      * Get a name for the price.

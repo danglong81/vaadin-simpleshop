@@ -3,6 +3,8 @@ package org.vaadin.simpleshop.data;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.vaadin.simpleshop.annotations.FieldTranslation;
 import org.vaadin.simpleshop.lang.SystemMsg;
@@ -23,10 +25,26 @@ public class Vat extends AbstractPojo {
     private double percentage;
 
     @FieldTranslation(name = SystemMsg.VAT_VALID_FROM)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date validFrom;
 
     @FieldTranslation(name = SystemMsg.VAT_VALID_UNTIL)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date validUntil;
+
+    /**
+     * Default constructor
+     */
+    public Vat() {
+    }
+
+    /**
+     * Constructor which takes the name and the VAT percentage as parameters
+     */
+    public Vat(String name, double percentage) {
+        setName(name);
+        setPercentage(percentage);
+    }
 
     /**
      * Sets a name for this VAT object.

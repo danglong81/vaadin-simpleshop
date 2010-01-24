@@ -1,10 +1,12 @@
 package org.vaadin.simpleshop;
 
 import org.vaadin.simpleshop.data.ActionLock;
+import org.vaadin.simpleshop.data.Price;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.ProductCategory;
 import org.vaadin.simpleshop.data.Role;
 import org.vaadin.simpleshop.data.User;
+import org.vaadin.simpleshop.data.Vat;
 import org.vaadin.simpleshop.facade.FacadeFactory;
 import org.vaadin.simpleshop.util.PasswordUtil;
 
@@ -35,6 +37,27 @@ public class InitialData {
 
         FacadeFactory.getFacade().store(adminUser);
 
+        // Initialize VAT objects
+        Vat vat0 = new Vat();
+        vat0.setPercentage(0);
+        vat0.setName("VAT0");
+        FacadeFactory.getFacade().store(vat0);
+
+        Vat vat8 = new Vat();
+        vat8.setPercentage(8);
+        vat8.setName("VAT8");
+        FacadeFactory.getFacade().store(vat8);
+
+        Vat vat17 = new Vat();
+        vat17.setPercentage(17);
+        vat17.setName("VAT17");
+        FacadeFactory.getFacade().store(vat17);
+
+        Vat vat22 = new Vat();
+        vat22.setPercentage(22);
+        vat22.setName("VAT22");
+        FacadeFactory.getFacade().store(vat22);
+
         ProductCategory volvo = new ProductCategory();
         volvo.setName("Volvo");
         volvo.setRootCategory(true);
@@ -60,11 +83,11 @@ public class InitialData {
                         + "feugait nulla facilisi. Nam liber tempor cum soluta nobis "
                         + "eleifend option congue nihil imperdiet doming id quod mazim "
                         + "placerat facer possim assum.");
-        s40.setPrice(32000d);
+        s40.setPrice(new Price("", 32000d, vat22));
 
         Product s80 = new Product();
         s80.setName("S80");
-        s80.setPrice(38000d);
+        s80.setPrice(new Price("", 38000d, vat22));
 
         sSeries.addProduct(s40);
         sSeries.addProduct(s80);
@@ -76,11 +99,11 @@ public class InitialData {
 
         Product v50 = new Product();
         v50.setName("V50");
-        v50.setPrice(28000d);
+        v50.setPrice(new Price("", 28000d, vat22));
 
         Product v70 = new Product();
         v70.setName("V70");
-        v70.setPrice(45500d);
+        v70.setPrice(new Price("", 45500d, vat22));
 
         vSeries.addProduct(v50);
         vSeries.addProduct(v70);
@@ -92,15 +115,15 @@ public class InitialData {
 
         Product xc60 = new Product();
         xc60.setName("XC60");
-        xc60.setPrice(53200d);
+        xc60.setPrice(new Price("", 53200d, vat22));
 
         Product xc70 = new Product();
         xc70.setName("XC70");
-        xc70.setPrice(55200d);
+        xc70.setPrice(new Price("", 55200d, vat22));
 
         Product xc90 = new Product();
         xc90.setName("XC90");
-        xc90.setPrice(67800d);
+        xc90.setPrice(new Price("", 67800d, vat22));
 
         xcSeries.addProduct(xc60);
         xcSeries.addProduct(xc70);
@@ -114,11 +137,11 @@ public class InitialData {
 
         Product c30 = new Product();
         c30.setName("C30");
-        c30.setPrice(24100d);
+        c30.setPrice(new Price("", 24100d, vat22));
 
         Product c70 = new Product();
         c70.setName("C70");
-        c70.setPrice(45600d);
+        c70.setPrice(new Price("", 45600d, vat22));
 
         cSeries.addProduct(c30);
         cSeries.addProduct(c70);
