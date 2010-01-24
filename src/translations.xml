@@ -881,5 +881,16 @@
 				<seg>Slutsumma (skattefri)</seg>
 			</tuv>
 		</tu>
+		<tu tuid="CHECKOUT_ERROR_CHOOSE_DELIVERY_METHOD">
+			<tuv lang="en">
+				<seg>Delivery method must be chosen!</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Valitse toimitustapa!</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Välj leveranssätt!</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>

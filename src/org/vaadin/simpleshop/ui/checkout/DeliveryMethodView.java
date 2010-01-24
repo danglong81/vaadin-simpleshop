@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.vaadin.simpleshop.ShoppingCart;
 import org.vaadin.simpleshop.SimpleshopApplication;
 import org.vaadin.simpleshop.data.DeliveryMethod;
+import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.controllers.CheckoutController;
 import org.vaadin.simpleshop.util.ConfigUtil;
 import org.vaadin.simpleshop.util.NumberUtil;
@@ -36,7 +38,19 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
     // What is the currently selected delivery method.
     private DeliveryMethod selectedDeliveryMethod = null;
 
+    // Add a label for displaying error messages
+    private Label errorMsg = new Label(
+            SystemMsg.CHECKOUT_ERROR_CHOOSE_DELIVERY_METHOD.get());
+
     public DeliveryMethodView() {
+        // Don't show the error message by default
+        errorMsg.setVisible(false);
+
+        // Set another style for the error message
+        errorMsg.setStyleName("error");
+
+        mainPanel.addComponent(errorMsg);
+
         // Enable spacing between the components
         ((VerticalLayout) mainPanel.getContent()).setSpacing(true);
 
@@ -96,10 +110,13 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
         if (selectedDeliveryMethod != null) {
             SimpleshopApplication.getViewHandler().activateView(
                     PaymentView.class);
-            // TODO remove error message if it is visible
+            CheckoutController.setDeliveryMethod(selectedDeliveryMethod,
+                    ShoppingCart.getOrder());
+
+            // Remove error message if it is visible
+            errorMsg.setVisible(false);
         } else {
-            // TODO show an error message that a delivery method must be
-            // selected
+            errorMsg.setVisible(true);
         }
     }
 
@@ -128,6 +145,9 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
         // Set the new selected delivery method
         selectedDeliveryMethod = (DeliveryMethod) ((HorizontalLayout) event
                 .getComponent()).getData();
+
+        // If the error message was shown, remove it
+        errorMsg.setVisible(false);
     }
 
 }

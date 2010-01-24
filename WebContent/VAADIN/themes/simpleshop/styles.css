@@ -29,6 +29,15 @@
 	background: #eeeeee;
 }
 
+.delivery-method:hover {
+	background: #dddddd;
+}
+
 .delivery-method-selected {
 	background: #c8c8c8;
+}
+
+.error {
+	font-weight: bold;
+	color: #FF0000;
 }

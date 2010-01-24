@@ -47,10 +47,13 @@ public class Order extends AbstractPojo {
     @PrivateOwned
     private List<OrderRow> orderedProducts = new ArrayList<OrderRow>();
 
+    // TODO add translation
     private String deliveryMethodName;
 
+    // TODO add translation
     private double deliveryMethodPrice;
 
+    // TODO add translation
     private double deliveryMethodVAT;
 
     public Order() {
@@ -184,6 +187,30 @@ public class Order extends AbstractPojo {
      */
     public String getComments() {
         return comments;
+    }
+
+    public String getDeliveryMethodName() {
+        return deliveryMethodName;
+    }
+
+    public void setDeliveryMethodName(String deliveryMethodName) {
+        this.deliveryMethodName = deliveryMethodName;
+    }
+
+    public double getDeliveryMethodPrice() {
+        return deliveryMethodPrice;
+    }
+
+    public void setDeliveryMethodPrice(double deliveryMethodPrice) {
+        this.deliveryMethodPrice = deliveryMethodPrice;
+    }
+
+    public double getDeliveryMethodVAT() {
+        return deliveryMethodVAT;
+    }
+
+    public void setDeliveryMethodVAT(double deliveryMethodVAT) {
+        this.deliveryMethodVAT = deliveryMethodVAT;
     }
 
     /**
