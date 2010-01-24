@@ -63,11 +63,11 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
             if (ConfigUtil.getBoolean("product.showPriceIncludingTakes")) {
                 price.setValue(NumberUtil.roundSum(method
                         .getPriceIncludingVAT(), 2)
-                        + ConfigUtil.getString("product.currency"));
+                        + " " + ConfigUtil.getString("product.currency"));
             } else {
                 price.setValue(NumberUtil.roundSum(method
                         .getPriceExcludingVAT(), 2)
-                        + ConfigUtil.getString("product.currency"));
+                        + " " + ConfigUtil.getString("product.currency"));
             }
             price.setWidth(null);
             layout.addComponent(price);
