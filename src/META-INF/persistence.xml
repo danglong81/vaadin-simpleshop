@@ -8,6 +8,9 @@
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
+		<class>org.vaadin.simpleshop.data.Vat</class>
+		<class>org.vaadin.simpleshop.data.Price</class>
+		<class>org.vaadin.simpleshop.data.DeliveryMethod</class>
 		<class>org.vaadin.simpleshop.data.LogMsg</class>
 		<class>org.vaadin.simpleshop.data.Product</class>
 		<class>org.vaadin.simpleshop.data.ProductCategory</class>

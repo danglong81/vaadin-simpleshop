@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import org.vaadin.simpleshop.InternationalizationServlet;
 
-
 /**
  * Translation messages in the system
  * 
@@ -85,7 +84,24 @@ public enum SystemMsg {
     ORDER_CITY,
     ORDER_PHONE,
     ORDER_EMAIL,
-    ORDER_COMMENTS;
+    ORDER_COMMENTS,
+
+    VAT_NAME,
+    VAT_PERCENTAGE,
+    VAT_VALID_FROM,
+    VAT_VALID_UNTIL,
+
+    PRICE_NAME,
+    PRICE_PRICE,
+    PRICE_VAT,
+    PRICE_VALID_FROM,
+    PRICE_VALID_UNTIL,
+
+    DELIVERY_METHOD_NAME,
+    DELIVERY_DESCRIPTION,
+    DELIVERY_PRICE,
+    DELIVERY_VALID_FROM,
+    DELIVERY_VALID_UNTIL;
 
     /**
      * Get the translation for this message

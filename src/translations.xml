@@ -705,5 +705,159 @@
 				<seg>Felaktig e-postadress</seg>
 			</tuv>
 		</tu>
+		<tu tuid="VAT_NAME">
+			<tuv lang="en">
+				<seg>Name</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Nimi</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Namn</seg>
+			</tuv>
+		</tu>
+		<tu tuid="VAT_PERCENTAGE">
+			<tuv lang="en">
+				<seg>VAT percentage</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Arvonlisäveroprosentti</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Moms prosent</seg>
+			</tuv>
+		</tu>
+		<tu tuid="VAT_VALID_FROM">
+			<tuv lang="en">
+				<seg>Valid from</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Voimassaolo alkaa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Giltighetsperiodens början</seg>
+			</tuv>
+		</tu>
+		<tu tuid="VAT_VALID_UNTIL">
+			<tuv lang="en">
+				<seg>Valid until</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Voimassaolo päättyy</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Giltighetsperiodens slut</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PRICE_NAME">
+			<tuv lang="en">
+				<seg>Name</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Nimi</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Namn</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PRICE_PRICE">
+			<tuv lang="en">
+				<seg>Price sum</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Hintasumma</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Prissumma</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PRICE_VAT">
+			<tuv lang="en">
+				<seg>VAT</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>ALV</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Moms</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PRICE_VALID_FROM">
+			<tuv lang="en">
+				<seg>Valid from</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Voimassaolo alkaa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Giltighetsperiodens början</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PRICE_VALID_UNTIL">
+			<tuv lang="en">
+				<seg>Valid until</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Voimassaolo päättyy</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Giltighetsperiodens slut</seg>
+			</tuv>
+		</tu>
+		<tu tuid="DELIVERY_METHOD_NAME">
+			<tuv lang="en">
+				<seg>Name</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Nimi</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Namn</seg>
+			</tuv>
+		</tu>
+		<tu tuid="DELIVERY_DESCRIPTION">
+			<tuv lang="en">
+				<seg>Description</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Kuvaus</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Beskrivning</seg>
+			</tuv>
+		</tu>
+		<tu tuid="DELIVERY_PRICE">
+			<tuv lang="en">
+				<seg>Price</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Hinta</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Pris</seg>
+			</tuv>
+		</tu>
+		<tu tuid="DELIVERY_VALID_FROM">
+			<tuv lang="en">
+				<seg>Valid from</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Voimassaolo alkaa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Giltighetsperiodens början</seg>
+			</tuv>
+		</tu>
+		<tu tuid="DELIVERY_VALID_UNTIL">
+			<tuv lang="en">
+				<seg>Valid until</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Voimassaolo päättyy</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Giltighetsperiodens slut</seg>
+			</tuv>
+		</tu>
 	</body>
 </tmx>
