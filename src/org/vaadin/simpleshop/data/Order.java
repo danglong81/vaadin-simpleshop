@@ -47,6 +47,12 @@ public class Order extends AbstractPojo {
     @PrivateOwned
     private List<OrderRow> orderedProducts = new ArrayList<OrderRow>();
 
+    private String deliveryMethodName;
+
+    private double deliveryMethodPrice;
+
+    private double deliveryMethodVAT;
+
     public Order() {
 
     }

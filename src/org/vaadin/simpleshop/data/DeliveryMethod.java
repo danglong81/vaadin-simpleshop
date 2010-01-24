@@ -134,4 +134,23 @@ public class DeliveryMethod extends AbstractPojo {
     public void setValidUntil(Date validUntil) {
         this.validUntil = validUntil;
     }
+
+    /**
+     * Transient method for getting the price including the VAT
+     * 
+     * @return
+     */
+    public double getPriceIncludingVAT() {
+        return getPrice().getPrice()
+                * ((getPrice().getVat().getPercentage() / 100) + 1);
+    }
+
+    /**
+     * Transient method for getting the price excluding the VAT
+     * 
+     * @return
+     */
+    public double getPriceExcludingVAT() {
+        return getPrice().getPrice();
+    }
 }

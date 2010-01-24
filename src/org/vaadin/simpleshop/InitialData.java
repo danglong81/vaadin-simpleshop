@@ -1,6 +1,7 @@
 package org.vaadin.simpleshop;
 
 import org.vaadin.simpleshop.data.ActionLock;
+import org.vaadin.simpleshop.data.DeliveryMethod;
 import org.vaadin.simpleshop.data.Price;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.ProductCategory;
@@ -61,6 +62,31 @@ public class InitialData {
         ProductCategory volvo = new ProductCategory();
         volvo.setName("Volvo");
         volvo.setRootCategory(true);
+
+        // Create a couple of delivery methods
+        DeliveryMethod dm1 = new DeliveryMethod();
+        dm1.setName("DHL");
+        dm1.setDescription("Your order will be delivered to "
+                + "your door step by DHL");
+        Price price = new Price("dhl", 25, vat22);
+        dm1.setPrice(price);
+        FacadeFactory.getFacade().store(dm1);
+
+        DeliveryMethod dm2 = new DeliveryMethod();
+        dm2.setName("Postal");
+        dm2.setDescription("Your order will be delivered to "
+                + "the closest postal office");
+        price = new Price("post", 15, vat22);
+        dm2.setPrice(price);
+        FacadeFactory.getFacade().store(dm2);
+
+        DeliveryMethod dm3 = new DeliveryMethod();
+        dm3.setName("Pickup");
+        dm3.setDescription("You want to pick up your delivery from "
+                + "our retail store");
+        price = new Price("post", 0, vat22);
+        dm3.setPrice(price);
+        FacadeFactory.getFacade().store(dm3);
 
         // Add S-series
         ProductCategory sSeries = new ProductCategory();

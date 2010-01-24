@@ -24,3 +24,11 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+.delivery-method {
+	background: #eeeeee;
+}
+
+.delivery-method-selected {
+	background: #c8c8c8;
+}

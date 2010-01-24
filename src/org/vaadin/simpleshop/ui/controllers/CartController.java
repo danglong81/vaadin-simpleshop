@@ -1,10 +1,9 @@
 package org.vaadin.simpleshop.ui.controllers;
 
-import java.math.RoundingMode;
-import java.text.NumberFormat;
-
 import org.vaadin.simpleshop.data.Order;
 import org.vaadin.simpleshop.data.OrderRow;
+import org.vaadin.simpleshop.util.ConfigUtil;
+import org.vaadin.simpleshop.util.NumberUtil;
 
 public class CartController {
 
@@ -38,13 +37,8 @@ public class CartController {
      * @return
      */
     public static String formatSum(double sum) {
-        // Initialize the number formatter
-        NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(2);
-        nf.setMinimumFractionDigits(2);
-        nf.setRoundingMode(RoundingMode.HALF_UP);
-
         // Format the total sum, add the currency and return the value
-        return nf.format(sum) + " EUR";
+        return NumberUtil.roundSum(sum, 2) + " "
+                + ConfigUtil.getString("product.currency");
     }
 }
