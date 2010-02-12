@@ -1,8 +1,8 @@
 package org.vaadin.simpleshop.util;
 
+import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 import org.vaadin.simpleshop.data.LogMsg;
 import org.vaadin.simpleshop.data.LogMsg.LogLevel;
-import org.vaadin.simpleshop.facade.FacadeFactory;
 
 /**
  * Logging utility class.

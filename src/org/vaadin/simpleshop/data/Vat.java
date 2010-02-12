@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
 import org.vaadin.simpleshop.annotations.FieldTranslation;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
@@ -17,6 +18,8 @@ import org.vaadin.simpleshop.lang.SystemMsg;
  */
 @Entity
 public class Vat extends AbstractPojo {
+
+    private static final long serialVersionUID = -4733123592750920398L;
 
     @FieldTranslation(name = SystemMsg.VAT_NAME)
     private String name;

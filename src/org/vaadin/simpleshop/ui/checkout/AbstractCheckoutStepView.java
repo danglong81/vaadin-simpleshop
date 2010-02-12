@@ -1,9 +1,9 @@
 package org.vaadin.simpleshop.ui.checkout;
 
-import org.vaadin.simpleshop.SimpleshopApplication;
+import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.views.ShopView;
-import org.vaadin.simpleshop.ui.views.View;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -19,8 +19,8 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-abstract public class AbstractCheckoutStepView extends View<VerticalLayout>
-        implements ClickListener {
+abstract public class AbstractCheckoutStepView extends
+        AbstractView<VerticalLayout> implements ClickListener {
 
     private static final long serialVersionUID = -7000782887824488286L;
 
@@ -39,12 +39,12 @@ abstract public class AbstractCheckoutStepView extends View<VerticalLayout>
         mainPanel.setStyleName(Panel.STYLE_LIGHT);
         mainPanel.setSizeFull();
 
-        mainLayout.setSizeFull();
+        content.setSizeFull();
         // Add the main panel to the main layout
-        mainLayout.addComponent(mainPanel);
+        content.addComponent(mainPanel);
 
         // Expand the main panel so that it will take all the available space
-        mainLayout.setExpandRatio(mainPanel, 1);
+        content.setExpandRatio(mainPanel, 1);
 
         // Initialize the navigation buttons
         initButtons();
@@ -80,13 +80,13 @@ abstract public class AbstractCheckoutStepView extends View<VerticalLayout>
         buttonLayout.setComponentAlignment(nextStepBtn, Alignment.MIDDLE_RIGHT);
 
         // Add the button layout to the main layout
-        mainLayout.addComponent(buttonLayout);
+        content.addComponent(buttonLayout);
     }
 
     @Override
     public void buttonClick(ClickEvent event) {
         if (event.getButton().equals(cancelBtn)) {
-            SimpleshopApplication.getViewHandler().activateView(ShopView.class);
+            ViewHandler.activateView(ShopView.class);
         } else if (event.getButton().equals(nextStepBtn)) {
             next();
         } else if (event.getButton().equals(previousStepBtn)) {

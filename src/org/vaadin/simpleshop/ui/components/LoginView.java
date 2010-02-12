@@ -1,9 +1,11 @@
 package org.vaadin.simpleshop.ui.components;
 
-import org.vaadin.simpleshop.SimpleshopApplication;
+import org.vaadin.appfoundation.authentication.AuthenticationMessage;
+import org.vaadin.appfoundation.authentication.util.AuthenticationUtil;
+import org.vaadin.appfoundation.authentication.util.AuthenticationUtil.AFAuthenticationMessage;
+import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.views.View;
-import org.vaadin.simpleshop.util.SessionUtil;
 
 import com.vaadin.event.Action;
 import com.vaadin.event.ShortcutAction;
@@ -25,12 +27,11 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class LoginView extends View<VerticalLayout> implements ClickListener,
+public class LoginView extends AbstractView<Panel> implements ClickListener,
         Handler {
 
     private static final long serialVersionUID = -7254800457211263522L;
 
-    private Panel panel = new Panel();
     private Label feedbackLabel;
     private TextField username;
     private TextField password;
@@ -44,22 +45,21 @@ public class LoginView extends View<VerticalLayout> implements ClickListener,
             ShortcutAction.KeyCode.ENTER, null);
 
     public LoginView() {
-        super(new VerticalLayout());
+        super(new Panel());
 
         // Remove all extra stryling
-        panel.setStyleName(Panel.STYLE_LIGHT);
+        content.setStyleName(Panel.STYLE_LIGHT);
 
         // The inner layout should be a VerticalLayout
         VerticalLayout panelLayout = new VerticalLayout();
         panelLayout.setMargin(true);
         panelLayout.setSpacing(true);
 
-        panel.setContent(panelLayout);
+        content.setContent(panelLayout);
 
         initForm();
 
-        panel.addActionHandler(this);
-        setCompositionRoot(panel);
+        content.addActionHandler(this);
     }
 
     /**
@@ -70,19 +70,19 @@ public class LoginView extends View<VerticalLayout> implements ClickListener,
         // "login failed"
         feedbackLabel = new Label();
 
-        panel.addComponent(feedbackLabel);
+        content.addComponent(feedbackLabel);
 
         // Add the username textfield. It should be focused by default
         username = new TextField(SystemMsg.GENERIC_USERNAME.get());
         username.setWidth("100%");
         username.focus();
-        panel.addComponent(username);
+        content.addComponent(username);
 
         // Add the password textfield. Set the type to secret
         password = new TextField(SystemMsg.GENERIC_PASSWORD.get());
         password.setSecret(true);
         password.setWidth("100%");
-        panel.addComponent(password);
+        content.addComponent(password);
 
         // Create a layout containing the buttons we need
         HorizontalLayout buttons = new HorizontalLayout();
@@ -105,7 +105,7 @@ public class LoginView extends View<VerticalLayout> implements ClickListener,
         buttons.addComponent(loginBtn);
         buttons.setComponentAlignment(loginBtn, Alignment.MIDDLE_RIGHT);
 
-        panel.addComponent(buttons);
+        content.addComponent(buttons);
     }
 
     public void buttonClick(ClickEvent event) {
@@ -115,8 +115,7 @@ public class LoginView extends View<VerticalLayout> implements ClickListener,
         } else if (event.getButton().equals(forgotPasswordBtn)) {
             // TODO: switch to forgot password view
         } else if (event.getButton().equals(registerBtn)) {
-            SimpleshopApplication.getViewHandler().activateView(
-                    RegistrationView.class);
+            ViewHandler.activateView(RegistrationView.class);
         }
     }
 
@@ -126,16 +125,16 @@ public class LoginView extends View<VerticalLayout> implements ClickListener,
     protected void login() {
         // Get the username and password from the textfields
         // Try to log in the user
-        boolean successfull = SessionUtil.login((String) username.getValue(),
-                (String) password.getValue());
+        AuthenticationMessage msg = AuthenticationUtil.authenticate(
+                (String) username.getValue(), (String) password.getValue());
         // If the login failed, give the user some feedback and reset the fields
-        if (!successfull) {
+        if (!msg.equals(AFAuthenticationMessage.AUTH_SUCCESSFUL)) {
             feedbackLabel.setValue(SystemMsg.LOGIN_LOGIN_FAILED.get());
             username.setValue("");
             password.setValue("");
         } else {
             // Login was successfull, hence remove the enter listener
-            panel.removeActionHandler(this);
+            content.removeActionHandler(this);
         }
     }
 

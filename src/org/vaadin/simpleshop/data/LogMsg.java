@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
+
 /**
  * Entity class for log messages.
  * 
@@ -14,9 +16,13 @@ import javax.persistence.Enumerated;
 @Entity
 public class LogMsg extends AbstractPojo {
 
+    private static final long serialVersionUID = -5069487222956859611L;
+
     /** Log levels for the message **/
     public static enum LogLevel {
-        DEBUG, WARNING, ERROR;
+        DEBUG,
+        WARNING,
+        ERROR;
     }
 
     @Column(length = 3000)

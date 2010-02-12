@@ -1,6 +1,6 @@
 package org.vaadin.simpleshop.ui.checkout;
 
-import org.vaadin.simpleshop.SimpleshopApplication;
+import org.vaadin.appfoundation.view.ViewHandler;
 
 /**
  * View for the payment process.
@@ -25,8 +25,7 @@ public class PaymentView extends AbstractCheckoutStepView {
 
     @Override
     protected void previous() {
-        SimpleshopApplication.getViewHandler().activateView(
-                DeliveryMethodView.class);
+        ViewHandler.activateView(DeliveryMethodView.class);
     }
 
     @Override

@@ -3,12 +3,11 @@ package org.vaadin.simpleshop.ui.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.vaadin.appfoundation.authentication.util.PasswordUtil;
+import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 import org.vaadin.simpleshop.data.User;
-import org.vaadin.simpleshop.facade.FacadeFactory;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.util.ConfigUtil;
-import org.vaadin.simpleshop.util.PasswordUtil;
-
 
 /**
  * Controller for managing user accounts

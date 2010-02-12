@@ -2,9 +2,9 @@ package org.vaadin.simpleshop.ui.controllers;
 
 import java.util.List;
 
+import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 import org.vaadin.simpleshop.data.DeliveryMethod;
 import org.vaadin.simpleshop.data.Order;
-import org.vaadin.simpleshop.facade.FacadeFactory;
 
 /**
  * Controller class for the checkout process.

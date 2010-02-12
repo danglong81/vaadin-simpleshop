@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
 
 /**
  * Entity class for the products in this application.
@@ -14,6 +15,8 @@ import org.eclipse.persistence.annotations.PrivateOwned;
  */
 @Entity
 public class Product extends AbstractPojo {
+
+    private static final long serialVersionUID = 6687418631050171248L;
 
     private String name;
 

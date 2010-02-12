@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 import org.vaadin.simpleshop.data.ProductCategory;
-import org.vaadin.simpleshop.facade.FacadeFactory;
-
 
 public class ItemController {
 

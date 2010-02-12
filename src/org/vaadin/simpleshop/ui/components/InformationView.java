@@ -1,19 +1,19 @@
 package org.vaadin.simpleshop.ui.components;
 
+import org.vaadin.appfoundation.authentication.SessionHandler;
+import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.appfoundation.view.ViewContainer;
+import org.vaadin.appfoundation.view.ViewHandler;
+import org.vaadin.appfoundation.view.ViewItem;
 import org.vaadin.simpleshop.CurrentUser;
 import org.vaadin.simpleshop.SimpleshopApplication;
 import org.vaadin.simpleshop.events.UserSessionEvent;
 import org.vaadin.simpleshop.events.UserSessionListener;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.Icons;
-import org.vaadin.simpleshop.ui.ParentView;
-import org.vaadin.simpleshop.ui.ViewHandler;
-import org.vaadin.simpleshop.ui.ViewItem;
 import org.vaadin.simpleshop.ui.admin.AdminWindow;
 import org.vaadin.simpleshop.ui.components.cart.CartContentView;
-import org.vaadin.simpleshop.ui.views.View;
 import org.vaadin.simpleshop.util.PermissionsUtil;
-import org.vaadin.simpleshop.util.SessionUtil;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -28,8 +28,8 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class InformationView extends View<VerticalLayout> implements
-        ClickListener, UserSessionListener, ParentView {
+public class InformationView extends AbstractView<VerticalLayout> implements
+        ClickListener, UserSessionListener, ViewContainer {
 
     private static final long serialVersionUID = 8401760557369059696L;
 
@@ -42,36 +42,36 @@ public class InformationView extends View<VerticalLayout> implements
     // Layout for navigation buttons
     private HorizontalLayout buttonLayout;
 
-    private View<?> currentView;
+    private AbstractView<?> currentView;
 
     public InformationView() {
         super(new VerticalLayout());
         setStyleName("infoview");
 
-        mainLayout.setSizeFull();
+        content.setSizeFull();
 
         // Initialize navigation buttons
         initButtons();
 
         // Register child views
-        ViewHandler vh = SimpleshopApplication.getViewHandler();
-        vh.addView(RegistrationView.class, this);
-        vh.addView(LoginView.class, this);
-        vh.addView(UserProfileView.class, this);
-        ViewItem cartContentView = vh.addView(CartContentView.class, this);
+        ViewHandler.addView(RegistrationView.class, this);
+        ViewHandler.addView(LoginView.class, this);
+        ViewHandler.addView(UserProfileView.class, this);
+        ViewItem cartContentView = ViewHandler.addView(CartContentView.class,
+                this);
 
         // Set the cart content view as the current view
         currentView = cartContentView.getView();
 
         // Add buttons to layout
-        mainLayout.addComponent(buttonLayout);
+        content.addComponent(buttonLayout);
 
         // Add current view to layout
-        mainLayout.addComponent(currentView);
+        content.addComponent(currentView);
 
         // The sub view should take as much space as there is available and
         // navigation button's should only reserve as much space as they need.
-        mainLayout.setExpandRatio(currentView, 1);
+        content.setExpandRatio(currentView, 1);
         SimpleshopApplication.getEventHandler().addListener(this);
     }
 
@@ -123,17 +123,14 @@ public class InformationView extends View<VerticalLayout> implements
     @Override
     public void buttonClick(ClickEvent event) {
         if (event.getButton().equals(profileBtn) && CurrentUser.get() == null) {
-            SimpleshopApplication.getViewHandler()
-                    .activateView(LoginView.class);
+            ViewHandler.activateView(LoginView.class);
         } else if (event.getButton().equals(profileBtn)
                 && CurrentUser.get() != null) {
-            SimpleshopApplication.getViewHandler().activateView(
-                    UserProfileView.class);
+            ViewHandler.activateView(UserProfileView.class);
         } else if (event.getButton().equals(shoppingCartBtn)) {
-            SimpleshopApplication.getViewHandler().activateView(
-                    CartContentView.class);
+            ViewHandler.activateView(CartContentView.class);
         } else if (event.getButton().equals(logoutBtn)) {
-            SessionUtil.logout();
+            SessionHandler.logout();
         } else if (event.getButton().equals(adminBtn)) {
             getApplication().getMainWindow().addWindow(new AdminWindow());
         }
@@ -143,8 +140,7 @@ public class InformationView extends View<VerticalLayout> implements
      * {@inheritDoc}
      */
     public void loginEvent(UserSessionEvent event) {
-        SimpleshopApplication.getViewHandler().activateView(
-                CartContentView.class);
+        ViewHandler.activateView(CartContentView.class);
 
         if (PermissionsUtil.isAdmin(CurrentUser.get())) {
             buttonLayout.addComponent(adminBtn);
@@ -157,8 +153,7 @@ public class InformationView extends View<VerticalLayout> implements
      * {@inheritDoc}
      */
     public void logoutEvent(UserSessionEvent event) {
-        SimpleshopApplication.getViewHandler().activateView(
-                CartContentView.class);
+        ViewHandler.activateView(CartContentView.class);
 
         buttonLayout.removeComponent(adminBtn);
         buttonLayout.removeComponent(logoutBtn);
@@ -166,15 +161,14 @@ public class InformationView extends View<VerticalLayout> implements
         // If the user logs out, clear the profile view so that if another user
         // uses the same session, he will see his own details and not the
         // previous user's details.
-        SimpleshopApplication.getViewHandler()
-                .removeView(UserProfileView.class);
+        ViewHandler.removeView(UserProfileView.class);
     }
 
     @Override
-    public void activate(View<?> view) {
-        mainLayout.replaceComponent(currentView, view);
+    public void activate(AbstractView<?> view) {
+        content.replaceComponent(currentView, view);
         currentView = view;
-        mainLayout.setExpandRatio(currentView, 1);
+        content.setExpandRatio(currentView, 1);
     }
 
     @Override

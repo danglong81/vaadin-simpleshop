@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
 
 /**
  * Products can be grouped into categories. This entity class defines the
@@ -20,6 +21,8 @@ import org.eclipse.persistence.annotations.PrivateOwned;
  */
 @Entity
 public class ProductCategory extends AbstractPojo {
+
+    private static final long serialVersionUID = 6848857849117469673L;
 
     @OneToMany(cascade = CascadeType.ALL)
     @PrivateOwned

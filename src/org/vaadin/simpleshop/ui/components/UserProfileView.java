@@ -3,13 +3,13 @@ package org.vaadin.simpleshop.ui.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.simpleshop.CurrentUser;
 import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.GenericFieldFactory;
 import org.vaadin.simpleshop.ui.controllers.UserController;
 import org.vaadin.simpleshop.ui.controllers.UserController.ProfileError;
-import org.vaadin.simpleshop.ui.views.View;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
@@ -20,6 +20,7 @@ import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -34,14 +35,12 @@ import com.vaadin.ui.Window.Notification;
  * @author Kim
  * 
  */
-public class UserProfileView extends View<VerticalLayout> implements
+public class UserProfileView extends AbstractView<Panel> implements
         ClickListener {
 
     private static final long serialVersionUID = -397461258975322708L;
 
     private FormLayout passwordLayout;
-
-    private final Panel content;
 
     private Label feedbackLabel;
     private TextField currentPassword;
@@ -54,17 +53,14 @@ public class UserProfileView extends View<VerticalLayout> implements
     private Button updateProfileBtn;
 
     public UserProfileView() {
-        super(new VerticalLayout());
+        super(new Panel());
 
-        content = new Panel();
         content.setStyleName(Panel.STYLE_LIGHT);
         content.setSizeFull();
 
-        mainLayout.setMargin(true);
-        mainLayout.setWidth("100%");
-
-        setCompositionRoot(content);
-        content.setContent(mainLayout);
+        content.setContent(new VerticalLayout());
+        ((Layout) content.getContent()).setMargin(true);
+        content.setWidth("100%");
 
         initContactInfoForm();
         initPasswordFields();
@@ -94,7 +90,7 @@ public class UserProfileView extends View<VerticalLayout> implements
 
         contactInfoForm.getLayout().addComponent(updateProfileBtn);
 
-        mainLayout.addComponent(contactInfoForm);
+        content.addComponent(contactInfoForm);
     }
 
     /**
@@ -104,7 +100,7 @@ public class UserProfileView extends View<VerticalLayout> implements
         passwordLayout = new FormLayout();
         passwordLayout.setCaption(SystemMsg.PROFILE_CHANGE_PASSWORD.get());
 
-        mainLayout.addComponent(passwordLayout);
+        content.addComponent(passwordLayout);
 
         feedbackLabel = new Label();
         feedbackLabel.setStyleName("error");

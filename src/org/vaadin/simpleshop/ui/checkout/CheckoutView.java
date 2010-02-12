@@ -1,10 +1,9 @@
 package org.vaadin.simpleshop.ui.checkout;
 
-import org.vaadin.simpleshop.SimpleshopApplication;
+import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.appfoundation.view.ViewContainer;
+import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.ParentView;
-import org.vaadin.simpleshop.ui.ViewHandler;
-import org.vaadin.simpleshop.ui.views.View;
 
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -16,7 +15,8 @@ import com.vaadin.ui.VerticalLayout;
  * @author Kim
  * 
  */
-public class CheckoutView extends View<VerticalLayout> implements ParentView {
+public class CheckoutView extends AbstractView<VerticalLayout> implements
+        ViewContainer {
 
     private static final long serialVersionUID = 1700835878617090430L;
 
@@ -26,23 +26,22 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView {
     private Label contactInformation;
     private Label payment;
 
-    private View<?> currentView = null;
+    private AbstractView<?> currentView = null;
 
     public CheckoutView() {
         super(new VerticalLayout());
-        mainLayout.setSizeFull();
+        content.setSizeFull();
 
         // Initialize the checkout process step captions
         initStepCaptions();
 
-        //
-        ViewHandler vh = SimpleshopApplication.getViewHandler();
-        vh.addView(VerifyContentView.class, this);
-        vh.addView(ContactInfoView.class, this);
-        vh.addView(DeliveryMethodView.class, this);
-        vh.addView(PaymentView.class, this);
+        // Register child views
+        ViewHandler.addView(VerifyContentView.class, this);
+        ViewHandler.addView(ContactInfoView.class, this);
+        ViewHandler.addView(DeliveryMethodView.class, this);
+        ViewHandler.addView(PaymentView.class, this);
 
-        vh.activateView(VerifyContentView.class, true);
+        ViewHandler.activateView(VerifyContentView.class, true);
     }
 
     private void initStepCaptions() {
@@ -69,7 +68,7 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView {
         payment.setEnabled(false);
         layout.addComponent(payment);
 
-        mainLayout.addComponent(layout);
+        content.addComponent(layout);
     }
 
     @Override
@@ -79,15 +78,15 @@ public class CheckoutView extends View<VerticalLayout> implements ParentView {
     }
 
     @Override
-    public void activate(View<?> view) {
+    public void activate(AbstractView<?> view) {
         if (currentView == null) {
-            mainLayout.addComponent(view, 1);
+            content.addComponent(view, 1);
         } else {
-            mainLayout.replaceComponent(currentView, view);
+            content.replaceComponent(currentView, view);
         }
 
         currentView = view;
-        mainLayout.setExpandRatio(view, 1);
+        content.setExpandRatio(view, 1);
 
         setStep(((AbstractCheckoutStepView) view).getStep());
     }

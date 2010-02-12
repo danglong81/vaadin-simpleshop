@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
 import org.vaadin.simpleshop.annotations.FieldTranslation;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
@@ -21,6 +22,8 @@ import org.vaadin.simpleshop.lang.SystemMsg;
 @Entity
 @Table(name = "shop_order")
 public class Order extends AbstractPojo {
+
+    private static final long serialVersionUID = -2006044282446797313L;
 
     @FieldTranslation(name = SystemMsg.ORDER_NAME)
     private String name;

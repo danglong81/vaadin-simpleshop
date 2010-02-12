@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
 import org.vaadin.simpleshop.annotations.FieldTranslation;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
@@ -20,6 +21,8 @@ import org.vaadin.simpleshop.lang.SystemMsg;
  */
 @Entity
 public class DeliveryMethod extends AbstractPojo {
+
+    private static final long serialVersionUID = 530854220431776974L;
 
     @FieldTranslation(name = SystemMsg.DELIVERY_METHOD_NAME)
     private String name;

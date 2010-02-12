@@ -3,8 +3,7 @@ package org.vaadin.simpleshop;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.vaadin.simpleshop.facade.FacadeFactory;
-
+import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 
 /**
  * 
@@ -20,7 +19,15 @@ public class SimpleShopContextListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent arg0) {
         // Setup and register the facade
-        FacadeFactory.registerFacade("default", true);
+        try {
+            FacadeFactory.registerFacade("default", true);
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         // Import initial test data
         InitialData.init();

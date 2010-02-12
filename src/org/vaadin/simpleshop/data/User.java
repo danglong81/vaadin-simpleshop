@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import org.vaadin.simpleshop.annotations.FieldTranslation;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
-
 /**
  * Entity class for users. This class keeps information about registered users.
  * 
@@ -18,7 +17,9 @@ import org.vaadin.simpleshop.lang.SystemMsg;
  */
 @Entity
 @Table(name = "shopuser")
-public class User extends AbstractPojo {
+public class User extends org.vaadin.appfoundation.authentication.data.User {
+
+    private static final long serialVersionUID = 1012189918605244977L;
 
     protected String username;
 
@@ -51,6 +52,7 @@ public class User extends AbstractPojo {
      * 
      * @return
      */
+    @Override
     public String getUsername() {
         return username;
     }
@@ -60,6 +62,7 @@ public class User extends AbstractPojo {
      * 
      * @param username
      */
+    @Override
     public void setUsername(String username) {
         this.username = username;
     }
@@ -69,6 +72,7 @@ public class User extends AbstractPojo {
      * 
      * @return
      */
+    @Override
     public String getPassword() {
         return password;
     }
@@ -78,6 +82,7 @@ public class User extends AbstractPojo {
      * 
      * @param password
      */
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
@@ -87,6 +92,7 @@ public class User extends AbstractPojo {
      * 
      * @param name
      */
+    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -96,6 +102,7 @@ public class User extends AbstractPojo {
      * 
      * @return
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -124,10 +131,12 @@ public class User extends AbstractPojo {
         return city;
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.ShoppingCart;
-import org.vaadin.simpleshop.SimpleshopApplication;
 import org.vaadin.simpleshop.data.DeliveryMethod;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.controllers.CheckoutController;
@@ -39,7 +39,7 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
     private DeliveryMethod selectedDeliveryMethod = null;
 
     // Add a label for displaying error messages
-    private Label errorMsg = new Label(
+    private final Label errorMsg = new Label(
             SystemMsg.CHECKOUT_ERROR_CHOOSE_DELIVERY_METHOD.get());
 
     public DeliveryMethodView() {
@@ -108,8 +108,7 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
     @Override
     protected void next() {
         if (selectedDeliveryMethod != null) {
-            SimpleshopApplication.getViewHandler().activateView(
-                    PaymentView.class);
+            ViewHandler.activateView(PaymentView.class);
             CheckoutController.setDeliveryMethod(selectedDeliveryMethod,
                     ShoppingCart.getOrder());
 
@@ -122,8 +121,7 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
 
     @Override
     protected void previous() {
-        SimpleshopApplication.getViewHandler().activateView(
-                ContactInfoView.class);
+        ViewHandler.activateView(ContactInfoView.class);
     }
 
     @Override

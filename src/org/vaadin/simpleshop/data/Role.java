@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 
 import org.eclipse.persistence.annotations.BasicCollection;
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
 
 /**
  * Entity class for Roles used in ACL
@@ -15,6 +16,8 @@ import org.eclipse.persistence.annotations.BasicCollection;
  */
 @Entity
 public class Role extends AbstractPojo {
+
+    private static final long serialVersionUID = -1908611640353142985L;
 
     private String name;
 

@@ -1,5 +1,7 @@
 package org.vaadin.simpleshop;
 
+import org.vaadin.appfoundation.authentication.util.PasswordUtil;
+import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 import org.vaadin.simpleshop.data.ActionLock;
 import org.vaadin.simpleshop.data.DeliveryMethod;
 import org.vaadin.simpleshop.data.Price;
@@ -8,8 +10,6 @@ import org.vaadin.simpleshop.data.ProductCategory;
 import org.vaadin.simpleshop.data.Role;
 import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.data.Vat;
-import org.vaadin.simpleshop.facade.FacadeFactory;
-import org.vaadin.simpleshop.util.PasswordUtil;
 
 /**
  * This class's only purpose is to import initial test data to the application.

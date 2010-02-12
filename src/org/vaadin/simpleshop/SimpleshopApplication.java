@@ -2,13 +2,13 @@ package org.vaadin.simpleshop;
 
 import java.util.Locale;
 
+import org.vaadin.appfoundation.authentication.SessionHandler;
+import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.data.Order;
-import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.events.EventHandler;
 import org.vaadin.simpleshop.events.UserSessionEvent;
 import org.vaadin.simpleshop.events.UserSessionListener;
 import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.ViewHandler;
 import org.vaadin.simpleshop.ui.views.MainLayout;
 import org.vaadin.simpleshop.util.ConfigUtil;
 
@@ -38,17 +38,15 @@ public class SimpleshopApplication extends Application implements
     // instance has its own EventHandler.
     private final EventHandler eventHandler = new EventHandler();
 
-    private final ViewHandler viewHandler = new ViewHandler();
-
     // This application instance's cart content
     private Order cartContent = new Order();
-
-    private User user = null;
 
     @Override
     public void init() {
         setTheme("simpleshop");
         getContext().addTransactionListener(this);
+        getContext().addTransactionListener(new SessionHandler(this));
+        getContext().addTransactionListener(new ViewHandler(this));
         eventHandler.addListener(this);
 
         // Get the store locale from the settings
@@ -90,9 +88,6 @@ public class SimpleshopApplication extends Application implements
 
             // Get the cart content
             cartContent = ShoppingCart.getOrder();
-
-            // Get the current user
-            user = CurrentUser.get();
         }
     }
 
@@ -106,9 +101,6 @@ public class SimpleshopApplication extends Application implements
 
             // Set the cart content for the ShoppingCart's thread local variable
             ShoppingCart.setOrder(cartContent);
-
-            // Set the current user
-            CurrentUser.setUser(user);
         }
     }
 
@@ -129,16 +121,6 @@ public class SimpleshopApplication extends Application implements
      */
     public static EventHandler getEventHandler() {
         return getInstance().eventHandler;
-    }
-
-    /**
-     * Method for fetching the ViewHandler instance in a static way for this
-     * application instance.
-     * 
-     * @return
-     */
-    public static ViewHandler getViewHandler() {
-        return getInstance().viewHandler;
     }
 
     @Override

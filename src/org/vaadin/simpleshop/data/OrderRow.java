@@ -3,6 +3,8 @@ package org.vaadin.simpleshop.data;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import org.vaadin.appfoundation.persistence.data.AbstractPojo;
+
 /**
  * An individual row in an order. The row contains information about the product
  * and the quantities the user is ordering. Some information is copied from the
@@ -15,6 +17,8 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class OrderRow extends AbstractPojo {
+
+    private static final long serialVersionUID = 8470809342152946264L;
 
     @ManyToOne
     private Product product;

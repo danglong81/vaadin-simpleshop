@@ -1,8 +1,8 @@
 package org.vaadin.simpleshop.ui.checkout;
 
+import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.CurrentUser;
 import org.vaadin.simpleshop.ShoppingCart;
-import org.vaadin.simpleshop.SimpleshopApplication;
 import org.vaadin.simpleshop.data.Order;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.GenericFieldFactory;
@@ -26,7 +26,7 @@ public class ContactInfoView extends AbstractCheckoutStepView {
 
     private static final long serialVersionUID = 9042506874851287277L;
 
-    private Form form;
+    private final Form form;
 
     public ContactInfoView() {
         ShoppingCart.prefillContactInformation(CurrentUser.get());
@@ -64,8 +64,7 @@ public class ContactInfoView extends AbstractCheckoutStepView {
     protected void next() {
         if (form.isValid()) {
             form.commit();
-            SimpleshopApplication.getViewHandler().activateView(
-                    DeliveryMethodView.class);
+            ViewHandler.activateView(DeliveryMethodView.class);
         } else {
             form.setValidationVisible(true);
         }
@@ -73,8 +72,7 @@ public class ContactInfoView extends AbstractCheckoutStepView {
 
     @Override
     protected void previous() {
-        SimpleshopApplication.getViewHandler().activateView(
-                VerifyContentView.class);
+        ViewHandler.activateView(VerifyContentView.class);
     }
 
     /**

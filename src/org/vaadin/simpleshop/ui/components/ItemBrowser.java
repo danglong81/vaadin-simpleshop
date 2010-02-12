@@ -3,11 +3,11 @@ package org.vaadin.simpleshop.ui.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.ProductCategory;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.controllers.ItemController;
-import org.vaadin.simpleshop.ui.views.View;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
@@ -24,7 +24,8 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class ItemBrowser extends View<VerticalLayout> implements ClickListener {
+public class ItemBrowser extends AbstractView<VerticalLayout> implements
+        ClickListener {
 
     private static final long serialVersionUID = 5368868329646304718L;
 
@@ -44,8 +45,8 @@ public class ItemBrowser extends View<VerticalLayout> implements ClickListener {
     public ItemBrowser() {
         super(new VerticalLayout());
 
-        mainLayout.setSizeFull();
-        mainLayout.setStyleName("item-browser-background");
+        content.setSizeFull();
+        content.setStyleName("item-browser-background");
 
         categoryHierarchy.setWidth("100%");
         categoryHierarchy.setHeight(null);
@@ -57,11 +58,11 @@ public class ItemBrowser extends View<VerticalLayout> implements ClickListener {
         productsLayout.addStyleName("products-browser");
         ((Layout) productsLayout.getContent()).setMargin(false);
 
-        mainLayout.addComponent(categoryHierarchy);
-        mainLayout.addComponent(productsLayout);
-        mainLayout.addComponent(spacerLayout);
+        content.addComponent(categoryHierarchy);
+        content.addComponent(productsLayout);
+        content.addComponent(spacerLayout);
 
-        mainLayout.setExpandRatio(spacerLayout, 1);
+        content.setExpandRatio(spacerLayout, 1);
 
         rootCategoryBtn.setWidth("100%");
         categoryHierarchy.addComponent(rootCategoryBtn);

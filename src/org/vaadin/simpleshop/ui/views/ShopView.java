@@ -1,5 +1,6 @@
 package org.vaadin.simpleshop.ui.views;
 
+import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.components.InformationView;
 import org.vaadin.simpleshop.ui.components.ItemBrowser;
@@ -13,7 +14,7 @@ import com.vaadin.ui.HorizontalLayout;
  * @author Kim
  * 
  */
-public class ShopView extends View<HorizontalLayout> {
+public class ShopView extends AbstractView<HorizontalLayout> {
 
     private static final long serialVersionUID = 5345221919713457136L;
 
@@ -23,15 +24,15 @@ public class ShopView extends View<HorizontalLayout> {
 
     public ShopView() {
         super(new HorizontalLayout());
-        mainLayout.setSizeFull();
+        content.setSizeFull();
         // Set the caption for this view. The caption is used as the caption in
         // the tabsheet for this tab.
         setCaption(SystemMsg.SHOP_CAPTION.get());
         browser = new ItemBrowser();
         cart = new InformationView();
 
-        mainLayout.addComponent(browser);
-        mainLayout.addComponent(cart);
+        content.addComponent(browser);
+        content.addComponent(cart);
     }
 
     /**
