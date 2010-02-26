@@ -1,10 +1,11 @@
 package org.vaadin.simpleshop.ui.components;
 
+import org.vaadin.appfoundation.authentication.util.UserUtil;
+import org.vaadin.appfoundation.authentication.util.UserUtil.RegistrationMsg;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.appfoundation.view.ViewHandler;
+import org.vaadin.simpleshop.lang.EnumMsgMapper;
 import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.controllers.UserController;
-import org.vaadin.simpleshop.ui.controllers.UserController.RegistrationError;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
@@ -82,16 +83,16 @@ public class RegistrationView extends AbstractView<VerticalLayout> implements
             verifyPassword.setValue(null);
             ViewHandler.activateView(LoginView.class);
         } else if (event.getButton().equals(registerBtn)) {
-            RegistrationError error = UserController.registerUser(
-                    (String) username.getValue(), (String) password.getValue(),
+            RegistrationMsg error = UserUtil.registerUser((String) username
+                    .getValue(), (String) password.getValue(),
                     (String) verifyPassword.getValue());
-            if (error.equals(RegistrationError.REGISTRATION_COMPLETED)) {
+            if (error.equals(RegistrationMsg.REGISTRATION_COMPLETED)) {
                 getApplication().getMainWindow().showNotification(
-                        error.getMessage(), "",
+                        EnumMsgMapper.getMsg(error).get(), "",
                         Notification.TYPE_TRAY_NOTIFICATION);
                 ViewHandler.activateView(LoginView.class);
             } else {
-                feedbackLabel.setValue(error.getMessage());
+                feedbackLabel.setValue(EnumMsgMapper.getMsg(error).get());
                 password.setValue(null);
                 verifyPassword.setValue(null);
             }

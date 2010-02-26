@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.vaadin.appfoundation.authentication.SessionHandler;
+import org.vaadin.appfoundation.authentication.util.UserUtil;
+import org.vaadin.appfoundation.authentication.util.UserUtil.ProfileMsg;
 import org.vaadin.appfoundation.i18n.TranslationUtil;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.simpleshop.data.User;
+import org.vaadin.simpleshop.lang.EnumMsgMapper;
 import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.controllers.UserController;
-import org.vaadin.simpleshop.ui.controllers.UserController.ProfileError;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
@@ -137,26 +138,26 @@ public class UserProfileView extends AbstractView<Panel> implements
         // Check which button was pressed so that we know which action to
         // perform
         if (event.getButton().equals(changePasswordBtn)) {
-            ProfileError msg = UserController.changePassword(
-                    (User) SessionHandler.get(), (String) currentPassword
-                            .getValue(), (String) newPassword.getValue(),
-                    (String) verifyNewPassword.getValue());
+            ProfileMsg msg = UserUtil.changePassword((User) SessionHandler
+                    .get(), (String) currentPassword.getValue(),
+                    (String) newPassword.getValue(), (String) verifyNewPassword
+                            .getValue());
 
             // No matter what the result was, clear all password fields
             currentPassword.setValue(null);
             newPassword.setValue(null);
             verifyNewPassword.setValue(null);
 
-            if (msg.equals(ProfileError.PASSWORD_CHANGED)) {
+            if (msg.equals(ProfileMsg.PASSWORD_CHANGED)) {
                 // Show a notification that the password has been changed
                 getApplication().getMainWindow().showNotification(
-                        msg.getMessage(), "",
+                        EnumMsgMapper.getMsg(msg).get(), "",
                         Notification.TYPE_TRAY_NOTIFICATION);
                 // Clear any possible error messages
                 feedbackLabel.setValue(null);
             } else {
                 // Show error message to the user
-                feedbackLabel.setValue(msg.getMessage());
+                feedbackLabel.setValue(EnumMsgMapper.getMsg(msg).get());
             }
         } else if (event.getButton().equals(updateProfileBtn)) {
             // Check that the form is filled properly
@@ -164,7 +165,7 @@ public class UserProfileView extends AbstractView<Panel> implements
                 // Commit any changes made to the actual object
                 contactInfoForm.commit();
                 // Store the user object
-                UserController.storeUser((User) ((BeanItem<?>) contactInfoForm
+                UserUtil.storeUser((User) ((BeanItem<?>) contactInfoForm
                         .getItemDataSource()).getBean());
                 getApplication().getMainWindow().showNotification(
                         SystemMsg.PROFILE_UPDATED.get(), "",
