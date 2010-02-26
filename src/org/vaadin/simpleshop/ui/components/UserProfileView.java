@@ -3,8 +3,8 @@ package org.vaadin.simpleshop.ui.components;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.vaadin.appfoundation.authentication.SessionHandler;
 import org.vaadin.appfoundation.view.AbstractView;
-import org.vaadin.simpleshop.CurrentUser;
 import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.GenericFieldFactory;
@@ -75,7 +75,7 @@ public class UserProfileView extends AbstractView<Panel> implements
                 .get());
         contactInfoForm.setFormFieldFactory(new ProfileFieldFactory());
 
-        BeanItem<User> item = new BeanItem<User>(CurrentUser.get());
+        BeanItem<User> item = new BeanItem<User>((User) SessionHandler.get());
         List<String> visibleFields = new ArrayList<String>();
         visibleFields.add("name");
         visibleFields.add("streetName");
@@ -136,9 +136,10 @@ public class UserProfileView extends AbstractView<Panel> implements
         // Check which button was pressed so that we know which action to
         // perform
         if (event.getButton().equals(changePasswordBtn)) {
-            ProfileError msg = UserController.changePassword(CurrentUser.get(),
-                    (String) currentPassword.getValue(), (String) newPassword
-                            .getValue(), (String) verifyNewPassword.getValue());
+            ProfileError msg = UserController.changePassword(
+                    (User) SessionHandler.get(), (String) currentPassword
+                            .getValue(), (String) newPassword.getValue(),
+                    (String) verifyNewPassword.getValue());
 
             // No matter what the result was, clear all password fields
             currentPassword.setValue(null);

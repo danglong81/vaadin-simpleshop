@@ -4,7 +4,11 @@ import org.vaadin.simpleshop.data.Order;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.events.CartUpdatedEvent;
+import org.vaadin.simpleshop.events.EventHandler;
 import org.vaadin.simpleshop.events.CartUpdatedEvent.EventType;
+
+import com.vaadin.Application;
+import com.vaadin.service.ApplicationContext.TransactionListener;
 
 /**
  * A static class which handles the cart content within the entire application.
@@ -12,11 +16,21 @@ import org.vaadin.simpleshop.events.CartUpdatedEvent.EventType;
  * @author Kim
  * 
  */
-public class ShoppingCart {
+public class ShoppingCart implements TransactionListener {
 
-    // Use the thread local pattern to have an application specific cart content
-    // which can be accessed in a static manner.
-    private static ThreadLocal<Order> currentOrder = new ThreadLocal<Order>();
+    private static final long serialVersionUID = 379983373100640878L;
+
+    private Order currentOrder = null;
+
+    private final Application application;
+
+    private static ThreadLocal<ShoppingCart> instance = new ThreadLocal<ShoppingCart>();
+
+    public ShoppingCart(Application application) {
+        this.application = application;
+        currentOrder = new Order();
+        instance.set(this);
+    }
 
     /**
      * Get the order object for this shopping cart
@@ -24,7 +38,7 @@ public class ShoppingCart {
      * @return
      */
     public static Order getOrder() {
-        return currentOrder.get();
+        return instance.get().currentOrder;
     }
 
     /**
@@ -33,7 +47,7 @@ public class ShoppingCart {
      * @param order
      */
     public static void setOrder(Order order) {
-        currentOrder.set(order);
+        instance.get().currentOrder = order;
     }
 
     /**
@@ -46,7 +60,7 @@ public class ShoppingCart {
         getOrder().addProduct(product);
         CartUpdatedEvent event = new CartUpdatedEvent(EventType.PRODUCT_ADDED,
                 product);
-        SimpleshopApplication.getEventHandler().dispatchEvent(event);
+        EventHandler.dispatchEvent(event);
     }
 
     /**
@@ -58,7 +72,7 @@ public class ShoppingCart {
         getOrder().removeProduct(product);
         CartUpdatedEvent event = new CartUpdatedEvent(
                 EventType.PRODUCT_REMOVED, product);
-        SimpleshopApplication.getEventHandler().dispatchEvent(event);
+        EventHandler.dispatchEvent(event);
     }
 
     /**
@@ -73,12 +87,12 @@ public class ShoppingCart {
             removeProduct(product);
             CartUpdatedEvent event = new CartUpdatedEvent(
                     EventType.PRODUCT_REMOVED, product);
-            SimpleshopApplication.getEventHandler().dispatchEvent(event);
+            EventHandler.dispatchEvent(event);
         } else {
             getOrder().setQuantity(product, quantity);
             CartUpdatedEvent event = new CartUpdatedEvent(
                     EventType.PRODUCT_QUANTITY_CHANGED, product);
-            SimpleshopApplication.getEventHandler().dispatchEvent(event);
+            EventHandler.dispatchEvent(event);
         }
     }
 
@@ -136,6 +150,22 @@ public class ShoppingCart {
         order.setPhone(null);
         order.setEmail(null);
         order.setComments(null);
+    }
+
+    @Override
+    public void transactionEnd(Application application, Object transactionData) {
+        // Clear thread local instance at the end of the transaction
+        if (this.application == application) {
+            instance.set(null);
+        }
+    }
+
+    @Override
+    public void transactionStart(Application application, Object transactionData) {
+        // Set the thread local instance
+        if (this.application == application) {
+            instance.set(this);
+        }
     }
 
 }

@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import org.vaadin.appfoundation.authentication.SessionHandler;
 import org.vaadin.appfoundation.view.ViewHandler;
-import org.vaadin.simpleshop.data.Order;
 import org.vaadin.simpleshop.events.EventHandler;
 import org.vaadin.simpleshop.events.UserSessionEvent;
 import org.vaadin.simpleshop.events.UserSessionListener;
@@ -13,7 +12,6 @@ import org.vaadin.simpleshop.ui.views.MainLayout;
 import org.vaadin.simpleshop.util.ConfigUtil;
 
 import com.vaadin.Application;
-import com.vaadin.service.ApplicationContext.TransactionListener;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
@@ -24,46 +22,28 @@ import com.vaadin.ui.Window.Notification;
  * 
  */
 public class SimpleshopApplication extends Application implements
-        TransactionListener, UserSessionListener {
+        UserSessionListener {
 
     private static final long serialVersionUID = 4097161573771089801L;
-
-    // An instance of the current application stored in a thread local variable
-    private static ThreadLocal<SimpleshopApplication> currentApplication = new ThreadLocal<SimpleshopApplication>();
 
     // The main layout we will be using in the entire application
     private MainLayout mainLayout;
 
-    // An instance of an EventHandler for this application. Each application
-    // instance has its own EventHandler.
-    private final EventHandler eventHandler = new EventHandler();
-
-    // This application instance's cart content
-    private Order cartContent = new Order();
-
     @Override
     public void init() {
         setTheme("simpleshop");
-        getContext().addTransactionListener(this);
+        getContext().addTransactionListener(new EventHandler(this));
+        getContext().addTransactionListener(new ShoppingCart(this));
         getContext().addTransactionListener(new SessionHandler(this));
         getContext().addTransactionListener(new ViewHandler(this));
-        eventHandler.addListener(this);
+
+        EventHandler.addListener(this);
 
         // Get the store locale from the settings
         Locale locale = new Locale(ConfigUtil.getString("locale.language"),
                 ConfigUtil.getString("locale.country"));
         // Use the settings locale
         Locale.setDefault(locale);
-
-        // Set the current application to this. This is also done in the
-        // transactionStart, but in our application we need to define it in the
-        // init, because the main layout will call the EventHandler (registering
-        // a couple of listeners) and the getEventHandler() method requires that
-        // we have the currentApplication set.
-        currentApplication.set(this);
-
-        // Set the order for the shopping cart for the same reason as above
-        ShoppingCart.setOrder(cartContent);
 
         // Create the main window we will be using in this application
         Window mainWindow = new Window(SystemMsg.APPLICATION_TITLE.get());
@@ -77,50 +57,6 @@ public class SimpleshopApplication extends Application implements
         mainWindow.setSizeFull();
 
         setMainWindow(mainWindow);
-    }
-
-    @Override
-    public void transactionEnd(Application application, Object transactionData) {
-        // Clear the currentApplication field
-        if (application == SimpleshopApplication.this) {
-            currentApplication.set(null);
-            currentApplication.remove();
-
-            // Get the cart content
-            cartContent = ShoppingCart.getOrder();
-        }
-    }
-
-    @Override
-    public void transactionStart(Application application, Object transactionData) {
-        // Check if the application instance we got as parameter is actually
-        // this application instance. If it is, then we should define the thread
-        // local variable for this request.
-        if (application == SimpleshopApplication.this) {
-            currentApplication.set(this);
-
-            // Set the cart content for the ShoppingCart's thread local variable
-            ShoppingCart.setOrder(cartContent);
-        }
-    }
-
-    /**
-     * Fetch the current application instance in a static manner.
-     * 
-     * @return SimpleshopApplication
-     */
-    public static SimpleshopApplication getInstance() {
-        return currentApplication.get();
-    }
-
-    /**
-     * Method for fetching the EventHandler instance in a static way for this
-     * application instance.
-     * 
-     * @return
-     */
-    public static EventHandler getEventHandler() {
-        return getInstance().eventHandler;
     }
 
     @Override

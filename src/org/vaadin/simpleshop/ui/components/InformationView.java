@@ -5,8 +5,8 @@ import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.appfoundation.view.ViewContainer;
 import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.appfoundation.view.ViewItem;
-import org.vaadin.simpleshop.CurrentUser;
-import org.vaadin.simpleshop.SimpleshopApplication;
+import org.vaadin.simpleshop.data.User;
+import org.vaadin.simpleshop.events.EventHandler;
 import org.vaadin.simpleshop.events.UserSessionEvent;
 import org.vaadin.simpleshop.events.UserSessionListener;
 import org.vaadin.simpleshop.lang.SystemMsg;
@@ -72,7 +72,7 @@ public class InformationView extends AbstractView<VerticalLayout> implements
         // The sub view should take as much space as there is available and
         // navigation button's should only reserve as much space as they need.
         content.setExpandRatio(currentView, 1);
-        SimpleshopApplication.getEventHandler().addListener(this);
+        EventHandler.addListener(this);
     }
 
     /**
@@ -122,15 +122,18 @@ public class InformationView extends AbstractView<VerticalLayout> implements
      */
     @Override
     public void buttonClick(ClickEvent event) {
-        if (event.getButton().equals(profileBtn) && CurrentUser.get() == null) {
+        if (event.getButton().equals(profileBtn)
+                && SessionHandler.get() == null) {
             ViewHandler.activateView(LoginView.class);
         } else if (event.getButton().equals(profileBtn)
-                && CurrentUser.get() != null) {
+                && SessionHandler.get() != null) {
             ViewHandler.activateView(UserProfileView.class);
         } else if (event.getButton().equals(shoppingCartBtn)) {
             ViewHandler.activateView(CartContentView.class);
         } else if (event.getButton().equals(logoutBtn)) {
+            User user = (User) SessionHandler.get();
             SessionHandler.logout();
+            EventHandler.dispatchLogoutEvent(new UserSessionEvent(user));
         } else if (event.getButton().equals(adminBtn)) {
             getApplication().getMainWindow().addWindow(new AdminWindow());
         }
@@ -142,7 +145,7 @@ public class InformationView extends AbstractView<VerticalLayout> implements
     public void loginEvent(UserSessionEvent event) {
         ViewHandler.activateView(CartContentView.class);
 
-        if (PermissionsUtil.isAdmin(CurrentUser.get())) {
+        if (PermissionsUtil.isAdmin((User) SessionHandler.get())) {
             buttonLayout.addComponent(adminBtn);
         }
 

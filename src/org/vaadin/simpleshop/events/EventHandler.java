@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.vaadin.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
 
+import com.vaadin.Application;
+import com.vaadin.service.ApplicationContext.TransactionListener;
 
 /**
  * This class handles the receiving of system wide events and dispatching those
@@ -13,21 +15,32 @@ import org.vaadin.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
  * @author Kim
  * 
  */
-public class EventHandler {
+public class EventHandler implements TransactionListener {
+
+    private static final long serialVersionUID = -3963471359648190718L;
 
     // A list of all the cart update listeners in the application
     private final List<CartUpdateListener> cartUpdateListeners = new ArrayList<CartUpdateListener>();
 
     private final List<UserSessionListener> userSessionListeners = new ArrayList<UserSessionListener>();
 
+    private static ThreadLocal<EventHandler> instance = new ThreadLocal<EventHandler>();
+
+    private final Application application;
+
+    public EventHandler(Application application) {
+        this.application = application;
+        instance.set(this);
+    }
+
     /**
      * Add a cart update listener
      * 
      * @param listener
      */
-    public void addListener(CartUpdateListener listener) {
+    public static void addListener(CartUpdateListener listener) {
         if (listener != null) {
-            cartUpdateListeners.add(listener);
+            instance.get().cartUpdateListeners.add(listener);
         }
     }
 
@@ -36,9 +49,9 @@ public class EventHandler {
      * 
      * @param listener
      */
-    public void removeListener(CartUpdateListener listener) {
+    public static void removeListener(CartUpdateListener listener) {
         if (listener != null) {
-            cartUpdateListeners.remove(listener);
+            instance.get().cartUpdateListeners.remove(listener);
         }
     }
 
@@ -47,9 +60,9 @@ public class EventHandler {
      * 
      * @param event
      */
-    public void dispatchEvent(CartUpdatedEvent event) {
+    public static void dispatchEvent(CartUpdatedEvent event) {
         if (event != null) {
-            for (CartUpdateListener listener : cartUpdateListeners) {
+            for (CartUpdateListener listener : instance.get().cartUpdateListeners) {
                 listener.cartUpdated(event);
             }
         }
@@ -60,9 +73,9 @@ public class EventHandler {
      * 
      * @param listener
      */
-    public void addListener(UserSessionListener listener) {
+    public static void addListener(UserSessionListener listener) {
         if (listener != null) {
-            userSessionListeners.add(listener);
+            instance.get().userSessionListeners.add(listener);
         }
     }
 
@@ -71,9 +84,9 @@ public class EventHandler {
      * 
      * @param listener
      */
-    public void removeListener(UserSessionListener listener) {
+    public static void removeListener(UserSessionListener listener) {
         if (listener != null) {
-            userSessionListeners.remove(listener);
+            instance.get().userSessionListeners.remove(listener);
         }
     }
 
@@ -82,9 +95,9 @@ public class EventHandler {
      * 
      * @param event
      */
-    public void dispatchLoginEvent(UserSessionEvent event) {
+    public static void dispatchLoginEvent(UserSessionEvent event) {
         if (event != null) {
-            for (UserSessionListener listener : userSessionListeners) {
+            for (UserSessionListener listener : instance.get().userSessionListeners) {
                 listener.loginEvent(event);
             }
         }
@@ -95,11 +108,27 @@ public class EventHandler {
      * 
      * @param event
      */
-    public void dispatchLogoutEvent(UserSessionEvent event) {
+    public static void dispatchLogoutEvent(UserSessionEvent event) {
         if (event != null) {
-            for (UserSessionListener listener : userSessionListeners) {
+            for (UserSessionListener listener : instance.get().userSessionListeners) {
                 listener.logoutEvent(event);
             }
+        }
+    }
+
+    @Override
+    public void transactionEnd(Application application, Object transactionData) {
+        // Clear thread local instance at the end of the transaction
+        if (this.application == application) {
+            instance.set(null);
+        }
+    }
+
+    @Override
+    public void transactionStart(Application application, Object transactionData) {
+        // Set the thread local instance
+        if (this.application == application) {
+            instance.set(this);
         }
     }
 

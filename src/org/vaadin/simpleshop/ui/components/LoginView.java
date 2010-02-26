@@ -1,10 +1,14 @@
 package org.vaadin.simpleshop.ui.components;
 
 import org.vaadin.appfoundation.authentication.AuthenticationMessage;
+import org.vaadin.appfoundation.authentication.SessionHandler;
 import org.vaadin.appfoundation.authentication.util.AuthenticationUtil;
 import org.vaadin.appfoundation.authentication.util.AuthenticationUtil.AFAuthenticationMessage;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.appfoundation.view.ViewHandler;
+import org.vaadin.simpleshop.data.User;
+import org.vaadin.simpleshop.events.EventHandler;
+import org.vaadin.simpleshop.events.UserSessionEvent;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
 import com.vaadin.event.Action;
@@ -133,6 +137,8 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
             username.setValue("");
             password.setValue("");
         } else {
+            EventHandler.dispatchLoginEvent(new UserSessionEvent(
+                    (User) SessionHandler.get()));
             // Login was successfull, hence remove the enter listener
             content.removeActionHandler(this);
         }

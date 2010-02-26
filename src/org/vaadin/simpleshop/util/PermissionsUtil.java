@@ -1,6 +1,6 @@
 package org.vaadin.simpleshop.util;
 
-import org.vaadin.simpleshop.CurrentUser;
+import org.vaadin.appfoundation.authentication.SessionHandler;
 import org.vaadin.simpleshop.data.ActionLock;
 import org.vaadin.simpleshop.data.Role;
 import org.vaadin.simpleshop.data.User;
@@ -20,7 +20,7 @@ public class PermissionsUtil {
      * @return
      */
     public static boolean hasAccess(ActionLock lock) {
-        return hasAccess(lock, CurrentUser.get());
+        return hasAccess(lock, (User) SessionHandler.get());
     }
 
     /**

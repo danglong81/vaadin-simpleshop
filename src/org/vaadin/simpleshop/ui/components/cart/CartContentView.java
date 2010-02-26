@@ -3,8 +3,8 @@ package org.vaadin.simpleshop.ui.components.cart;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.ShoppingCart;
-import org.vaadin.simpleshop.SimpleshopApplication;
 import org.vaadin.simpleshop.events.CartUpdatedEvent;
+import org.vaadin.simpleshop.events.EventHandler;
 import org.vaadin.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.checkout.CheckoutView;
@@ -54,7 +54,7 @@ public class CartContentView extends AbstractView<VerticalLayout> implements
         // Initialize the summary
         initSummary();
 
-        SimpleshopApplication.getEventHandler().addListener(this);
+        EventHandler.addListener(this);
     }
 
     /**

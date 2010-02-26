@@ -1,9 +1,10 @@
 package org.vaadin.simpleshop.ui.checkout;
 
+import org.vaadin.appfoundation.authentication.SessionHandler;
 import org.vaadin.appfoundation.view.ViewHandler;
-import org.vaadin.simpleshop.CurrentUser;
 import org.vaadin.simpleshop.ShoppingCart;
 import org.vaadin.simpleshop.data.Order;
+import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.ui.GenericFieldFactory;
 
@@ -29,7 +30,7 @@ public class ContactInfoView extends AbstractCheckoutStepView {
     private final Form form;
 
     public ContactInfoView() {
-        ShoppingCart.prefillContactInformation(CurrentUser.get());
+        ShoppingCart.prefillContactInformation((User) SessionHandler.get());
 
         // Get the current order
         Order order = ShoppingCart.getOrder();
