@@ -2,7 +2,7 @@ package org.vaadin.simpleshop.lang;
 
 import java.util.Locale;
 
-import org.vaadin.simpleshop.InternationalizationServlet;
+import org.vaadin.appfoundation.i18n.InternationalizationServlet;
 
 /**
  * Translation messages in the system

@@ -7,9 +7,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.vaadin.appfoundation.i18n.FieldTranslation;
 import org.vaadin.appfoundation.persistence.data.AbstractPojo;
-import org.vaadin.simpleshop.annotations.FieldTranslation;
-import org.vaadin.simpleshop.lang.SystemMsg;
 
 /**
  * Entity class for prices. Prices can be used in various location, such as
@@ -23,21 +22,21 @@ public class Price extends AbstractPojo {
 
     private static final long serialVersionUID = 1212247639143314692L;
 
-    @FieldTranslation(name = SystemMsg.PRICE_NAME)
+    @FieldTranslation(tuid = "PRICE_NAME")
     private String name;
 
-    @FieldTranslation(name = SystemMsg.PRICE_PRICE)
+    @FieldTranslation(tuid = "PRICE_PRICE")
     private double price;
 
-    @FieldTranslation(name = SystemMsg.PRICE_VAT)
+    @FieldTranslation(tuid = "PRICE_VAT")
     @ManyToOne
     private Vat vat;
 
-    @FieldTranslation(name = SystemMsg.PRICE_VALID_FROM)
+    @FieldTranslation(tuid = "PRICE_VALID_FROM")
     @Temporal(TemporalType.TIMESTAMP)
     private Date validFrom;
 
-    @FieldTranslation(name = SystemMsg.PRICE_VALID_UNTIL)
+    @FieldTranslation(tuid = "PRICE_VALID_UNTIL")
     @Temporal(TemporalType.TIMESTAMP)
     private Date validUntil;
 

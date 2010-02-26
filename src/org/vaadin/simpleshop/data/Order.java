@@ -9,9 +9,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
+import org.vaadin.appfoundation.i18n.FieldTranslation;
 import org.vaadin.appfoundation.persistence.data.AbstractPojo;
-import org.vaadin.simpleshop.annotations.FieldTranslation;
-import org.vaadin.simpleshop.lang.SystemMsg;
 
 /**
  * Entity for orders places in the shop
@@ -25,25 +24,25 @@ public class Order extends AbstractPojo {
 
     private static final long serialVersionUID = -2006044282446797313L;
 
-    @FieldTranslation(name = SystemMsg.ORDER_NAME)
+    @FieldTranslation(tuid = "ORDER_NAME")
     private String name;
 
-    @FieldTranslation(name = SystemMsg.ORDER_STREET_NAME)
+    @FieldTranslation(tuid = "ORDER_STREET_NAME")
     private String streetName;
 
-    @FieldTranslation(name = SystemMsg.ORDER_ZIP)
+    @FieldTranslation(tuid = "ORDER_ZIP")
     private String zip;
 
-    @FieldTranslation(name = SystemMsg.ORDER_CITY)
+    @FieldTranslation(tuid = "ORDER_CITY")
     private String city;
 
-    @FieldTranslation(name = SystemMsg.ORDER_PHONE)
+    @FieldTranslation(tuid = "ORDER_PHONE")
     private String phone;
 
-    @FieldTranslation(name = SystemMsg.ORDER_EMAIL)
+    @FieldTranslation(tuid = "ORDER_EMAIL")
     private String email;
 
-    @FieldTranslation(name = SystemMsg.ORDER_COMMENTS)
+    @FieldTranslation(tuid = "ORDER_COMMENTS")
     private String comments;
 
     @OneToMany(cascade = CascadeType.ALL)

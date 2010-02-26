@@ -9,9 +9,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
+import org.vaadin.appfoundation.i18n.FieldTranslation;
 import org.vaadin.appfoundation.persistence.data.AbstractPojo;
-import org.vaadin.simpleshop.annotations.FieldTranslation;
-import org.vaadin.simpleshop.lang.SystemMsg;
 
 /**
  * Entity class for defining different delivery methods.
@@ -24,22 +23,22 @@ public class DeliveryMethod extends AbstractPojo {
 
     private static final long serialVersionUID = 530854220431776974L;
 
-    @FieldTranslation(name = SystemMsg.DELIVERY_METHOD_NAME)
+    @FieldTranslation(tuid = "DELIVERY_METHOD_NAME")
     private String name;
 
-    @FieldTranslation(name = SystemMsg.DELIVERY_DESCRIPTION)
+    @FieldTranslation(tuid = "DELIVERY_DESCRIPTION")
     private String description;
 
-    @FieldTranslation(name = SystemMsg.DELIVERY_PRICE)
+    @FieldTranslation(tuid = "DELIVERY_PRICE")
     @OneToOne(cascade = CascadeType.ALL)
     @PrivateOwned
     private Price price;
 
-    @FieldTranslation(name = SystemMsg.DELIVERY_VALID_FROM)
+    @FieldTranslation(tuid = "DELIVERY_VALID_FROM")
     @Temporal(TemporalType.TIMESTAMP)
     private Date validFrom;
 
-    @FieldTranslation(name = SystemMsg.DELIVERY_VALID_UNTIL)
+    @FieldTranslation(tuid = "DELIVERY_VALID_UNTIL")
     @Temporal(TemporalType.TIMESTAMP)
     private Date validUntil;
 

@@ -27,7 +27,7 @@
 	
 	<servlet>
 		<servlet-name>I18NServlet</servlet-name>
-		<servlet-class>org.vaadin.simpleshop.InternationalizationServlet</servlet-class>
+		<servlet-class>org.vaadin.appfoundation.i18n.InternationalizationServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	

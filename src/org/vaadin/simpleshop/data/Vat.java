@@ -6,9 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.vaadin.appfoundation.i18n.FieldTranslation;
 import org.vaadin.appfoundation.persistence.data.AbstractPojo;
-import org.vaadin.simpleshop.annotations.FieldTranslation;
-import org.vaadin.simpleshop.lang.SystemMsg;
 
 /**
  * Entity class for value added taxes.
@@ -21,17 +20,17 @@ public class Vat extends AbstractPojo {
 
     private static final long serialVersionUID = -4733123592750920398L;
 
-    @FieldTranslation(name = SystemMsg.VAT_NAME)
+    @FieldTranslation(tuid = "VAT_NAME")
     private String name;
 
-    @FieldTranslation(name = SystemMsg.VAT_PERCENTAGE)
+    @FieldTranslation(tuid = "VAT_PERCENTAGE")
     private double percentage;
 
-    @FieldTranslation(name = SystemMsg.VAT_VALID_FROM)
+    @FieldTranslation(tuid = "VAT_VALID_FROM")
     @Temporal(TemporalType.TIMESTAMP)
     private Date validFrom;
 
-    @FieldTranslation(name = SystemMsg.VAT_VALID_UNTIL)
+    @FieldTranslation(tuid = "VAT_VALID_UNTIL")
     @Temporal(TemporalType.TIMESTAMP)
     private Date validUntil;
 

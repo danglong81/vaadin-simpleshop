@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.vaadin.appfoundation.authentication.SessionHandler;
+import org.vaadin.appfoundation.i18n.TranslationUtil;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.GenericFieldFactory;
 import org.vaadin.simpleshop.ui.controllers.UserController;
 import org.vaadin.simpleshop.ui.controllers.UserController.ProfileError;
 
@@ -16,6 +16,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
@@ -182,7 +183,7 @@ public class UserProfileView extends AbstractView<Panel> implements
      * @author Kim
      * 
      */
-    class ProfileFieldFactory extends GenericFieldFactory {
+    class ProfileFieldFactory extends DefaultFieldFactory {
 
         private static final long serialVersionUID = -3092775590821924860L;
 
@@ -208,7 +209,7 @@ public class UserProfileView extends AbstractView<Panel> implements
             ((TextField) field).setNullRepresentation("");
 
             // Set the translated caption
-            field.setCaption(getFieldTranslation(User.class,
+            field.setCaption(TranslationUtil.getFieldTranslation(User.class,
                     (String) propertyId));
 
             return field;

@@ -6,8 +6,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.vaadin.simpleshop.annotations.FieldTranslation;
-import org.vaadin.simpleshop.lang.SystemMsg;
+import org.vaadin.appfoundation.i18n.FieldTranslation;
 
 /**
  * Entity class for users. This class keeps information about registered users.
@@ -26,19 +25,19 @@ public class User extends org.vaadin.appfoundation.authentication.data.User {
     protected String password;
 
     // Provide the translated name for this field
-    @FieldTranslation(name = SystemMsg.PROFILE_NAME)
+    @FieldTranslation(tuid = "PROFILE_NAME")
     private String name;
 
-    @FieldTranslation(name = SystemMsg.PROFILE_STREET_NAME)
+    @FieldTranslation(tuid = "PROFILE_STREET_NAME")
     private String streetName;
 
-    @FieldTranslation(name = SystemMsg.PROFILE_ZIP)
+    @FieldTranslation(tuid = "PROFILE_ZIP")
     private String zip;
 
-    @FieldTranslation(name = SystemMsg.PROFILE_CITY)
+    @FieldTranslation(tuid = "PROFILE_CITY")
     private String city;
 
-    @FieldTranslation(name = SystemMsg.PROFILE_EMAIL)
+    @FieldTranslation(tuid = "PROFILE_EMAIL")
     private String email;
 
     private Set<Role> roles = new HashSet<Role>();

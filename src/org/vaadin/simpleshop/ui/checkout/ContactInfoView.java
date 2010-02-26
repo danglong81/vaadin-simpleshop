@@ -1,17 +1,18 @@
 package org.vaadin.simpleshop.ui.checkout;
 
 import org.vaadin.appfoundation.authentication.SessionHandler;
+import org.vaadin.appfoundation.i18n.TranslationUtil;
 import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.ShoppingCart;
 import org.vaadin.simpleshop.data.Order;
 import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.GenericFieldFactory;
 
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
@@ -82,7 +83,7 @@ public class ContactInfoView extends AbstractCheckoutStepView {
      * @author Kim
      * 
      */
-    private class OrderFieldFactory extends GenericFieldFactory {
+    private class OrderFieldFactory extends DefaultFieldFactory {
 
         @Override
         public Field createField(Item item, Object propertyId,
@@ -91,7 +92,7 @@ public class ContactInfoView extends AbstractCheckoutStepView {
             Field field = super.createField(item, propertyId, uiContext);
 
             // Set the translated caption
-            field.setCaption(getFieldTranslation(Order.class,
+            field.setCaption(TranslationUtil.getFieldTranslation(Order.class,
                     (String) propertyId));
 
             field.setWidth("350px");
