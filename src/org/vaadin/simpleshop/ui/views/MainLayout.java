@@ -26,10 +26,9 @@ public class MainLayout extends VerticalLayout implements ViewContainer {
     public MainLayout() {
         // Initialize layout
         initLayout();
-        // initTabs();
         setSizeFull();
 
-        ViewHandler.addView(ShopView.class, this).getView();
+        currentShopView = ViewHandler.addView(ShopView.class, this).getView();
         ViewHandler.addView(CheckoutView.class, this);
 
         mainTabs.addComponent(currentShopView);

@@ -116,7 +116,7 @@ public class CartContentView extends AbstractView<VerticalLayout> implements
                 .setComponentAlignment(checkoutBtn, Alignment.MIDDLE_RIGHT);
 
         // Add summary layout to the main layout
-        cartContent.addComponent(summaryLayout);
+        content.addComponent(summaryLayout);
     }
 
     @Override
