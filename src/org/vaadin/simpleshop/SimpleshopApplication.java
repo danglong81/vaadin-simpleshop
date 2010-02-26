@@ -36,6 +36,7 @@ public class SimpleshopApplication extends Application implements
         getContext().addTransactionListener(new ShoppingCart(this));
         getContext().addTransactionListener(new SessionHandler(this));
         getContext().addTransactionListener(new ViewHandler(this));
+        getContext().addTransactionListener(new UriHandler(this));
 
         EventHandler.addListener(this);
 

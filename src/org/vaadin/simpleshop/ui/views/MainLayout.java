@@ -3,6 +3,7 @@ package org.vaadin.simpleshop.ui.views;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.appfoundation.view.ViewContainer;
 import org.vaadin.appfoundation.view.ViewHandler;
+import org.vaadin.simpleshop.UriHandler;
 import org.vaadin.simpleshop.ui.checkout.CheckoutView;
 
 import com.vaadin.ui.Alignment;
@@ -31,7 +32,10 @@ public class MainLayout extends VerticalLayout implements ViewContainer {
         currentShopView = ViewHandler.addView(ShopView.class, this).getView();
         ViewHandler.addView(CheckoutView.class, this);
 
+        addComponent(UriHandler.getUriFragmentUtility());
+
         mainTabs.addComponent(currentShopView);
+        setExpandRatio(mainTabs, 1);
     }
 
     /**

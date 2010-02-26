@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.simpleshop.UriHandler;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.ProductCategory;
 import org.vaadin.simpleshop.lang.SystemMsg;
@@ -34,8 +35,6 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
     private final Panel productsLayout = new Panel();
 
     private final CssLayout spacerLayout = new CssLayout();
-
-    private final ItemController controller = new ItemController();
 
     private final List<Button> categoryHierharchyList = new ArrayList<Button>();
 
@@ -72,7 +71,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
     }
 
     private void initRoot() {
-        List<ProductCategory> categories = controller.getRootCategories();
+        List<ProductCategory> categories = ItemController.getRootCategories();
         for (ProductCategory category : categories) {
             Button categoryBtn = new Button(category.getName(), this);
             categoryBtn.setData(category);
@@ -81,7 +80,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
         }
     }
 
-    private void drawCategory(ProductCategory category) {
+    private void drawCategory(ProductCategory category, Long expandedProductId) {
         if (category != null) {
             productsLayout.removeAllComponents();
             List<ProductCategory> subcategories = category.getSubcategories();
@@ -100,6 +99,11 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
                 for (Product product : products) {
                     ProductViewer productViewer = new ProductViewer(product);
                     productsLayout.addComponent(productViewer);
+
+                    if (expandedProductId != null
+                            && expandedProductId.equals(product.getId())) {
+                        productViewer.setExpanded(true);
+                    }
                 }
             }
         }
@@ -137,12 +141,64 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
             categoryHierarchy.addComponent(categoryBtn);
         }
 
-        drawCategory(category);
+        if (category != null) {
+            String name = category.getName();
+            UriHandler.setFragment("C" + category.getId() + "-" + name);
+        }
+
+        drawCategory(category, null);
     }
 
     @Override
     public void activated(Object... params) {
-        // TODO Auto-generated method stub
+        // We can expect two parameters, the second parameter is an id and the
+        // first parameter defines if the id is for a category or for a product
+        if (params.length == 2 && params[1] instanceof Long) {
+            // Parse the id
+            Long id = (Long) params[1];
+
+            Long categoryId = null;
+            Long productId = null;
+            // Check if the id is for a category
+            if (params[0] != null && params[0].equals("category")) {
+                categoryId = id;
+            } else if (params[0] != null && params[0].equals("product")) {
+                // We are browsing a product
+                productId = id;
+                ProductCategory category = ItemController
+                        .getCategory(productId);
+                if (category != null) {
+                    categoryId = category.getId();
+                }
+            }
+
+            if (categoryId != null) {
+                // Get a list of all parent categories for the given category id
+                List<ProductCategory> categories = ItemController
+                        .getPathToCategory(categoryId);
+                if (categories != null && categories.size() > 0) {
+                    categoryHierarchy.removeAllComponents();
+                    categoryHierarchy.addComponent(rootCategoryBtn);
+
+                    categoryHierharchyList.clear();
+                    categoryHierharchyList.add(rootCategoryBtn);
+
+                    productsLayout.removeAllComponents();
+                    initRoot();
+                    for (ProductCategory category : categories) {
+                        Button categoryBtn = new Button(category.getName());
+                        categoryBtn.setData(category);
+                        categoryBtn.addListener(this);
+                        categoryBtn.setWidth("100%");
+                        categoryHierharchyList.add(categoryBtn);
+                        categoryHierarchy.addComponent(categoryBtn);
+                    }
+
+                    drawCategory(categories.get(categories.size() - 1),
+                            productId);
+                }
+            }
+        }
 
     }
 }

@@ -4,6 +4,7 @@ import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 import org.vaadin.simpleshop.ShoppingCart;
+import org.vaadin.simpleshop.UriHandler;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.util.ConfigUtil;
@@ -128,25 +129,32 @@ public class ProductViewer extends CustomComponent implements ClickListener {
             // Expand button was pressed, get the new expand state of the
             // component
             boolean expand = !(Boolean) expandBtn.getValue();
-            // Update the state
-            expandBtn.setValue(expand);
-
-            // The component should be expanded
-            if (expand) {
-                // Change the caption of the expand button
-                expandBtn.setCaption("-");
-                // Add the the description to the main layout, thus expanding
-                // the component
-                mainLayout.addComponent(description);
-            } else {
-                // Component should be collapsed, update button label...
-                expandBtn.setCaption("+");
-                // .. and remove the description from the layout
-                mainLayout.removeComponent(description);
-            }
+            setExpanded(expand);
         } else if (event.getButton().equals(addToCartBtn)) {
             // Add button was pressed. Add this product to the cart
             ShoppingCart.addProduct(product);
+        }
+    }
+
+    public void setExpanded(boolean expanded) {
+        // Update the state
+        expandBtn.setValue(expanded);
+
+        // The component should be expanded
+        if (expanded) {
+            // Change the caption of the expand button
+            expandBtn.setCaption("-");
+            // Add the the description to the main layout, thus expanding
+            // the component
+            mainLayout.addComponent(description);
+
+            UriHandler.setFragment("P" + product.getId() + "-"
+                    + product.getName());
+        } else {
+            // Component should be collapsed, update button label...
+            expandBtn.setCaption("+");
+            // .. and remove the description from the layout
+            mainLayout.removeComponent(description);
         }
     }
 }
