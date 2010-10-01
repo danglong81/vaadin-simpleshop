@@ -51,7 +51,7 @@ public class ContactInfoView extends AbstractCheckoutStepView {
 
         // Define which fields we are showing in the form
         form.setVisibleItemProperties(new Object[] { "name", "streetName",
-                "zip", "city", "phone", "email", "comments" });
+                "zip", "city", "ssn", "phone", "email", "comments" });
 
         mainPanel.addComponent(form);
     }

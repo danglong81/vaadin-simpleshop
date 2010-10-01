@@ -4,6 +4,7 @@ import org.vaadin.appfoundation.authentication.util.PasswordUtil;
 import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 import org.vaadin.simpleshop.data.ActionLock;
 import org.vaadin.simpleshop.data.DeliveryMethod;
+import org.vaadin.simpleshop.data.PaymentMethod;
 import org.vaadin.simpleshop.data.Price;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.ProductCategory;
@@ -81,7 +82,7 @@ public class InitialData {
         FacadeFactory.getFacade().store(dm2);
 
         DeliveryMethod dm3 = new DeliveryMethod();
-        dm3.setName("Pickup");
+        dm3.setName("Pick up");
         dm3.setDescription("You want to pick up your delivery from "
                 + "our retail store");
         price = new Price("post", 0, vat22);
@@ -173,5 +174,15 @@ public class InitialData {
         cSeries.addProduct(c70);
 
         FacadeFactory.getFacade().store(volvo);
+        createPaymentMethods();
+    }
+
+    private static void createPaymentMethods() {
+        PaymentMethod paymentMethod = new PaymentMethod();
+        paymentMethod.setName("Invoice payment");
+        paymentMethod
+                .setDescription("An invoice will be sent to your address along with your order.");
+
+        FacadeFactory.getFacade().store(paymentMethod);
     }
 }

@@ -42,6 +42,9 @@ public class Order extends AbstractPojo {
     @FieldTranslation(tuid = "ORDER_EMAIL")
     private String email;
 
+    @FieldTranslation(tuid = "ORDER_SSN")
+    private String ssn;
+
     @FieldTranslation(tuid = "ORDER_COMMENTS")
     private String comments;
 
@@ -168,6 +171,14 @@ public class Order extends AbstractPojo {
      */
     public String getEmail() {
         return email;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
+    public String getSsn() {
+        return ssn;
     }
 
     /**

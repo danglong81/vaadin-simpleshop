@@ -542,13 +542,13 @@
 		</tu>
 		<tu tuid="CHECKOUT_PAYMENT">
 			<tuv lang="en">
-				<seg>Payment</seg>
+				<seg>Payment method</seg>
 			</tuv>
 			<tuv lang="fi">
-				<seg>Maksaminen</seg>
+				<seg>Maksutapa</seg>
 			</tuv>
 			<tuv lang="sv">
-				<seg>Betalning</seg>
+				<seg>Betalningssätt</seg>
 			</tuv>
 		</tu>
 		<tu tuid="CHECKOUT_DELIVERY_ADDRESS">
@@ -604,6 +604,17 @@
 			</tuv>
 			<tuv lang="sv">
 				<seg>Postanstalt</seg>
+			</tuv>
+		</tu>
+		<tu tuid="ORDER_SSN">
+			<tuv lang="en">
+				<seg>Social security number</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Sosiaaliturvatunnus</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Socialskyddsnummer</seg>
 			</tuv>
 		</tu>
 		<tu tuid="ORDER_COMMENTS">
@@ -892,5 +903,62 @@
 				<seg>Välj leveranssätt!</seg>
 			</tuv>
 		</tu>
+		<tu tuid="CONTACT_INFO_VIEW">
+			<tuv lang="en">
+				<seg>Contact us</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Yhteystiedot</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Kontaktuppgifter</seg>
+			</tuv>
+		</tu>
+		<tu tuid="TERMS_VIEW">
+			<tuv lang="en">
+				<seg>Terms of agreement</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Sopimusehdot</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Avtalsvillkoren</seg>
+			</tuv>
+		</tu>
+		<tu tuid="TODO">
+			<tuv lang="en">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>TODO</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>TODO</seg>
+			</tuv>
+		</tu>
+		<tu tuid="PAYMENT_SELECT_PAYMENT_METHOD">
+			<tuv lang="en">
+				<seg>Select payment method</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Valitse maksutapa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Välj betalningssätt</seg>
+			</tuv>
+		</tu>
+		
+		<tu tuid="CHECKOUT_ERROR_CHOOSE_PAYMENT_METHOD">
+			<tuv lang="en">
+				<seg>A payment method must be selected in order to continue</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Maksutapa tulee olla valittuna</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Ett betalningssätt måst vara valt</seg>
+			</tuv>
+		</tu>
+		
 	</body>
 </tmx>

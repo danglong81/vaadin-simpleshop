@@ -35,6 +35,8 @@ public class MainLayout extends VerticalLayout implements ViewContainer {
         addComponent(UriHandler.getUriFragmentUtility());
 
         mainTabs.addComponent(currentShopView);
+        mainTabs.addComponent(new ContactUsView());
+        mainTabs.addComponent(new TermsView());
         setExpandRatio(mainTabs, 1);
     }
 
