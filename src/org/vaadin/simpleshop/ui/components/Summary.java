@@ -41,7 +41,9 @@ public class Summary extends HorizontalLayout implements CartUpdateListener, But
         }
 		
         // Initialize the checkout button
-        checkoutBtn = new Button(SystemMsg.CART_CHECKOUT.get(), this);
+        checkoutBtn = new Button();
+        checkoutBtn.addStyleName("checkout");
+        checkoutBtn.addListener(this);
 
         // Button should be disabled when there are no items in the cart and
         // since the cart will be empty when this view is initialized, this

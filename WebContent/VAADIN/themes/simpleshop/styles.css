@@ -104,3 +104,26 @@
 	font-weight: bold;
 	font-size: 14px;
 }
+
+.checkout,
+.checkout:active,
+.checkout:focus,
+.checkout.v-pressed,
+.checkout.v-disabled {
+	background: url('icons/checkout_btn.png');
+	
+	width: 64px;
+	height: 64px;
+	
+	padding: 0;
+	
+	cursor: pointer;
+}
+
+.checkout .v-button-wrap,
+.checkout:active .v-button-wrap,
+.checkout:focus .v-button-wrap,
+.checkout.v-pressed .v-button-wrap,
+.checkout.v-disabled .v-button-wrap {
+	background: none;
+}
