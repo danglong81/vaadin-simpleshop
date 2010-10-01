@@ -540,7 +540,7 @@
 				<seg>Kontaktuppgifter</seg>
 			</tuv>
 		</tu>
-		<tu tuid="CHECKOUT_PAYMENT">
+		<tu tuid="CHECKOUT_PAYMENT_METHOD">
 			<tuv lang="en">
 				<seg>Payment method</seg>
 			</tuv>
@@ -549,6 +549,17 @@
 			</tuv>
 			<tuv lang="sv">
 				<seg>Betalningssätt</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_PAYMENT">
+			<tuv lang="en">
+				<seg>Payment</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Maksaminen</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Betalning</seg>
 			</tuv>
 		</tu>
 		<tu tuid="CHECKOUT_DELIVERY_ADDRESS">
@@ -957,6 +968,17 @@
 			</tuv>
 			<tuv lang="sv">
 				<seg>Ett betalningssätt måst vara valt</seg>
+			</tuv>
+		</tu>
+		<tu tuid="CHECKOUT_PAY_BTN">
+			<tuv lang="en">
+				<seg>Complete</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Maksa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Betala</seg>
 			</tuv>
 		</tu>
 		

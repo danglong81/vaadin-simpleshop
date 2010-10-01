@@ -24,6 +24,7 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
     private Label verifyContent;
     private Label chooseDeliveryMethod;
     private Label contactInformation;
+    private Label paymentMethod;
     private Label payment;
 
     private AbstractView<?> currentView = null;
@@ -40,6 +41,7 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
         ViewHandler.addView(ContactInfoView.class, this);
         ViewHandler.addView(DeliveryMethodView.class, this);
         ViewHandler.addView(PaymentMethodView.class, this);
+        ViewHandler.addView(PaymentView.class, this);
 
         ViewHandler.activateView(VerifyContentView.class, true);
     }
@@ -64,7 +66,12 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
         chooseDeliveryMethod.setEnabled(false);
         layout.addComponent(chooseDeliveryMethod);
 
-        payment = new Label("4. " + SystemMsg.CHECKOUT_PAYMENT.get());
+        paymentMethod = new Label("4. "
+                + SystemMsg.CHECKOUT_PAYMENT_METHOD.get());
+        paymentMethod.setEnabled(false);
+        layout.addComponent(paymentMethod);
+
+        payment = new Label("5. " + SystemMsg.CHECKOUT_PAYMENT.get());
         payment.setEnabled(false);
         layout.addComponent(payment);
 
@@ -95,6 +102,7 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
         verifyContent.setEnabled(step == 1 ? true : false);
         contactInformation.setEnabled(step == 2 ? true : false);
         chooseDeliveryMethod.setEnabled(step == 3 ? true : false);
-        payment.setEnabled(step == 4 ? true : false);
+        paymentMethod.setEnabled(step == 4 ? true : false);
+        payment.setEnabled(step == 5 ? true : false);
     }
 }
