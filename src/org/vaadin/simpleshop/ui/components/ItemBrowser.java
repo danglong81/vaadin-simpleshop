@@ -43,7 +43,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
 
     public ItemBrowser() {
         super(new VerticalLayout());
-
+        setSizeFull();
         content.setSizeFull();
         content.setStyleName("item-browser-background");
 
@@ -64,6 +64,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
         content.setExpandRatio(spacerLayout, 1);
 
         rootCategoryBtn.setWidth("100%");
+        rootCategoryBtn.addStyleName("category_button");
         categoryHierarchy.addComponent(rootCategoryBtn);
         categoryHierharchyList.add(rootCategoryBtn);
 
@@ -73,9 +74,8 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
     private void initRoot() {
         List<ProductCategory> categories = ItemController.getRootCategories();
         for (ProductCategory category : categories) {
-            Button categoryBtn = new Button(category.getName(), this);
+            Button categoryBtn = generateCategoryButton(category);
             categoryBtn.setData(category);
-            categoryBtn.setWidth("100%");
             productsLayout.addComponent(categoryBtn);
         }
     }
@@ -86,10 +86,8 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
             List<ProductCategory> subcategories = category.getSubcategories();
             if (subcategories != null && subcategories.size() > 0) {
                 for (ProductCategory subCategory : subcategories) {
-                    Button categoryBtn = new Button(subCategory.getName());
+                    Button categoryBtn = generateCategoryButton(subCategory);
                     categoryBtn.setData(subCategory);
-                    categoryBtn.addListener(this);
-                    categoryBtn.setWidth("100%");
                     productsLayout.addComponent(categoryBtn);
                 }
             }
@@ -113,6 +111,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
     public void buttonClick(ClickEvent event) {
         ProductCategory category = (ProductCategory) event.getButton()
                 .getData();
+        
         if (category == null) {
             categoryHierarchy.removeAllComponents();
             categoryHierarchy.addComponent(rootCategoryBtn);
@@ -134,9 +133,8 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
 
             categoryHierharchyList.removeAll(buttonsToRemove);
         } else {
-            Button categoryBtn = new Button(category.getName(), this);
-            categoryBtn.setData(category);
-            categoryBtn.setWidth("100%");
+            Button categoryBtn = generateCategoryButton(category);
+           
             categoryHierharchyList.add(categoryBtn);
             categoryHierarchy.addComponent(categoryBtn);
         }
@@ -144,6 +142,10 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
         if (category != null) {
             String name = category.getName();
             UriHandler.setFragment("C" + category.getId() + "-" + name);
+        }
+        
+        for(Button categoryButton : categoryHierharchyList) {
+        	categoryButton.addStyleName("selected");
         }
 
         drawCategory(category, null);
@@ -186,10 +188,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
                     productsLayout.removeAllComponents();
                     initRoot();
                     for (ProductCategory category : categories) {
-                        Button categoryBtn = new Button(category.getName());
-                        categoryBtn.setData(category);
-                        categoryBtn.addListener(this);
-                        categoryBtn.setWidth("100%");
+                    	Button categoryBtn = generateCategoryButton(category);
                         categoryHierharchyList.add(categoryBtn);
                         categoryHierarchy.addComponent(categoryBtn);
                     }
@@ -199,6 +198,14 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
                 }
             }
         }
-
+    }
+    
+    private Button generateCategoryButton(ProductCategory category) {
+    	 Button categoryBtn = new Button(category.getName(), this);
+         categoryBtn.setData(category);
+         categoryBtn.addStyleName("category_button");
+         categoryBtn.setWidth(100, UNITS_PERCENTAGE);
+         
+         return categoryBtn;
     }
 }

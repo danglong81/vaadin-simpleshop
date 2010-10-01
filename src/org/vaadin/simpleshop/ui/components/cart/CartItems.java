@@ -35,7 +35,7 @@ public class CartItems extends Panel implements ValueChangeListener,
 
     public CartItems() {
         // Remove margins from this panel
-        ((Layout) getContent()).setMargin(false);
+        ((Layout) getContent()).setMargin(true);
         // Maximize the size of this panel
         setSizeFull();
 

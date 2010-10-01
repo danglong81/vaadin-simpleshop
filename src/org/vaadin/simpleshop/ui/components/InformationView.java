@@ -47,8 +47,9 @@ public class InformationView extends AbstractView<VerticalLayout> implements
     public InformationView() {
         super(new VerticalLayout());
         setStyleName("infoview");
-
+        setSizeFull();
         content.setSizeFull();
+        content.setMargin(true);
 
         // Initialize navigation buttons
         initButtons();

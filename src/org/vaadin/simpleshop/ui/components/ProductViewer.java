@@ -9,6 +9,9 @@ import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.lang.SystemMsg;
 import org.vaadin.simpleshop.util.ConfigUtil;
 
+import com.vaadin.event.LayoutEvents.LayoutClickEvent;
+import com.vaadin.event.LayoutEvents.LayoutClickListener;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
@@ -24,15 +27,15 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class ProductViewer extends CustomComponent implements ClickListener {
+public class ProductViewer extends VerticalLayout implements ClickListener, LayoutClickListener {
 
     private static final long serialVersionUID = 9208012559967162736L;
 
     // The root layout of this component
-    private final VerticalLayout mainLayout = new VerticalLayout();
+    private final HorizontalLayout mainLayout = new HorizontalLayout();
 
     // The header which is show when the product viewer is collapsed
-    private final HorizontalLayout header;
+    private  HorizontalLayout details;
 
     // Product information labels
     private final Label name;
@@ -41,10 +44,12 @@ public class ProductViewer extends CustomComponent implements ClickListener {
 
     // Action buttons
     private final Button addToCartBtn;
-    private final Button expandBtn;
+    
 
     // The product being show in this component
     private final Product product;
+    
+    private boolean expanded;
 
     /**
      * Constructor. Takes as parameter the product being showed in this
@@ -59,33 +64,22 @@ public class ProductViewer extends CustomComponent implements ClickListener {
         this.product = product;
 
         // Set the root layout
-        setCompositionRoot(mainLayout);
+        addListener(this);
         mainLayout.setMargin(true);
+        mainLayout.setWidth(100, UNITS_PERCENTAGE);
+        mainLayout.setHeight(30, UNITS_PIXELS);
 
         // Start building the layout
 
         // This component should take all the width available
         setWidth("100%");
 
-        // Create the header which is shown when the component is collapsed.
-        header = new HorizontalLayout();
-        header.setWidth("100%");
-        header.setSpacing(true);
-
-        // Create the expander button
-        expandBtn = new Button("+", this);
-        expandBtn.setWidth(null);
-        // Set the button's value according to the expand state
-        expandBtn.setValue(false);
-
-        // The expand button is the first component in the header
-        header.addComponent(expandBtn);
-
         // The second component shown in the header should be the product's
         // name. This label should take all the space there is available.
         name = new Label(product.getName());
-        header.addComponent(name);
-        header.setExpandRatio(name, 1);
+        name.setWidth(350, UNITS_PIXELS);
+     
+
 
         // Create a number formatter for formating the prices.
         NumberFormat nf = NumberFormat.getInstance();
@@ -105,56 +99,65 @@ public class ProductViewer extends CustomComponent implements ClickListener {
 
         // The price label shouldn't take more space than what it needs
         price.setWidth(null);
-
-        // Price is also shown in the header
-        header.addComponent(price);
-
-        // The last component in the header is the add button
-        addToCartBtn = new Button(SystemMsg.GENERIC_ADD.get(), this);
-        addToCartBtn.setWidth(null);
-        header.addComponent(addToCartBtn);
-
+        price.addStyleName("price");
+      
         // Create the description label, but do not attach it to any layout at
         // this point
         description = new Label(product.getDescription());
-
-        // Only add the header to the main layout
-        mainLayout.addComponent(header);
+        
+        addComponent(mainLayout);
+        
+        mainLayout.addComponent(name);
+        mainLayout.addComponent(price);
+        mainLayout.setExpandRatio(price, 1);
+        mainLayout.setComponentAlignment(name, Alignment.MIDDLE_LEFT);
+        mainLayout.setComponentAlignment(price, Alignment.MIDDLE_RIGHT);
+        
+        // Create the header which is shown when the component is collapsed.
+        details = new HorizontalLayout();
+        details.setWidth("100%");
+        details.setSpacing(true);
+        
+        // The last component in the header is the add button
+        addToCartBtn = new Button();
+        addToCartBtn.addStyleName("add_to_cart");
+        addToCartBtn.addListener(this);
+      
+        details.addComponent(description);
+        description.setWidth(300, UNITS_PIXELS);
+        
+        details.setExpandRatio(description, 1);
+        details.addComponent(addToCartBtn);
+        
+        addComponent(details);
+        details.setVisible(false);
     }
 
+    
     @Override
     public void buttonClick(ClickEvent event) {
         // Check which button has been pressed
-        if (event.getButton().equals(expandBtn)) {
-            // Expand button was pressed, get the new expand state of the
-            // component
-            boolean expand = !(Boolean) expandBtn.getValue();
-            setExpanded(expand);
-        } else if (event.getButton().equals(addToCartBtn)) {
+    
+    	if (event.getButton().equals(addToCartBtn)) {
             // Add button was pressed. Add this product to the cart
             ShoppingCart.addProduct(product);
         }
     }
 
     public void setExpanded(boolean expanded) {
-        // Update the state
-        expandBtn.setValue(expanded);
-
-        // The component should be expanded
+    	details.setVisible(expanded);
+    	
         if (expanded) {
-            // Change the caption of the expand button
-            expandBtn.setCaption("-");
-            // Add the the description to the main layout, thus expanding
-            // the component
-            mainLayout.addComponent(description);
-
             UriHandler.setFragment("P" + product.getId() + "-"
                     + product.getName());
         } else {
-            // Component should be collapsed, update button label...
-            expandBtn.setCaption("+");
-            // .. and remove the description from the layout
             mainLayout.removeComponent(description);
         }
     }
+
+	@Override
+	public void layoutClick(LayoutClickEvent event) {
+		expanded = !expanded;
+		setExpanded(expanded);
+	}
 }
