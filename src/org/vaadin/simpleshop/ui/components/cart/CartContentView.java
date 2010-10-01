@@ -1,23 +1,11 @@
 package org.vaadin.simpleshop.ui.components.cart;
 
 import org.vaadin.appfoundation.view.AbstractView;
-import org.vaadin.appfoundation.view.ViewHandler;
-import org.vaadin.simpleshop.ShoppingCart;
 import org.vaadin.simpleshop.events.CartUpdatedEvent;
 import org.vaadin.simpleshop.events.EventHandler;
 import org.vaadin.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
-import org.vaadin.simpleshop.lang.SystemMsg;
-import org.vaadin.simpleshop.ui.checkout.CheckoutView;
-import org.vaadin.simpleshop.ui.controllers.CartController;
-import org.vaadin.simpleshop.util.ConfigUtil;
 
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 
 /**
  * This class defines the layout for the cart content. The cart content consists

@@ -4,13 +4,21 @@ import org.vaadin.simpleshop.ShoppingCart;
 import org.vaadin.simpleshop.data.OrderRow;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.lang.SystemMsg;
+import org.vaadin.simpleshop.ui.components.ProductViewer;
 import org.vaadin.simpleshop.ui.controllers.CartController;
 import org.vaadin.simpleshop.util.ConfigUtil;
 
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
+import com.vaadin.event.Transferable;
+import com.vaadin.event.dd.DragAndDropEvent;
+import com.vaadin.event.dd.DropHandler;
+import com.vaadin.event.dd.acceptcriteria.AcceptAll;
+import com.vaadin.event.dd.acceptcriteria.AcceptCriterion;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.DragAndDropWrapper;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
@@ -26,18 +34,24 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Kim
  * 
  */
-public class CartItems extends Panel implements ValueChangeListener,
-        ClickListener {
+public class CartItems extends DragAndDropWrapper implements
+        ValueChangeListener, ClickListener, DropHandler {
 
     private static final long serialVersionUID = -7560154972179454453L;
 
     private final GridLayout layout = new GridLayout(4, 1);
 
+    private Panel panel;
+
     public CartItems() {
+        super(new Panel());
+        setDropHandler(this);
+        panel = (Panel) getCompositionRoot();
         // Remove margins from this panel
-        ((Layout) getContent()).setMargin(true);
+        ((Layout) panel.getContent()).setMargin(true);
         // Maximize the size of this panel
         setSizeFull();
+        panel.setSizeFull();
 
         // Initialize the content
         refresh();
@@ -52,7 +66,7 @@ public class CartItems extends Panel implements ValueChangeListener,
         layout.setColumnExpandRatio(3, 1);
 
         // Add the GridLayout to the panel
-        addComponent(layout);
+        panel.addComponent(layout);
     }
 
     /**
@@ -163,6 +177,21 @@ public class CartItems extends Panel implements ValueChangeListener,
         // Update its quantity
         ShoppingCart.setQuantity(product, Integer.valueOf((String) event
                 .getProperty().getValue()));
+    }
+
+    @Override
+    public void drop(DragAndDropEvent event) {
+        Transferable transferable = event.getTransferable();
+        Component sourceComponent = transferable.getSourceComponent();
+        if (sourceComponent instanceof ProductViewer) {
+            ProductViewer viewer = (ProductViewer) sourceComponent;
+            viewer.addToCart();
+        }
+    }
+
+    @Override
+    public AcceptCriterion getAcceptCriterion() {
+        return AcceptAll.get();
     }
 
 }
