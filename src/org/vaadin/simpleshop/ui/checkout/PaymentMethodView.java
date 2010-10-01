@@ -93,10 +93,10 @@ public class PaymentMethodView extends AbstractCheckoutStepView implements
     @Override
     protected void next() {
         if (selectedPaymentMethod != null) {
-            ViewHandler.activateView(PaymentView.class);
             CheckoutController.setPaymentMethod(selectedPaymentMethod,
                     ShoppingCart.getOrder());
 
+            ViewHandler.activateView(PaymentView.class);
             // Remove error message if it is visible
             errorMsg.setVisible(false);
         } else {

@@ -982,5 +982,41 @@
 			</tuv>
 		</tu>
 		
+		<tu tuid="PAYMENT_PAYMENT_METHOD">
+			<tuv lang="en">
+				<seg>Payment method</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Maksutapa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Betalningssätt</seg>
+			</tuv>
+		</tu>
+		
+		<tu tuid="PAYMENT_DELIVERY_METHOD">
+			<tuv lang="en">
+				<seg>Delivery method</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Toimitustapa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Leveranssätt</seg>
+			</tuv>
+		</tu>
+		
+		<tu tuid="PAYMENT_PURCHASE_TOTAL">
+			<tuv lang="en">
+				<seg>Payment method</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Maksutapa</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Betalningssätt</seg>
+			</tuv>
+		</tu>
+		
 	</body>
 </tmx>

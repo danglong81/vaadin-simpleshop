@@ -5,6 +5,7 @@ import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 import org.vaadin.simpleshop.data.ActionLock;
 import org.vaadin.simpleshop.data.DeliveryMethod;
 import org.vaadin.simpleshop.data.PaymentMethod;
+import org.vaadin.simpleshop.data.PaymentMethodType;
 import org.vaadin.simpleshop.data.Price;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.ProductCategory;
@@ -19,6 +20,8 @@ import org.vaadin.simpleshop.data.Vat;
  * 
  */
 public class InitialData {
+
+    private static Vat vat0 = new Vat();
 
     public static void init() {
         // Create the admin role
@@ -40,7 +43,6 @@ public class InitialData {
         FacadeFactory.getFacade().store(adminUser);
 
         // Initialize VAT objects
-        Vat vat0 = new Vat();
         vat0.setPercentage(0);
         vat0.setName("VAT0");
         FacadeFactory.getFacade().store(vat0);
@@ -182,6 +184,9 @@ public class InitialData {
         paymentMethod.setName("Invoice payment");
         paymentMethod
                 .setDescription("An invoice will be sent to your address along with your order.");
+        paymentMethod.setType(PaymentMethodType.INVOICE);
+        Price price = new Price("invoice", 0, vat0);
+        paymentMethod.setPrice(price);
 
         FacadeFactory.getFacade().store(paymentMethod);
     }

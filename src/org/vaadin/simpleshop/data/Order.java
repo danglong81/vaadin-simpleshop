@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.eclipse.persistence.annotations.PrivateOwned;
 import org.vaadin.appfoundation.i18n.FieldTranslation;
@@ -60,6 +61,18 @@ public class Order extends AbstractPojo {
 
     // TODO add translation
     private double deliveryMethodVAT;
+
+    // TODO add translation
+    private String paymentMethodName;
+
+    // TODO add translation
+    private double paymentMethodPrice;
+
+    // TODO add translation
+    private double paymentMethodVAT;
+
+    @Transient
+    private PaymentMethodType paymentMethodType;
 
     public Order() {
 
@@ -214,6 +227,16 @@ public class Order extends AbstractPojo {
         return deliveryMethodPrice;
     }
 
+    @Transient
+    public double getDeliveryMethodPriceIncludingVAT() {
+        double price = deliveryMethodPrice;
+        if (deliveryMethodVAT > 0) {
+            price *= (1 + deliveryMethodVAT / 100);
+        }
+
+        return price;
+    }
+
     public void setDeliveryMethodPrice(double deliveryMethodPrice) {
         this.deliveryMethodPrice = deliveryMethodPrice;
     }
@@ -332,6 +355,48 @@ public class Order extends AbstractPojo {
         }
 
         return null;
+    }
+
+    public void setPaymentMethodName(String paymentMethodName) {
+        this.paymentMethodName = paymentMethodName;
+    }
+
+    public String getPaymentMethodName() {
+        return paymentMethodName;
+    }
+
+    public void setPaymentMethodPrice(double paymentMethodPrice) {
+        this.paymentMethodPrice = paymentMethodPrice;
+    }
+
+    public double getPaymentMethodPrice() {
+        return paymentMethodPrice;
+    }
+
+    public void setPaymentMethodVAT(double paymentMethodVAT) {
+        this.paymentMethodVAT = paymentMethodVAT;
+    }
+
+    public double getPaymentMethodVAT() {
+        return paymentMethodVAT;
+    }
+
+    @Transient
+    public double getPaymentMethodPriceIncludingVAT() {
+        double price = paymentMethodPrice;
+        if (paymentMethodVAT > 0) {
+            price *= (1 + paymentMethodVAT / 100);
+        }
+
+        return price;
+    }
+
+    public void setPaymentMethodType(PaymentMethodType paymentMethodType) {
+        this.paymentMethodType = paymentMethodType;
+    }
+
+    public PaymentMethodType getPaymentMethodType() {
+        return paymentMethodType;
     }
 
 }

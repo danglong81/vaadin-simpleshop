@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,6 +37,9 @@ public class PaymentMethod extends AbstractPojo {
     @FieldTranslation(tuid = "PAYMENT_VALID_UNTIL")
     @Temporal(TemporalType.TIMESTAMP)
     private Date validUntil;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentMethodType type;
 
     /**
      * Gets the name for this payment method.
@@ -148,6 +153,14 @@ public class PaymentMethod extends AbstractPojo {
      */
     public double getPriceExcludingVAT() {
         return getPrice().getPrice();
+    }
+
+    public void setType(PaymentMethodType type) {
+        this.type = type;
+    }
+
+    public PaymentMethodType getType() {
+        return type;
     }
 
 }

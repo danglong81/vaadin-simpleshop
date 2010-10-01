@@ -1,6 +1,7 @@
 package org.vaadin.simpleshop;
 
 import org.vaadin.simpleshop.data.Order;
+import org.vaadin.simpleshop.data.OrderRow;
 import org.vaadin.simpleshop.data.Product;
 import org.vaadin.simpleshop.data.User;
 import org.vaadin.simpleshop.events.CartUpdatedEvent;
@@ -166,6 +167,42 @@ public class ShoppingCart implements TransactionListener {
         if (this.application == application) {
             instance.set(this);
         }
+    }
+
+    public static double getCartTotalIncludingVAT() {
+        Order order = getOrder();
+
+        double total = 0;
+        for (OrderRow row : order.getOrderedProducts()) {
+            total += row.getSumIncludingVAT();
+        }
+
+        return total;
+    }
+
+    public static double getCartTotalExcludingVAT() {
+        Order order = getOrder();
+
+        double total = 0;
+        for (OrderRow row : order.getOrderedProducts()) {
+            total += row.getSumExcludingVAT();
+        }
+
+        return total;
+    }
+
+    public static double getOrderTotalIncludingVAT() {
+        double total = getCartTotalIncludingVAT();
+        total += getOrder().getDeliveryMethodPriceIncludingVAT();
+        total += getOrder().getPaymentMethodPriceIncludingVAT();
+        return total;
+    }
+
+    public static double getOrderTotalExcludingVAT() {
+        double total = getCartTotalExcludingVAT();
+        total += getOrder().getDeliveryMethodPrice();
+        total += getOrder().getPaymentMethodPrice();
+        return total;
     }
 
 }

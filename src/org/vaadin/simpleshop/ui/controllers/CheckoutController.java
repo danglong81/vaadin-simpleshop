@@ -34,7 +34,11 @@ public class CheckoutController {
 
     public static void setPaymentMethod(PaymentMethod method, Order order) {
         if (method != null && order != null) {
-            // TODO
+            order.setPaymentMethodName(method.getName());
+            order.setPaymentMethodPrice(method.getPrice().getPrice());
+            order.setPaymentMethodVAT(method.getPrice().getVat()
+                    .getPercentage());
+            order.setPaymentMethodType(method.getType());
         }
     }
 }
