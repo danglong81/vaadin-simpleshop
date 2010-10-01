@@ -23,7 +23,7 @@ import com.vaadin.ui.VerticalLayout;
  * @author Kim
  * 
  */
-public class PaymentView extends AbstractCheckoutStepView implements
+public class PaymentMethodView extends AbstractCheckoutStepView implements
         LayoutClickListener {
 
     // Create a map between the PaymentMethod objects and the layout they are
@@ -39,7 +39,7 @@ public class PaymentView extends AbstractCheckoutStepView implements
     private final Label errorMsg = new Label(
             SystemMsg.CHECKOUT_ERROR_CHOOSE_PAYMENT_METHOD.get());
 
-    public PaymentView() {
+    public PaymentMethodView() {
         mainPanel.addComponent(new Label(
                 SystemMsg.PAYMENT_SELECT_PAYMENT_METHOD.get()));
         // Don't show the error message by default
@@ -93,7 +93,7 @@ public class PaymentView extends AbstractCheckoutStepView implements
     @Override
     protected void next() {
         if (selectedPaymentMethod != null) {
-            ViewHandler.activateView(PaymentView.class);
+            ViewHandler.activateView(PaymentMethodView.class);
             CheckoutController.setPaymentMethod(selectedPaymentMethod,
                     ShoppingCart.getOrder());
 

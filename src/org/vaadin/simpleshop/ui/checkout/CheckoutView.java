@@ -39,7 +39,7 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
         ViewHandler.addView(VerifyContentView.class, this);
         ViewHandler.addView(ContactInfoView.class, this);
         ViewHandler.addView(DeliveryMethodView.class, this);
-        ViewHandler.addView(PaymentView.class, this);
+        ViewHandler.addView(PaymentMethodView.class, this);
 
         ViewHandler.activateView(VerifyContentView.class, true);
     }

@@ -108,7 +108,7 @@ public class DeliveryMethodView extends AbstractCheckoutStepView implements
     @Override
     protected void next() {
         if (selectedDeliveryMethod != null) {
-            ViewHandler.activateView(PaymentView.class);
+            ViewHandler.activateView(PaymentMethodView.class);
             CheckoutController.setDeliveryMethod(selectedDeliveryMethod,
                     ShoppingCart.getOrder());
 
