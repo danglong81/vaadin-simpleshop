@@ -1,5 +1,6 @@
 package org.vaadin.simpleshop.ui.checkout;
 
+import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
 public class PaymentView extends AbstractCheckoutStepView {
@@ -23,8 +24,7 @@ public class PaymentView extends AbstractCheckoutStepView {
 
     @Override
     protected void previous() {
-        // TODO Auto-generated method stub
-
+        ViewHandler.activateView(PaymentMethodView.class);
     }
 
     @Override
