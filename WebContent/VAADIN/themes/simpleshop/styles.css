@@ -1,7 +1,7 @@
 @import url(../reindeer/styles.css);
 
 .item-browser-background {
-	background: #666975 url(gradient-bg.png) repeat-x;
+	background: #B7C2C3 url(gradient-bg.png) repeat-x;
 }
 
 .v-panel-content-products-browser {
@@ -103,6 +103,12 @@
 .total_sum {
 	font-weight: bold;
 	font-size: 14px;
+	padding: 0px 20px 35px 20px;
+}
+
+.v-caption-total_sum {
+	font-size: 11px;
+	padding: 20px 20px 0px 20px;
 }
 
 .checkout,
@@ -126,4 +132,50 @@
 .checkout.v-pressed .v-button-wrap,
 .checkout.v-disabled .v-button-wrap {
 	background: none;
+}
+
+.v-ddwrapper {
+	padding: 0px;
+}
+
+.no-horizontal-drag-hints .v-ddwrapper-over-left {
+	padding-left: 0px;
+	border-left: none;
+}
+.no-horizontal-drag-hints .v-ddwrapper-over-right {
+	padding-right: 0px;
+	border-right: none;
+}
+.no-vertical-drag-hints .v-ddwrapper-over-top {
+	padding-top: 0px;
+	border-top: none;
+}
+.no-vertical-drag-hints .v-ddwrapper-over-bottom {
+	padding-bottom: 0px;
+	border-bottom: none;
+}
+
+.no-box-drag-hints .v-ddwrapper-over {
+	padding: 0px;
+}
+
+.v-app .v-ddwrapper-over-top,
+.v-window .v-ddwrapper-over-top,
+.v-popupview-popup .v-ddwrapper-over-top {
+	padding: 0px;
+}
+.v-app .v-ddwrapper-over-bottom,
+.v-window .v-ddwrapper-over-bottom,
+.v-popupview-popup .v-ddwrapper-over-bottom {
+	padding: 0px;
+}
+.v-app .v-ddwrapper-over-left,
+.v-window .v-ddwrapper-over-left,
+.v-popupview-popup .v-ddwrapper-over-left {
+	padding: 0px;
+}
+.v-app .v-ddwrapper-over-right,
+.v-window .v-ddwrapper-over-right,
+.v-popupview-popup .v-ddwrapper-over-right {
+	padding: 0px;
 }

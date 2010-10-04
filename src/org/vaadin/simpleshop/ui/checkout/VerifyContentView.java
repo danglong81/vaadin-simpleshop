@@ -10,7 +10,7 @@ public class VerifyContentView extends AbstractCheckoutStepView {
     private final CartContentView view;
 
     public VerifyContentView() {
-        view = new CartContentView();
+        view = new CartContentView(false);
         view.activated(true);
 
         // The CartContentView itself has a panel, so there is no need for us to

@@ -45,7 +45,7 @@ public class CartItems extends DragAndDropWrapper implements
 
     public CartItems() {
         super(new Panel());
-        addStyleName("no-box-drag-hints");
+
         setDropHandler(this);
         panel = (Panel) getCompositionRoot();
 

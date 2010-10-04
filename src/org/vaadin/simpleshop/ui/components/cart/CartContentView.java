@@ -27,27 +27,36 @@ public class CartContentView extends AbstractView<VerticalLayout> implements
      * Constructor
      */
     public CartContentView() {
+        this(true);
+    }
+
+    public CartContentView(boolean includeSummary) {
         super(new VerticalLayout());
         // Take as much space as there is available
         content.setSizeFull();
 
         // Initialize the content
-        initContent();
+        initContent(includeSummary);
 
         EventHandler.addListener(this);
+        addStyleName("no-box-drag-hints");
+        addStyleName("no-horizontal-drag-hints");
+        addStyleName("no-vertical-drag-hints");
     }
 
     /**
      * Initializes the cart items listing panel
      */
-    private void initContent() {
+    private void initContent(boolean includeSummary) {
         // Create the cart items panel and add it to the main layout
         cartContent = new CartItems();
         content.addComponent(cartContent);
 
-        // The items panel should take all the available space
-        content.setExpandRatio(cartContent, 1);
-        content.addComponent(new Summary());
+        if (includeSummary) {
+            // The items panel should take all the available space
+            content.setExpandRatio(cartContent, 1);
+            content.addComponent(new Summary());
+        }
     }
 
     /**
