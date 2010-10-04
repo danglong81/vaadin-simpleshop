@@ -63,6 +63,7 @@ public class ProductViewer extends DragAndDropWrapper implements ClickListener,
         layout = (VerticalLayout) super.getCompositionRoot();
         setDragStartMode(DragStartMode.WRAPPER);
         layout.setStyleName("product");
+        setWidth("100%");
 
         // Set the product
         this.product = product;

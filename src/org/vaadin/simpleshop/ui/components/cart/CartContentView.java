@@ -4,6 +4,7 @@ import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.simpleshop.events.CartUpdatedEvent;
 import org.vaadin.simpleshop.events.EventHandler;
 import org.vaadin.simpleshop.events.CartUpdatedEvent.CartUpdateListener;
+import org.vaadin.simpleshop.ui.components.Summary;
 
 import com.vaadin.ui.VerticalLayout;
 
@@ -46,26 +47,23 @@ public class CartContentView extends AbstractView<VerticalLayout> implements
 
         // The items panel should take all the available space
         content.setExpandRatio(cartContent, 1);
+        content.addComponent(new Summary());
     }
 
     /**
      * Initializes the cart content summary layout
      */
-  
 
     @Override
     public void cartUpdated(CartUpdatedEvent event) {
-      
+
         cartContent.refresh();
 
-      
     }
 
     @Override
     public void activated(Object... params) {
-      
-    }
 
-   
+    }
 
 }

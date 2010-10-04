@@ -21,11 +21,11 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.DragAndDropWrapper;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * This class is a panel containing a listing of all the products in the
@@ -45,13 +45,14 @@ public class CartItems extends DragAndDropWrapper implements
 
     public CartItems() {
         super(new Panel());
+        addStyleName("no-box-drag-hints");
         setDropHandler(this);
         panel = (Panel) getCompositionRoot();
-        // Remove margins from this panel
-        ((Layout) panel.getContent()).setMargin(true);
+
         // Maximize the size of this panel
         setSizeFull();
         panel.setSizeFull();
+        panel.setStyleName(Reindeer.PANEL_LIGHT);
 
         // Initialize the content
         refresh();
@@ -66,7 +67,7 @@ public class CartItems extends DragAndDropWrapper implements
         layout.setColumnExpandRatio(3, 1);
 
         // Add the GridLayout to the panel
-        panel.addComponent(layout);
+        panel.setContent(layout);
     }
 
     /**

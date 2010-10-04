@@ -16,17 +16,18 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Button.ClickEvent;
 
-public class Summary extends HorizontalLayout implements CartUpdateListener, Button.ClickListener {
+public class Summary extends HorizontalLayout implements CartUpdateListener,
+        Button.ClickListener {
 
-	private static final long serialVersionUID = -6578618679491943392L;
-	
-	private Label totalSumLabel;
-	private Button checkoutBtn;
-	
-	public Summary() {
-		setMargin(true);
-		
-		 // Create the sum label
+    private static final long serialVersionUID = -6578618679491943392L;
+
+    private Label totalSumLabel;
+    private Button checkoutBtn;
+
+    public Summary() {
+        setMargin(true);
+
+        // Create the sum label
         totalSumLabel = new Label(CartController.getFormattedTotalPrice(
                 ShoppingCart.getOrder(), ConfigUtil
                         .getBoolean("product.showPriceIncludingTakes")));
@@ -39,7 +40,7 @@ public class Summary extends HorizontalLayout implements CartUpdateListener, But
             totalSumLabel.setCaption(SystemMsg.CART_TOTAL_SUM_CAPTION_EXCL_VAT
                     .get());
         }
-		
+
         // Initialize the checkout button
         checkoutBtn = new Button();
         checkoutBtn.addStyleName("checkout");
@@ -50,47 +51,42 @@ public class Summary extends HorizontalLayout implements CartUpdateListener, But
         // button should then be disabled.
         checkoutBtn.setEnabled(false);
 
-		
-		addComponent(totalSumLabel);
-		addComponent(checkoutBtn);
-		
-		setWidth(100, UNITS_PERCENTAGE);
-		setComponentAlignment(totalSumLabel, Alignment.BOTTOM_LEFT);
-		setComponentAlignment(checkoutBtn, Alignment.BOTTOM_RIGHT);
-		
-		EventHandler.addListener(this);
-		
-		
-	}
+        addComponent(totalSumLabel);
+        addComponent(checkoutBtn);
 
-	  @Override
-	    public void cartUpdated(CartUpdatedEvent event) {
-	        totalSumLabel.setValue(CartController.getFormattedTotalPrice(
-	                ShoppingCart.getOrder(), ConfigUtil
-	                        .getBoolean("product.showPriceIncludingTakes")));
-	        
+        setWidth(100, UNITS_PERCENTAGE);
+        setComponentAlignment(totalSumLabel, Alignment.BOTTOM_LEFT);
+        setComponentAlignment(checkoutBtn, Alignment.BOTTOM_RIGHT);
 
-	        // Check if the checkout button exists, as it is removed in some cases.
-	        if (checkoutBtn != null) {
-	            // Disable the checkout button if there aren't any items in the cart
-	            if (checkoutBtn.isEnabled()
-	                    && ShoppingCart.getOrder().getOrderedProducts().size() <= 0) {
-	                checkoutBtn.setEnabled(false);
-	            } else if (!checkoutBtn.isEnabled()
-	                    && ShoppingCart.getOrder().getOrderedProducts().size() > 0) {
-	                // Enable button if cart contains items
-	                checkoutBtn.setEnabled(true);
-	            }
-	        }
-	    }
+        EventHandler.addListener(this);
 
-	    @Override
-	    public void buttonClick(ClickEvent event) {
-	        // We want to proceed to the checkout process. Activate the checkout
-	        // view.
-	        ViewHandler.activateView(CheckoutView.class);
-	    }
-	
+    }
 
+    @Override
+    public void cartUpdated(CartUpdatedEvent event) {
+        totalSumLabel.setValue(CartController.getFormattedTotalPrice(
+                ShoppingCart.getOrder(), ConfigUtil
+                        .getBoolean("product.showPriceIncludingTakes")));
+
+        // Check if the checkout button exists, as it is removed in some cases.
+        if (checkoutBtn != null) {
+            // Disable the checkout button if there aren't any items in the cart
+            if (checkoutBtn.isEnabled()
+                    && ShoppingCart.getOrder().getOrderedProducts().size() <= 0) {
+                checkoutBtn.setEnabled(false);
+            } else if (!checkoutBtn.isEnabled()
+                    && ShoppingCart.getOrder().getOrderedProducts().size() > 0) {
+                // Enable button if cart contains items
+                checkoutBtn.setEnabled(true);
+            }
+        }
+    }
+
+    @Override
+    public void buttonClick(ClickEvent event) {
+        // We want to proceed to the checkout process. Activate the checkout
+        // view.
+        ViewHandler.activateView(CheckoutView.class);
+    }
 
 }
