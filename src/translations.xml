@@ -1018,5 +1018,29 @@
 			</tuv>
 		</tu>
 		
+		<tu tuid="ACCOUNT_PASSWORD_DOESNT_MEET_REQUIREMENTS">
+			<tuv lang="en">
+				<seg>Password not strong enough</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Salasana ei ole tarpeeksi vahva</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Lösenordet är inte tillräckligt starkt</seg>
+			</tuv>
+		</tu>
+		
+		<tu tuid="ACCOUNT_LOCKED">
+			<tuv lang="en">
+				<seg>Account has been temporarily locked and any login attempts are refused</seg>
+			</tuv>
+			<tuv lang="fi">
+				<seg>Tili on toistaiseksi jäädytetty ja kaikki sisäänkirjautumisyritykset estetään</seg>
+			</tuv>
+			<tuv lang="sv">
+				<seg>Kontot har blivit låst, alla inloggningsförsök hindras</seg>
+			</tuv>
+		</tu>
+		
 	</body>
 </tmx>

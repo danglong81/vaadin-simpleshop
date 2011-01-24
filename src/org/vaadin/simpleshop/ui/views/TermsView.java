@@ -13,11 +13,17 @@ public class TermsView extends AbstractView<VerticalLayout> {
     public TermsView() {
         super(new VerticalLayout());
         setCaption(SystemMsg.TERMS_VIEW.get());
-        content.addComponent(new Label(SystemMsg.TODO.get()));
+        getContent().addComponent(new Label(SystemMsg.TODO.get()));
     }
 
     @Override
     public void activated(Object... params) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void deactivated(Object... params) {
         // TODO Auto-generated method stub
 
     }

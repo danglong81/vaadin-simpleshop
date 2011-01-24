@@ -101,4 +101,10 @@ public class PaymentView extends AbstractCheckoutStepView {
         refreshSummary();
     }
 
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

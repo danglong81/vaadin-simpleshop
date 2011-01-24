@@ -1,8 +1,13 @@
 package org.vaadin.simpleshop;
 
+import java.io.File;
+import java.net.URL;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.vaadin.appfoundation.i18n.InternationalizationServlet;
+import org.vaadin.appfoundation.i18n.TmxSourceReader;
 import org.vaadin.appfoundation.persistence.facade.FacadeFactory;
 
 /**
@@ -28,6 +33,12 @@ public class SimpleShopContextListener implements ServletContextListener {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        URL url = SimpleshopApplication.class.getClassLoader().getResource(
+                "translations.xml");
+        File file = new File(url.getPath());
+
+        InternationalizationServlet.loadTranslations(new TmxSourceReader(file));
 
         // Import initial test data
         InitialData.init();

@@ -17,6 +17,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Main layout for the item browser. The item browser is where the user browses
@@ -44,24 +45,24 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
     public ItemBrowser() {
         super(new VerticalLayout());
         setSizeFull();
-        content.setSizeFull();
-        content.setStyleName("item-browser-background");
+        getContent().setSizeFull();
+        getContent().setStyleName("item-browser-background");
 
         categoryHierarchy.setWidth("100%");
         categoryHierarchy.setHeight(null);
-        categoryHierarchy.setStyleName(Panel.STYLE_LIGHT);
+        categoryHierarchy.setStyleName(Reindeer.PANEL_LIGHT);
         ((Layout) categoryHierarchy.getContent()).setMargin(false);
 
         productsLayout.setWidth("100%");
-        productsLayout.setStyleName(Panel.STYLE_LIGHT);
+        productsLayout.setStyleName(Reindeer.PANEL_LIGHT);
         productsLayout.addStyleName("products-browser");
         ((Layout) productsLayout.getContent()).setMargin(false);
 
-        content.addComponent(categoryHierarchy);
-        content.addComponent(productsLayout);
-        content.addComponent(spacerLayout);
+        getContent().addComponent(categoryHierarchy);
+        getContent().addComponent(productsLayout);
+        getContent().addComponent(spacerLayout);
 
-        content.setExpandRatio(spacerLayout, 1);
+        getContent().setExpandRatio(spacerLayout, 1);
 
         rootCategoryBtn.setWidth("100%");
         rootCategoryBtn.addStyleName("category_button");
@@ -111,7 +112,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
     public void buttonClick(ClickEvent event) {
         ProductCategory category = (ProductCategory) event.getButton()
                 .getData();
-        
+
         if (category == null) {
             categoryHierarchy.removeAllComponents();
             categoryHierarchy.addComponent(rootCategoryBtn);
@@ -134,7 +135,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
             categoryHierharchyList.removeAll(buttonsToRemove);
         } else {
             Button categoryBtn = generateCategoryButton(category);
-           
+
             categoryHierharchyList.add(categoryBtn);
             categoryHierarchy.addComponent(categoryBtn);
         }
@@ -143,9 +144,9 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
             String name = category.getName();
             UriHandler.setFragment("C" + category.getId() + "-" + name);
         }
-        
-        for(Button categoryButton : categoryHierharchyList) {
-        	categoryButton.addStyleName("selected");
+
+        for (Button categoryButton : categoryHierharchyList) {
+            categoryButton.addStyleName("selected");
         }
 
         drawCategory(category, null);
@@ -188,7 +189,7 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
                     productsLayout.removeAllComponents();
                     initRoot();
                     for (ProductCategory category : categories) {
-                    	Button categoryBtn = generateCategoryButton(category);
+                        Button categoryBtn = generateCategoryButton(category);
                         categoryHierharchyList.add(categoryBtn);
                         categoryHierarchy.addComponent(categoryBtn);
                     }
@@ -199,13 +200,19 @@ public class ItemBrowser extends AbstractView<VerticalLayout> implements
             }
         }
     }
-    
+
     private Button generateCategoryButton(ProductCategory category) {
-    	 Button categoryBtn = new Button(category.getName(), this);
-         categoryBtn.setData(category);
-         categoryBtn.addStyleName("category_button");
-         categoryBtn.setWidth(100, UNITS_PERCENTAGE);
-         
-         return categoryBtn;
+        Button categoryBtn = new Button(category.getName(), this);
+        categoryBtn.setData(category);
+        categoryBtn.addStyleName("category_button");
+        categoryBtn.setWidth(100, UNITS_PERCENTAGE);
+
+        return categoryBtn;
+    }
+
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
     }
 }

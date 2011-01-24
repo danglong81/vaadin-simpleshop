@@ -2,6 +2,7 @@ package org.vaadin.simpleshop.ui.components;
 
 import org.vaadin.appfoundation.authentication.SessionHandler;
 import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.appfoundation.view.View;
 import org.vaadin.appfoundation.view.ViewContainer;
 import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.appfoundation.view.ViewItem;
@@ -16,6 +17,7 @@ import org.vaadin.simpleshop.ui.components.cart.CartContentView;
 import org.vaadin.simpleshop.util.PermissionsUtil;
 
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
@@ -42,14 +44,14 @@ public class InformationView extends AbstractView<VerticalLayout> implements
     // Layout for navigation buttons
     private HorizontalLayout buttonLayout;
 
-    private AbstractView<?> currentView;
+    private View currentView;
 
     public InformationView() {
         super(new VerticalLayout());
         setStyleName("infoview");
         setSizeFull();
-        content.setSizeFull();
-        content.setMargin(true);
+        getContent().setSizeFull();
+        getContent().setMargin(true);
 
         // Initialize navigation buttons
         initButtons();
@@ -65,14 +67,14 @@ public class InformationView extends AbstractView<VerticalLayout> implements
         currentView = cartContentView.getView();
 
         // Add buttons to layout
-        content.addComponent(buttonLayout);
+        getContent().addComponent(buttonLayout);
 
         // Add current view to layout
-        content.addComponent(currentView);
+        getContent().addComponent((Component) currentView);
 
         // The sub view should take as much space as there is available and
         // navigation button's should only reserve as much space as they need.
-        content.setExpandRatio(currentView, 1);
+        getContent().setExpandRatio((Component) currentView, 1);
         EventHandler.addListener(this);
     }
 
@@ -169,14 +171,27 @@ public class InformationView extends AbstractView<VerticalLayout> implements
     }
 
     @Override
-    public void activate(AbstractView<?> view) {
-        content.replaceComponent(currentView, view);
-        currentView = view;
-        content.setExpandRatio(currentView, 1);
+    public void activated(Object... params) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
-    public void activated(Object... params) {
+    public void activate(View view) {
+        getContent()
+                .replaceComponent((Component) currentView, (Component) view);
+        currentView = view;
+        getContent().setExpandRatio((Component) currentView, 1);
+    }
+
+    @Override
+    public void deactivate(View view) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void deactivated(Object... params) {
         // TODO Auto-generated method stub
 
     }

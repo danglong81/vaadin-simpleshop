@@ -39,12 +39,12 @@ abstract public class AbstractCheckoutStepView extends
         mainPanel.setStyleName(Panel.STYLE_LIGHT);
         mainPanel.setSizeFull();
 
-        content.setSizeFull();
+        getContent().setSizeFull();
         // Add the main panel to the main layout
-        content.addComponent(mainPanel);
+        getContent().addComponent(mainPanel);
 
         // Expand the main panel so that it will take all the available space
-        content.setExpandRatio(mainPanel, 1);
+        getContent().setExpandRatio(mainPanel, 1);
 
         // Initialize the navigation buttons
         initButtons();
@@ -80,7 +80,7 @@ abstract public class AbstractCheckoutStepView extends
         buttonLayout.setComponentAlignment(nextStepBtn, Alignment.MIDDLE_RIGHT);
 
         // Add the button layout to the main layout
-        content.addComponent(buttonLayout);
+        getContent().addComponent(buttonLayout);
     }
 
     @Override

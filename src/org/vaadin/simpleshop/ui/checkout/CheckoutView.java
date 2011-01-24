@@ -1,10 +1,12 @@
 package org.vaadin.simpleshop.ui.checkout;
 
 import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.appfoundation.view.View;
 import org.vaadin.appfoundation.view.ViewContainer;
 import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
@@ -27,11 +29,11 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
     private Label paymentMethod;
     private Label payment;
 
-    private AbstractView<?> currentView = null;
+    private View currentView = null;
 
     public CheckoutView() {
         super(new VerticalLayout());
-        content.setSizeFull();
+        getContent().setSizeFull();
 
         // Initialize the checkout process step captions
         initStepCaptions();
@@ -75,7 +77,7 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
         payment.setEnabled(false);
         layout.addComponent(payment);
 
-        content.addComponent(layout);
+        getContent().addComponent(layout);
     }
 
     @Override
@@ -84,25 +86,38 @@ public class CheckoutView extends AbstractView<VerticalLayout> implements
 
     }
 
-    @Override
-    public void activate(AbstractView<?> view) {
-        if (currentView == null) {
-            content.addComponent(view, 1);
-        } else {
-            content.replaceComponent(currentView, view);
-        }
-
-        currentView = view;
-        content.setExpandRatio(view, 1);
-
-        setStep(((AbstractCheckoutStepView) view).getStep());
-    }
-
     private void setStep(int step) {
         verifyContent.setEnabled(step == 1 ? true : false);
         contactInformation.setEnabled(step == 2 ? true : false);
         chooseDeliveryMethod.setEnabled(step == 3 ? true : false);
         paymentMethod.setEnabled(step == 4 ? true : false);
         payment.setEnabled(step == 5 ? true : false);
+    }
+
+    @Override
+    public void activate(View view) {
+        if (currentView == null) {
+            getContent().addComponent((Component) view, 1);
+        } else {
+            getContent().replaceComponent((Component) currentView,
+                    (Component) view);
+        }
+
+        currentView = view;
+        getContent().setExpandRatio((Component) view, 1);
+
+        setStep(((AbstractCheckoutStepView) view).getStep());
+    }
+
+    @Override
+    public void deactivate(View view) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
     }
 }

@@ -133,4 +133,10 @@ public class PaymentMethodView extends AbstractCheckoutStepView implements
         errorMsg.setVisible(false);
     }
 
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

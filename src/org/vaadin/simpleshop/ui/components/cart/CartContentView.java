@@ -33,7 +33,7 @@ public class CartContentView extends AbstractView<VerticalLayout> implements
     public CartContentView(boolean includeSummary) {
         super(new VerticalLayout());
         // Take as much space as there is available
-        content.setSizeFull();
+        getContent().setSizeFull();
 
         // Initialize the content
         initContent(includeSummary);
@@ -50,12 +50,12 @@ public class CartContentView extends AbstractView<VerticalLayout> implements
     private void initContent(boolean includeSummary) {
         // Create the cart items panel and add it to the main layout
         cartContent = new CartItems();
-        content.addComponent(cartContent);
+        getContent().addComponent(cartContent);
 
         if (includeSummary) {
             // The items panel should take all the available space
-            content.setExpandRatio(cartContent, 1);
-            content.addComponent(new Summary());
+            getContent().setExpandRatio(cartContent, 1);
+            getContent().addComponent(new Summary());
         }
     }
 
@@ -72,6 +72,12 @@ public class CartContentView extends AbstractView<VerticalLayout> implements
 
     @Override
     public void activated(Object... params) {
+
+    }
+
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
 
     }
 

@@ -1,9 +1,9 @@
 package org.vaadin.simpleshop.ui.components;
 
-import org.vaadin.appfoundation.authentication.AuthenticationMessage;
 import org.vaadin.appfoundation.authentication.SessionHandler;
+import org.vaadin.appfoundation.authentication.exceptions.AccountLockedException;
+import org.vaadin.appfoundation.authentication.exceptions.InvalidCredentialsException;
 import org.vaadin.appfoundation.authentication.util.AuthenticationUtil;
-import org.vaadin.appfoundation.authentication.util.AuthenticationUtil.AFAuthenticationMessage;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.data.User;
@@ -52,18 +52,18 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
         super(new Panel());
 
         // Remove all extra stryling
-        content.setStyleName(Panel.STYLE_LIGHT);
+        getContent().setStyleName(Panel.STYLE_LIGHT);
 
         // The inner layout should be a VerticalLayout
         VerticalLayout panelLayout = new VerticalLayout();
         panelLayout.setMargin(true);
         panelLayout.setSpacing(true);
 
-        content.setContent(panelLayout);
+        getContent().setContent(panelLayout);
 
         initForm();
 
-        content.addActionHandler(this);
+        getContent().addActionHandler(this);
     }
 
     /**
@@ -74,19 +74,19 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
         // "login failed"
         feedbackLabel = new Label();
 
-        content.addComponent(feedbackLabel);
+        getContent().addComponent(feedbackLabel);
 
         // Add the username textfield. It should be focused by default
         username = new TextField(SystemMsg.GENERIC_USERNAME.get());
         username.setWidth("100%");
         username.focus();
-        content.addComponent(username);
+        getContent().addComponent(username);
 
         // Add the password textfield. Set the type to secret
         password = new TextField(SystemMsg.GENERIC_PASSWORD.get());
         password.setSecret(true);
         password.setWidth("100%");
-        content.addComponent(password);
+        getContent().addComponent(password);
 
         // Create a layout containing the buttons we need
         HorizontalLayout buttons = new HorizontalLayout();
@@ -109,7 +109,7 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
         buttons.addComponent(loginBtn);
         buttons.setComponentAlignment(loginBtn, Alignment.MIDDLE_RIGHT);
 
-        content.addComponent(buttons);
+        getContent().addComponent(buttons);
     }
 
     public void buttonClick(ClickEvent event) {
@@ -129,18 +129,23 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
     protected void login() {
         // Get the username and password from the textfields
         // Try to log in the user
-        AuthenticationMessage msg = AuthenticationUtil.authenticate(
-                (String) username.getValue(), (String) password.getValue());
-        // If the login failed, give the user some feedback and reset the fields
-        if (!msg.equals(AFAuthenticationMessage.AUTH_SUCCESSFUL)) {
-            feedbackLabel.setValue(SystemMsg.LOGIN_LOGIN_FAILED.get());
-            username.setValue("");
-            password.setValue("");
-        } else {
+        String username = (String) this.username.getValue();
+        String password = (String) this.password.getValue();
+
+        try {
+            AuthenticationUtil.authenticate(username, password);
             EventHandler.dispatchLoginEvent(new UserSessionEvent(
                     (User) SessionHandler.get()));
             // Login was successfull, hence remove the enter listener
-            content.removeActionHandler(this);
+            getContent().removeActionHandler(this);
+        } catch (InvalidCredentialsException e) {
+            feedbackLabel.setValue(SystemMsg.LOGIN_LOGIN_FAILED.get());
+            this.username.setValue("");
+            this.password.setValue("");
+        } catch (AccountLockedException e) {
+            feedbackLabel.setValue(SystemMsg.ACCOUNT_LOCKED.get());
+            this.username.setValue("");
+            this.password.setValue("");
         }
     }
 
@@ -158,5 +163,11 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
         username.setValue("");
         password.setValue("");
         username.focus();
+    }
+
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
     }
 }

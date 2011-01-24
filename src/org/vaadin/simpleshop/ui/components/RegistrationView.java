@@ -1,10 +1,13 @@
 package org.vaadin.simpleshop.ui.components;
 
+import org.vaadin.appfoundation.authentication.exceptions.PasswordRequirementException;
+import org.vaadin.appfoundation.authentication.exceptions.PasswordsDoNotMatchException;
+import org.vaadin.appfoundation.authentication.exceptions.TooShortPasswordException;
+import org.vaadin.appfoundation.authentication.exceptions.TooShortUsernameException;
+import org.vaadin.appfoundation.authentication.exceptions.UsernameExistsException;
 import org.vaadin.appfoundation.authentication.util.UserUtil;
-import org.vaadin.appfoundation.authentication.util.UserUtil.RegistrationMsg;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.appfoundation.view.ViewHandler;
-import org.vaadin.simpleshop.lang.EnumMsgMapper;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
 import com.vaadin.ui.Button;
@@ -32,30 +35,30 @@ public class RegistrationView extends AbstractView<VerticalLayout> implements
     public RegistrationView() {
         super(new VerticalLayout());
 
-        content.setWidth("100%");
-        content.setMargin(true);
-        content.setSpacing(true);
+        getContent().setWidth("100%");
+        getContent().setMargin(true);
+        getContent().setSpacing(true);
 
         feedbackLabel = new Label();
-        content.addComponent(feedbackLabel);
+        getContent().addComponent(feedbackLabel);
 
         username = new TextField(SystemMsg.GENERIC_USERNAME.get());
         username.setNullRepresentation("");
         username.setWidth("100%");
         username.focus();
-        content.addComponent(username);
+        getContent().addComponent(username);
 
         password = new TextField(SystemMsg.GENERIC_PASSWORD.get());
         password.setSecret(true);
         password.setNullRepresentation("");
         password.setWidth("100%");
-        content.addComponent(password);
+        getContent().addComponent(password);
 
         verifyPassword = new TextField(SystemMsg.REGISTER_VERIFY_PASSWORD.get());
         verifyPassword.setSecret(true);
         verifyPassword.setNullRepresentation("");
         verifyPassword.setWidth("100%");
-        content.addComponent(verifyPassword);
+        getContent().addComponent(verifyPassword);
 
         registerBtn = new Button(SystemMsg.REGISTER_REGISTER_BTN.get(), this);
         registerBtn.setSizeUndefined();
@@ -73,7 +76,7 @@ public class RegistrationView extends AbstractView<VerticalLayout> implements
 
         buttonLayout.setExpandRatio(spacer, 1);
 
-        content.addComponent(buttonLayout);
+        getContent().addComponent(buttonLayout);
     }
 
     public void buttonClick(ClickEvent event) {
@@ -83,24 +86,46 @@ public class RegistrationView extends AbstractView<VerticalLayout> implements
             verifyPassword.setValue(null);
             ViewHandler.activateView(LoginView.class);
         } else if (event.getButton().equals(registerBtn)) {
-            RegistrationMsg error = UserUtil.registerUser((String) username
-                    .getValue(), (String) password.getValue(),
-                    (String) verifyPassword.getValue());
-            if (error.equals(RegistrationMsg.REGISTRATION_COMPLETED)) {
+
+            try {
+                UserUtil.registerUser((String) username.getValue(),
+                        (String) password.getValue(), (String) verifyPassword
+                                .getValue());
+
                 getApplication().getMainWindow().showNotification(
-                        EnumMsgMapper.getMsg(error).get(), "",
+                        SystemMsg.REGISTER_REGISTRATION_COMPLETED.get(), "",
                         Notification.TYPE_TRAY_NOTIFICATION);
                 ViewHandler.activateView(LoginView.class);
-            } else {
-                feedbackLabel.setValue(EnumMsgMapper.getMsg(error).get());
-                password.setValue(null);
-                verifyPassword.setValue(null);
+            } catch (TooShortPasswordException e) {
+                feedbackLabel.setValue(SystemMsg.ACCOUNT_TOO_SHORT_PASSWORD
+                        .get());
+            } catch (TooShortUsernameException e) {
+                feedbackLabel.setValue(SystemMsg.ACCOUNT_TOO_SHORT_USERNAME
+                        .get());
+            } catch (PasswordsDoNotMatchException e) {
+                feedbackLabel.setValue(SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH
+                        .get());
+            } catch (UsernameExistsException e) {
+                feedbackLabel.setValue(SystemMsg.ACCOUNT_USERNAME_TAKEN.get());
+            } catch (PasswordRequirementException e) {
+                feedbackLabel
+                        .setValue(SystemMsg.ACCOUNT_PASSWORD_DOESNT_MEET_REQUIREMENTS
+                                .get());
             }
+
+            password.setValue(null);
+            verifyPassword.setValue(null);
         }
     }
 
     @Override
     public void activated(Object... params) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void deactivated(Object... params) {
         // TODO Auto-generated method stub
 
     }

@@ -133,4 +133,10 @@ public class ContactInfoView extends AbstractCheckoutStepView {
     public int getStep() {
         return 2;
     }
+
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
+    }
 }

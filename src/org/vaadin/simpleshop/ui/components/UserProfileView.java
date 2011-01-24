@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.vaadin.appfoundation.authentication.SessionHandler;
+import org.vaadin.appfoundation.authentication.exceptions.InvalidCredentialsException;
+import org.vaadin.appfoundation.authentication.exceptions.PasswordRequirementException;
+import org.vaadin.appfoundation.authentication.exceptions.PasswordsDoNotMatchException;
+import org.vaadin.appfoundation.authentication.exceptions.TooShortPasswordException;
 import org.vaadin.appfoundation.authentication.util.UserUtil;
-import org.vaadin.appfoundation.authentication.util.UserUtil.ProfileMsg;
 import org.vaadin.appfoundation.i18n.TranslationUtil;
 import org.vaadin.appfoundation.view.AbstractView;
 import org.vaadin.simpleshop.data.User;
-import org.vaadin.simpleshop.lang.EnumMsgMapper;
 import org.vaadin.simpleshop.lang.SystemMsg;
 
 import com.vaadin.data.Item;
@@ -57,12 +59,12 @@ public class UserProfileView extends AbstractView<Panel> implements
     public UserProfileView() {
         super(new Panel());
 
-        content.setStyleName(Panel.STYLE_LIGHT);
-        content.setSizeFull();
+        getContent().setStyleName(Panel.STYLE_LIGHT);
+        getContent().setSizeFull();
 
-        content.setContent(new VerticalLayout());
-        ((Layout) content.getContent()).setMargin(true);
-        content.setWidth("100%");
+        getContent().setContent(new VerticalLayout());
+        ((Layout) getContent().getContent()).setMargin(true);
+        getContent().setWidth("100%");
 
         initContactInfoForm();
         initPasswordFields();
@@ -92,7 +94,7 @@ public class UserProfileView extends AbstractView<Panel> implements
 
         contactInfoForm.getLayout().addComponent(updateProfileBtn);
 
-        content.addComponent(contactInfoForm);
+        getContent().addComponent(contactInfoForm);
     }
 
     /**
@@ -102,7 +104,7 @@ public class UserProfileView extends AbstractView<Panel> implements
         passwordLayout = new FormLayout();
         passwordLayout.setCaption(SystemMsg.PROFILE_CHANGE_PASSWORD.get());
 
-        content.addComponent(passwordLayout);
+        getContent().addComponent(passwordLayout);
 
         feedbackLabel = new Label();
         feedbackLabel.setStyleName("error");
@@ -138,27 +140,36 @@ public class UserProfileView extends AbstractView<Panel> implements
         // Check which button was pressed so that we know which action to
         // perform
         if (event.getButton().equals(changePasswordBtn)) {
-            ProfileMsg msg = UserUtil.changePassword((User) SessionHandler
-                    .get(), (String) currentPassword.getValue(),
-                    (String) newPassword.getValue(), (String) verifyNewPassword
-                            .getValue());
+            try {
+                UserUtil.changePassword((User) SessionHandler.get(),
+                        (String) currentPassword.getValue(),
+                        (String) newPassword.getValue(),
+                        (String) verifyNewPassword.getValue());
 
+                // Show a notification that the password has been changed
+                getApplication().getMainWindow().showNotification(
+                        SystemMsg.PROFILE_PASSWORD_CHANGED.get(), "",
+                        Notification.TYPE_TRAY_NOTIFICATION);
+                // Clear any possible error messages
+                feedbackLabel.setValue(null);
+            } catch (InvalidCredentialsException e) {
+                feedbackLabel.setValue(SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH
+                        .get());
+            } catch (TooShortPasswordException e) {
+                feedbackLabel.setValue(SystemMsg.ACCOUNT_TOO_SHORT_PASSWORD
+                        .get());
+            } catch (PasswordsDoNotMatchException e) {
+                feedbackLabel.setValue(SystemMsg.ACCOUNT_PASSWORDS_DO_NOT_MATCH
+                        .get());
+            } catch (PasswordRequirementException e) {
+                feedbackLabel
+                        .setValue(SystemMsg.ACCOUNT_PASSWORD_DOESNT_MEET_REQUIREMENTS
+                                .get());
+            }
             // No matter what the result was, clear all password fields
             currentPassword.setValue(null);
             newPassword.setValue(null);
             verifyNewPassword.setValue(null);
-
-            if (msg.equals(ProfileMsg.PASSWORD_CHANGED)) {
-                // Show a notification that the password has been changed
-                getApplication().getMainWindow().showNotification(
-                        EnumMsgMapper.getMsg(msg).get(), "",
-                        Notification.TYPE_TRAY_NOTIFICATION);
-                // Clear any possible error messages
-                feedbackLabel.setValue(null);
-            } else {
-                // Show error message to the user
-                feedbackLabel.setValue(EnumMsgMapper.getMsg(msg).get());
-            }
         } else if (event.getButton().equals(updateProfileBtn)) {
             // Check that the form is filled properly
             if (contactInfoForm.isValid()) {
@@ -224,5 +235,11 @@ public class UserProfileView extends AbstractView<Panel> implements
         currentPassword.setValue(null);
         newPassword.setValue(null);
         verifyNewPassword.setValue(null);
+    }
+
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
     }
 }

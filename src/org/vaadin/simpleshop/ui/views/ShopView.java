@@ -1,6 +1,7 @@
 package org.vaadin.simpleshop.ui.views;
 
 import org.vaadin.appfoundation.view.AbstractView;
+import org.vaadin.appfoundation.view.View;
 import org.vaadin.appfoundation.view.ViewContainer;
 import org.vaadin.appfoundation.view.ViewHandler;
 import org.vaadin.simpleshop.lang.SystemMsg;
@@ -26,7 +27,7 @@ public class ShopView extends AbstractView<HorizontalLayout> implements
 
     public ShopView() {
         super(new HorizontalLayout());
-        content.setSizeFull();
+        getContent().setSizeFull();
 
         // Set the caption for this view. The caption is used as the caption in
         // the tabsheet for this tab.
@@ -36,8 +37,8 @@ public class ShopView extends AbstractView<HorizontalLayout> implements
 
         cart = new InformationView();
 
-        content.addComponent(browser);
-        content.addComponent(cart);
+        getContent().addComponent(browser);
+        getContent().addComponent(cart);
     }
 
     /**
@@ -50,7 +51,19 @@ public class ShopView extends AbstractView<HorizontalLayout> implements
     }
 
     @Override
-    public void activate(AbstractView<?> view) {
+    public void activate(View view) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void deactivate(View view) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void deactivated(Object... params) {
         // TODO Auto-generated method stub
 
     }

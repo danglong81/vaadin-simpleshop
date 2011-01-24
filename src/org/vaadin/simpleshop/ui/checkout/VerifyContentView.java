@@ -17,9 +17,9 @@ public class VerifyContentView extends AbstractCheckoutStepView {
         // set it inside another panel. Let's make the DOM structure a bit more
         // lightweight by removing the main panel and replacing it with the view
         // itself.
-        content.replaceComponent(mainPanel, view);
+        getContent().replaceComponent(mainPanel, view);
 
-        content.setExpandRatio(view, 1);
+        getContent().setExpandRatio(view, 1);
 
         previousStepBtn.setEnabled(false);
     }
@@ -43,6 +43,12 @@ public class VerifyContentView extends AbstractCheckoutStepView {
     @Override
     public int getStep() {
         return 1;
+    }
+
+    @Override
+    public void deactivated(Object... params) {
+        // TODO Auto-generated method stub
+
     }
 
 }
