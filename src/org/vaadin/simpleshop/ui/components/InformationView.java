@@ -22,6 +22,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * This view is placed on the right side of the item browser. This view consist
@@ -90,7 +91,7 @@ public class InformationView extends AbstractView<VerticalLayout> implements
 
         // Create and add buttons to layout
         profileBtn = new Button(null, this);
-        profileBtn.setStyleName(Button.STYLE_LINK);
+        profileBtn.setStyleName(Reindeer.BUTTON_LINK);
         profileBtn.setWidth("64px");
         profileBtn.setHeight("64px");
         profileBtn.setIcon(Icons.USER_PROFILE.getResource());
@@ -98,7 +99,7 @@ public class InformationView extends AbstractView<VerticalLayout> implements
         buttonLayout.addComponent(profileBtn);
 
         shoppingCartBtn = new Button(null, this);
-        shoppingCartBtn.setStyleName(Button.STYLE_LINK);
+        shoppingCartBtn.setStyleName(Reindeer.BUTTON_LINK);
         shoppingCartBtn.setWidth("64px");
         shoppingCartBtn.setHeight("64px");
         shoppingCartBtn.setIcon(Icons.SHOPPING_CART.getResource());
@@ -106,14 +107,14 @@ public class InformationView extends AbstractView<VerticalLayout> implements
         buttonLayout.addComponent(shoppingCartBtn);
 
         adminBtn = new Button(null, this);
-        adminBtn.setStyleName(Button.STYLE_LINK);
+        adminBtn.setStyleName(Reindeer.BUTTON_LINK);
         adminBtn.setWidth("64px");
         adminBtn.setHeight("64px");
         adminBtn.setIcon(Icons.ADMIN.getResource());
         adminBtn.setDescription(SystemMsg.GENERIC_ADMINISTRATION.get());
 
         logoutBtn = new Button(null, this);
-        logoutBtn.setStyleName(Button.STYLE_LINK);
+        logoutBtn.setStyleName(Reindeer.BUTTON_LINK);
         logoutBtn.setWidth("64px");
         logoutBtn.setHeight("64px");
         logoutBtn.setIcon(Icons.LOGOUT.getResource());

@@ -23,6 +23,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * This class contains the layout for the login view. This class is based on a
@@ -52,7 +53,7 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
         super(new Panel());
 
         // Remove all extra stryling
-        getContent().setStyleName(Panel.STYLE_LIGHT);
+        getContent().setStyleName(Reindeer.PANEL_LIGHT);
 
         // The inner layout should be a VerticalLayout
         VerticalLayout panelLayout = new VerticalLayout();
@@ -96,12 +97,12 @@ public class LoginView extends AbstractView<Panel> implements ClickListener,
         // Add the "forgot password"-link
         forgotPasswordBtn = new Button(SystemMsg.LOGIN_FORGOT_PASSWORD.get(),
                 this);
-        forgotPasswordBtn.setStyleName(Button.STYLE_LINK);
+        forgotPasswordBtn.setStyleName(Reindeer.BUTTON_LINK);
         buttons.addComponent(forgotPasswordBtn);
 
         // Add the "register"-link
         registerBtn = new Button(SystemMsg.LOGIN_REGISTER_BTN.get(), this);
-        registerBtn.setStyleName(Button.STYLE_LINK);
+        registerBtn.setStyleName(Reindeer.BUTTON_LINK);
         buttons.addComponent(registerBtn);
 
         // Add the Login button

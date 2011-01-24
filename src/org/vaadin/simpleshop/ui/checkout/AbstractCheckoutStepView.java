@@ -12,6 +12,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Abstract implementation of the views in the checkout process.
@@ -36,7 +37,7 @@ abstract public class AbstractCheckoutStepView extends
 
         // Create the main panel
         mainPanel = new Panel();
-        mainPanel.setStyleName(Panel.STYLE_LIGHT);
+        mainPanel.setStyleName(Reindeer.PANEL_LIGHT);
         mainPanel.setSizeFull();
 
         getContent().setSizeFull();

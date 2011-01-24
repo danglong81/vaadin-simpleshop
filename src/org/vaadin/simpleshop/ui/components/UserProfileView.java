@@ -31,6 +31,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Window.Notification;
+import com.vaadin.ui.themes.Reindeer;
 
 /**
  * Implementation of the user profile view where the user can change his contact
@@ -59,7 +60,7 @@ public class UserProfileView extends AbstractView<Panel> implements
     public UserProfileView() {
         super(new Panel());
 
-        getContent().setStyleName(Panel.STYLE_LIGHT);
+        getContent().setStyleName(Reindeer.PANEL_LIGHT);
         getContent().setSizeFull();
 
         getContent().setContent(new VerticalLayout());
