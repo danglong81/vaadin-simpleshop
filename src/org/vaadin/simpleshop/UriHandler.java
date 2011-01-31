@@ -55,10 +55,10 @@ public class UriHandler implements TransactionListener, FragmentChangedListener 
 
     public static void setFragment(String fragment) {
         fragment = fragment.replaceAll("\\s", "-");
-        fragment = fragment.replaceAll("√•√§", "a");
-        fragment = fragment.replaceAll("√Ö√Ñ", "A");
-        fragment = fragment.replaceAll("√∂", "o");
-        fragment = fragment.replaceAll("√ñ", "O");
+        fragment = fragment.replaceAll("åä", "a");
+        fragment = fragment.replaceAll("ÅÄ", "A");
+        fragment = fragment.replaceAll("ö", "o");
+        fragment = fragment.replaceAll("Ö", "O");
         fragment = fragment.replaceAll("[^a-zA-Z0-9\\-]", "");
         instance.get().util.setFragment(fragment, false);
     }
